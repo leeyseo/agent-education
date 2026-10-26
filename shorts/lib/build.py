@@ -32,7 +32,7 @@ MIN_CHUNK = 4
 SAY = {
     "CLAUDE.md": "클로드 엠디", "Claude Code": "클로드 코드", "Claude Design": "클로드 디자인", "Claude": "클로드",
     "Cowork": "코워크", "VS Code": "브이에스 코드", "FileZilla": "파일질라", "HTML": "에이치티엠엘",
-    "FTP": "에프티피", "PPT": "피피티", "AI": "에이아이",
+    "FTP": "에프티피", "PPT": "피피티", "AI": "에이아이", "CDO": "씨디오",
 }
 
 
@@ -177,7 +177,8 @@ def main(ep_name):
         w.setframerate(SR)
         w.writeframes(out.tobytes())
 
-    meta = {"ep": script["ep"], "title": script["title"], "series": SERIES, "header": script.get("header", {})}
+    meta = {"ep": script["ep"], "title": script["title"], "series": script.get("series", SERIES),
+            "header": script.get("header", {})}
     tl = {"meta": meta, "total": total, "scenes": scenes, "captions": captions}
     (ep_dir / "timeline.js").write_text("window.TIMELINE = " + json.dumps(tl, ensure_ascii=False, indent=1) + ";\n",
                                         encoding="utf-8")

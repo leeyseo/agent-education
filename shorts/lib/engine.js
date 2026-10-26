@@ -33,6 +33,40 @@ const bob = (t, k = 1, amp = 3, f = 14) => Math.sin(t * f) * amp * k;
 // 그 단어를 말하기 시작하는 시각(장면 기준). 못 찾으면 fallback
 const when = (W, s, fallback = 0) => (W.find(x => x.w.includes(s)) || { t: fallback }).t;
 
+// ---------- 화면 녹화 클립 ----------
+// <canvas data-src="../rec/clips/ep07_a.mp4" width="1920" height="1080"> (lib/clip.py로 만든 클립)
+// 숨긴 <video>로 탐색하고, 탐색을 마친 프레임을 캔버스에 그린다. 화면 합성 타이밍과 상관없이 정확한 프레임이 찍힌다
+function initClips() {
+  $$('canvas[data-src]').forEach(cv => {
+    const v = document.createElement('video');
+    v.muted = true;
+    v.preload = 'auto';
+    v.src = cv.dataset.src;
+    v.style.display = 'none';
+    cv.video = v;
+    cv.draw = () => cv.getContext('2d').drawImage(v, 0, 0, cv.width, cv.height);
+    v.addEventListener('seeked', cv.draw);
+    v.addEventListener('loadeddata', cv.draw);
+    document.body.appendChild(v);
+  });
+}
+// 장면 시각 at~at+dur 동안 녹화본의 a~b초를 보여 준다. 구간이 길면 그만큼 빨리 감긴다
+function clip(cv, t, at, dur, a, b) {
+  const v = cv.video, want = a + (b - a) * prog(t, at, dur);
+  if (Math.abs(v.currentTime - want) > 0.001) v.currentTime = want;
+}
+// 렌더러가 프레임마다 기다린다: 모든 클립이 탐색을 마치면 그 프레임을 그리고 끝낸다
+window.settle = () => new Promise(res => {
+  const t0 = performance.now(), cvs = $$('canvas[data-src]');
+  const check = () => {
+    if (cvs.every(c => !c.video.seeking && c.video.readyState >= 2) || performance.now() - t0 > 5000) {
+      cvs.forEach(c => c.draw());
+      res();
+    } else requestAnimationFrame(check);
+  };
+  check();
+});
+
 // ---------- 캐릭터 ----------
 const SKIN = '#F7D4B8', HAIR = '#2B2420', HOOD = '#4FD1B5';
 
@@ -54,9 +88,24 @@ function faceParts(mood, skin, ink) {
   return eyes + (mouths[mood] || mouths.smile) + sweat;
 }
 
+// 디자이너 편의 열정이 분신: 같은 AI가 역할만 바꿔 쓴 모자와 명찰
+const ROLE = {
+  analyst: { badge: '분석', color: '#3D6EF0',
+    hat: `<path d="M58 124 C58 -14 242 -14 242 124 Z" fill="#3D6EF0"/><path d="M200 116 Q282 110 290 130 Q244 138 200 130 Z" fill="#2F57C7"/>` },
+  planner: { badge: '기획', color: '#C99A12',
+    hat: `<path d="M64 112 C64 -6 236 -6 236 112 Z" fill="#FFD84D"/><path d="M150 26 L150 108" stroke="#E9BF2B" stroke-width="12"/><rect x="46" y="102" width="208" height="20" rx="10" fill="#E9BF2B"/>` },
+  designer: { badge: '디자인', color: '#FF7A2F',
+    hat: `<ellipse cx="138" cy="66" rx="108" ry="46" fill="#FF7A2F" transform="rotate(-10 138 66)"/><circle cx="132" cy="22" r="11" fill="#E0661E"/>` },
+  copy: { badge: '카피', color: '#D9468F',
+    hat: `<path d="M70 104 Q76 18 150 18 Q224 18 230 104 Z" fill="#F06BA8"/><ellipse cx="150" cy="106" rx="106" ry="16" fill="#D9468F"/>` },
+  critic: { badge: '비평', color: '#E5484D',
+    hat: `<path d="M92 76 Q64 30 94 4 Q98 44 124 62 Z" fill="#E5484D"/><path d="M208 76 Q236 30 206 4 Q202 44 176 62 Z" fill="#E5484D"/>` },
+};
+
 // 열정이: kind = laptop(노트북 앞) | cheer(만세) | stand | coffee | thumb(엄지척)
-// mood = smile | proud | oops | shock | sad
-function yjSVG(kind = 'stand', mood = 'smile') {
+// mood = smile | proud | oops | shock | sad | skeptic, role = ROLE의 키(없으면 NEW 명찰)
+function yjSVG(kind = 'stand', mood = 'smile', role = '') {
+  const R = ROLE[role];
   const tall = kind !== 'laptop';
   const legs = tall ? `
     <rect x="108" y="396" width="36" height="66" rx="12" fill="#3B3F4A"/><rect x="156" y="396" width="36" height="66" rx="12" fill="#3B3F4A"/>
@@ -84,8 +133,10 @@ function yjSVG(kind = 'stand', mood = 'smile') {
     <path d="M100 292 Q150 332 200 292 Q190 320 150 324 Q110 320 100 292 Z" fill="#36B89C"/>
     <path d="M135 320 L131 362" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
     <path d="M165 320 L169 362" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
-    <rect x="176" y="352" width="48" height="28" rx="6" fill="#fff"/>
-    <text x="200" y="372" font-size="16" font-weight="900" text-anchor="middle" fill="#1FB394" font-family="sans-serif">NEW</text>
+    ${R ? `<rect x="164" y="350" width="72" height="32" rx="7" fill="#fff"/>
+           <text x="200" y="373" font-size="19" font-weight="900" text-anchor="middle" fill="${R.color}" font-family="sans-serif">${R.badge}</text>`
+        : `<rect x="176" y="352" width="48" height="28" rx="6" fill="#fff"/>
+           <text x="200" y="372" font-size="16" font-weight="900" text-anchor="middle" fill="#1FB394" font-family="sans-serif">NEW</text>`}
     ${arms}
     <rect x="132" y="244" width="36" height="48" rx="12" fill="#EFC3A2"/>
     <circle cx="60" cy="170" r="18" fill="${SKIN}"/><circle cx="240" cy="170" r="18" fill="${SKIN}"/>
@@ -97,6 +148,7 @@ function yjSVG(kind = 'stand', mood = 'smile') {
     <circle cx="114" cy="170" r="30" fill="#fff" fill-opacity=".25" stroke="${HAIR}" stroke-width="7"/>
     <circle cx="186" cy="170" r="30" fill="#fff" fill-opacity=".25" stroke="${HAIR}" stroke-width="7"/>
     <path d="M144 168 Q150 162 156 168" stroke="${HAIR}" stroke-width="6" fill="none"/>
+    ${R ? R.hat : ''}
     ${laptop}
   </svg>`;
 }
@@ -134,7 +186,7 @@ function bossSVG(mood = 'skeptic') {
   </svg>`;
 }
 
-// 나머지 인물: sian(디자이너 최시안) | tag(퍼블리셔 박태그) | owner(모닝빵 사장님)
+// 나머지 인물: sian(디자이너 최시안) | tag(퍼블리셔 박태그) | owner(모닝빵 사장님) | junior(사람 신입, 사원증)
 const PEOPLE = {
   sian: {
     skin: '#F5D0B5', neck: '#E9BC9C', top: '#FF9A5C', ink: '#3B2A22',
@@ -163,6 +215,14 @@ const PEOPLE = {
            <path d="M84 112 C58 74 98 30 130 50 C140 18 182 18 188 50 C218 30 252 74 220 112 Z" fill="#fff" stroke="#E6DCCF" stroke-width="4"/>
            <rect x="86" y="98" width="132" height="38" rx="8" fill="#fff" stroke="#E6DCCF" stroke-width="4"/>`,
     extra: `<path d="M118 206 Q150 194 182 206 Q166 218 150 209 Q134 218 118 206 Z" fill="#6B4E3A"/>`,
+  },
+  junior: {
+    skin: '#F6D2B6', neck: '#EABD9C', top: '#9AA6B8', ink: '#2B2420',
+    collar: `<path d="M116 292 L150 330 L184 292" stroke="#fff" stroke-width="10" fill="none" stroke-linejoin="round"/>`,
+    neckExtra: `<path d="M126 300 L150 360 L174 300" stroke="#3D6EF0" stroke-width="6" fill="none"/>
+                <rect x="130" y="356" width="40" height="52" rx="6" fill="#fff" stroke="#3D6EF0" stroke-width="4"/>
+                <rect x="138" y="366" width="24" height="14" rx="3" fill="#C9D6F5"/>`,
+    hair: `<path d="M56 164 C46 84 102 46 152 50 C206 50 254 86 244 164 C238 132 222 108 196 100 C170 92 116 92 94 108 C74 120 62 138 56 164 Z" fill="#2B2420"/>`,
   },
 };
 
@@ -253,10 +313,11 @@ function fitTitle() {
 }
 
 function fillArt() {
-  // <div data-char="yj:laptop:smile">, <div data-char="boss:shock">, <div data-char="person:sian:grin">, <span data-icon="mag:#3D6EF0">
+  // <div data-char="yj:laptop:smile">, <div data-char="yj:stand:smile:critic">, <div data-char="boss:shock">,
+  // <div data-char="person:sian:grin">, <span data-icon="mag:#3D6EF0">
   $$('[data-char]').forEach(el => {
-    const [who, a, b] = el.dataset.char.split(':');
-    el.innerHTML = who === 'yj' ? yjSVG(a, b) : who === 'boss' ? bossSVG(a) : personSVG(a, b);
+    const [who, a, b, c] = el.dataset.char.split(':');
+    el.innerHTML = who === 'yj' ? yjSVG(a, b, c) : who === 'boss' ? bossSVG(a) : personSVG(a, b);
   });
   $$('[data-icon]').forEach(el => {
     const [name, color] = el.dataset.icon.split(':');
@@ -297,6 +358,7 @@ function start(scenes) {
   SCENES = scenes;
   buildChrome();
   fillArt();
+  initClips();
   const params = new URLSearchParams(location.search);
   if (params.has('render')) {
     document.body.classList.add('render');
@@ -323,5 +385,8 @@ function start(scenes) {
       requestAnimationFrame(loop);
     };
   }
-  document.fonts.ready.then(() => { fitTitle(); seek(Number(params.get('t') || 0)); window.READY = true; });
+  // 글꼴과 이미지(디자이너 편의 실제 시안 PNG)가 모두 준비된 뒤에 첫 프레임을 그린다
+  const loaded = v => new Promise(r => v.readyState >= 2 ? r() : v.addEventListener('loadeddata', r, { once: true }));
+  Promise.all([document.fonts.ready, ...$$('img').map(img => img.decode().catch(() => {})), ...$$('video').map(loaded)])
+    .then(() => { fitTitle(); seek(Number(params.get('t') || 0)); window.READY = true; });
 }

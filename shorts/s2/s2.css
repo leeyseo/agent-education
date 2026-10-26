@@ -1,0 +1,83 @@
+/* 디자이너 편 공통 부품: 실제 시안 카드, 판정 표시, 회의 테이블, 대화창 */
+
+/* 실제 시안 카드 (Design 캔버스에서 찍은 PNG) */
+.lg { position: absolute; background: #fff; border-radius: 18px; border: 3px solid var(--line); overflow: hidden;
+  box-shadow: 0 10px 24px rgba(60, 40, 20, .12); }
+.lg img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.lg .no { position: absolute; left: 10px; top: 6px; font-size: 22px; font-weight: 900; color: var(--sub); }
+.lgrid4 { position: absolute; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.lgrid4 .lg { position: relative; aspect-ratio: 1 / 1; }
+.lg.dim img { opacity: .2; filter: grayscale(1); }
+.lg.pick { border-color: var(--mint); box-shadow: 0 0 0 6px var(--mint), 0 10px 24px rgba(60, 40, 20, .12); }
+
+/* 판정 표시: 버려(✕) / 살려(○) / 보강(△) */
+.mk { position: absolute; right: 8px; top: 8px; min-width: 58px; height: 58px; padding: 0 12px; border-radius: 999px;
+  color: #fff; font-size: 28px; font-weight: 900; display: flex; align-items: center; justify-content: center;
+  opacity: 0; box-shadow: 0 6px 14px rgba(0, 0, 0, .2); white-space: nowrap; }
+.mk.x { background: var(--red); } .mk.o { background: var(--mint); } .mk.t { background: var(--yellow); color: var(--ink); }
+
+/* "실제 결과물" 꼬리표 */
+.real { position: absolute; background: var(--ink); color: #fff; font-size: 26px; font-weight: 900; padding: 8px 20px;
+  border-radius: 999px; white-space: nowrap; }
+.real::before { content: ''; display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: var(--mint);
+  margin-right: 10px; vertical-align: 1px; }
+
+/* Claude 대화창 */
+.chat { position: absolute; background: #fff; border-radius: 28px; border: 3px solid #E6DCCF; overflow: hidden;
+  box-shadow: 0 18px 40px rgba(60, 40, 20, .14); }
+.chat .chd { height: 64px; display: flex; align-items: center; gap: 12px; padding: 0 26px; background: var(--paper);
+  border-bottom: 2px solid var(--line); font-size: 26px; font-weight: 900; }
+.chat .chd i { width: 26px; height: 26px; border-radius: 8px; background: var(--orange); }
+.chat .inp { position: absolute; left: 22px; right: 22px; bottom: 22px; min-height: 76px; border: 3px solid var(--line);
+  border-radius: 22px; padding: 16px 22px; font-size: 30px; font-weight: 700; line-height: 1.4; color: var(--ink); }
+.file { display: inline-flex; align-items: center; gap: 10px; background: var(--paper); border: 3px solid var(--line);
+  border-radius: 14px; padding: 8px 16px; font-size: 24px; font-weight: 800; white-space: nowrap; }
+.file b { color: #fff; font-size: 18px; padding: 3px 8px; border-radius: 6px; background: var(--sub); }
+
+/* 회의 테이블과 명패 */
+.mtable { position: absolute; background: #D9B58C; border-radius: 50%; box-shadow: inset 0 -16px 0 #C49B6E, 0 16px 30px rgba(60, 40, 20, .18); }
+.plate { position: absolute; background: #fff; border-radius: 10px; padding: 4px 14px; font-size: 24px; font-weight: 900;
+  border: 3px solid var(--c, var(--ink)); color: var(--c, var(--ink)); white-space: nowrap; transform: translateX(-50%); }
+
+/* 2부: Claude 화면 모형. 실제 화면이 아니므로 항상 .demo(예시 화면) 꼬리표를 함께 단다 */
+.demo { position: absolute; font-size: 22px; font-weight: 800; color: var(--sub); background: #fff; border: 3px solid var(--line);
+  border-radius: 999px; padding: 4px 14px; white-space: nowrap; z-index: 6; }
+.app { position: absolute; background: #fff; border-radius: 26px; border: 3px solid #E6DCCF; overflow: hidden;
+  box-shadow: 0 18px 40px rgba(60, 40, 20, .14); }
+.app .body { position: absolute; left: 0; right: 0; top: 56px; bottom: 0; display: flex; }
+.app .side { width: 76px; flex: none; background: #F7F3EE; border-right: 2px solid var(--line); display: flex; flex-direction: column;
+  align-items: center; gap: 22px; padding-top: 24px; }
+.app .side i { width: 34px; height: 34px; border-radius: 10px; background: #E3DAD0; }
+.app .side i.on { background: var(--orange); }
+.app .main { flex: 1; position: relative; padding: 26px 30px; overflow: hidden; }
+.mu { margin-left: auto; width: fit-content; max-width: 720px; background: #F1ECE4; border-radius: 24px; padding: 16px 22px;
+  font-size: 28px; font-weight: 700; line-height: 1.45; white-space: pre-line; }
+.ma { font-size: 28px; line-height: 1.5; font-weight: 500; margin-top: 16px; }
+.ma b { font-weight: 900; }
+.ma .ln { margin-top: 6px; }
+.ma .hd { font-weight: 900; margin-top: 14px; }
+.cite { display: inline-block; font-size: 20px; font-weight: 900; background: var(--blue-soft); color: var(--blue); border-radius: 8px;
+  padding: 0 8px; vertical-align: 4px; }
+.hlt { background: linear-gradient(transparent 50%, var(--yellow) 50%); }
+.composer { position: absolute; left: 30px; right: 30px; bottom: 24px; min-height: 124px; border: 3px solid var(--line); border-radius: 24px;
+  padding: 16px 22px 62px; font-size: 28px; font-weight: 700; line-height: 1.45; background: #fff; white-space: pre-line; }
+.composer .ph { color: #B9AEA2; }
+.composer .tools { position: absolute; left: 16px; bottom: 12px; display: flex; gap: 10px; }
+.composer .tools span { font-size: 22px; font-weight: 800; color: var(--sub); border: 2px solid var(--line); border-radius: 999px; padding: 2px 14px; }
+.composer .tools span.on { color: var(--blue); border-color: var(--blue); background: var(--blue-soft); }
+.composer .send { position: absolute; right: 14px; bottom: 12px; width: 46px; height: 46px; border-radius: 12px; background: var(--orange); }
+.pj-title { font-family: 'Black Han Sans', sans-serif; font-size: 46px; letter-spacing: -1px; }
+.pcard { position: relative; border: 3px solid var(--line); border-radius: 20px; padding: 16px 22px; margin-top: 18px; background: #fff; }
+.pcard h4 { font-size: 24px; color: var(--sub); font-weight: 900; margin-bottom: 6px; }
+.pcard .ins { font-size: 27px; font-weight: 600; line-height: 1.55; white-space: pre-line; min-height: 40px; }
+.modal { position: absolute; background: #fff; border-radius: 24px; box-shadow: 0 24px 60px rgba(0, 0, 0, .25); padding: 28px 30px; }
+.modal h3 { font-size: 32px; font-weight: 900; margin-bottom: 16px; }
+.field { border: 3px solid var(--blue); border-radius: 14px; padding: 12px 16px; font-size: 30px; font-weight: 700; min-height: 66px; }
+.btn { display: inline-block; background: var(--ink); color: #fff; border-radius: 14px; padding: 10px 24px; font-size: 28px; font-weight: 900; }
+.cursor { position: absolute; left: 0; top: 0; width: 40px; height: 50px; z-index: 7; opacity: 0; transform-origin: 4px 4px; }
+
+/* 보고서 카드 (역할별 보고) */
+.rep { position: absolute; background: #fff; border-radius: 22px; border: 3px solid var(--line); padding: 20px 24px;
+  box-shadow: 0 12px 26px rgba(60, 40, 20, .12); font-size: 32px; font-weight: 700; line-height: 1.45; }
+.rep .who { display: inline-block; color: #fff; background: var(--c, var(--ink)); font-size: 22px; font-weight: 900;
+  padding: 4px 14px; border-radius: 999px; margin-bottom: 8px; }

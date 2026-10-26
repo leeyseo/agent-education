@@ -13,6 +13,10 @@
 shorts/완성본/
 shorts/voice_samples/
 
+# 화면 녹화 원본과 클립 (계정 화면이 찍혀 있을 수 있어 저장소에 넣지 않는다)
+shorts/s2/rec/raw/
+shorts/s2/rec/clips/
+
 # 참고용으로 받은 외부 광고 영상
 KakaoTalk_*
 

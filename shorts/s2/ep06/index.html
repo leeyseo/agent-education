@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>디자이너 편 EP6 claude.ai에서 시작하기</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700;900&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../../lib/base.css">
+<link rel="stylesheet" href="../s2.css">
+<style>
+  .login { left: 230px; top: 250px; width: 440px; text-align: center; }
+  .login .lb { border: 3px solid var(--line); border-radius: 14px; padding: 14px; font-size: 26px; font-weight: 800; margin-top: 14px; }
+  .canvas { position: absolute; inset: 0; background: #EEEAE4; background-image: radial-gradient(#D6CEC3 2px, transparent 2px); background-size: 28px 28px; }
+  .canvas .lg { border-radius: 8px; }
+  .ins-big { font-size: 34px; font-weight: 700; line-height: 1.7; }
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage"><div class="abs" id="area">
+
+  <!-- s1: 주소창에 claude.ai, 로그인 -->
+  <div class="scene" id="s1">
+    <div class="demo" style="right:0;top:0">예시 화면</div>
+    <div class="app" id="s1-app" style="left:0;top:50px;width:960px;height:700px">
+      <div class="bbar"><i></i><i></i><i></i><div class="url" style="font-size:30px;color:var(--ink)"><span id="s1-url"></span><span class="caret" id="s1-caret"></span></div></div>
+      <div class="body">
+        <div class="modal login" id="s1-login">
+          <h3>로그인</h3>
+          <div class="lb">Google로 계속하기</div>
+          <div class="lb">이메일로 계속하기</div>
+        </div>
+      </div>
+    </div>
+    <div class="abs" id="s1-sian" data-char="person:sian:smile" style="left:700px;top:620px;width:220px;height:308px"></div>
+  </div>
+
+  <!-- s2: 프로젝트 만들기 -->
+  <div class="scene" id="s2">
+    <div class="demo" style="right:0;top:0">예시 화면</div>
+    <div class="app" id="s2-app" style="left:0;top:50px;width:960px;height:820px">
+      <div class="bbar"><i></i><i></i><i></i><div class="url">claude.ai</div></div>
+      <div class="body">
+        <div class="side"><i class="on"></i><i id="s2-pj"></i><i></i><i></i></div>
+        <div class="main">
+          <div id="s2-list">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div class="pj-title">프로젝트</div><div class="btn" id="s2-new">+ 새 프로젝트</div>
+            </div>
+            <div class="pcard" style="color:var(--sub);font-size:26px;font-weight:700">아직 프로젝트가 없어요</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal" id="s2-modal" style="left:150px;top:280px;width:660px">
+        <h3>새 프로젝트</h3>
+        <div class="field"><span id="s2-name"></span><span class="caret"></span></div>
+        <div style="text-align:right;margin-top:18px"><span class="btn" id="s2-make" style="background:var(--orange)">만들기</span></div>
+      </div>
+      <div class="cursor" id="s2-cur" data-cursor></div>
+    </div>
+  </div>
+
+  <!-- s3: 프로젝트 지침 -->
+  <div class="scene" id="s3">
+    <div class="demo" style="right:0;top:0">예시 화면</div>
+    <div class="app" style="left:0;top:50px;width:960px;height:820px">
+      <div class="bbar"><i></i><i></i><i></i><div class="url">claude.ai/project</div></div>
+      <div class="body">
+        <div class="side"><i></i><i class="on"></i><i></i><i></i></div>
+        <div class="main">
+          <div class="pj-title">모닝빵 2호점 리브랜딩</div>
+          <div class="pcard"><h4>지침</h4><div class="ins" id="s3-ins"></div></div>
+          <div class="pcard"><h4>파일</h4><div class="ins" style="color:#B9AEA2">파일을 여기로 끌어다 놓으세요</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- s4: 규칙 예시 -->
+  <div class="scene" id="s4">
+    <div class="demo" style="right:0;top:0">예시 화면</div>
+    <div class="pcard" id="s4-card" style="position:absolute;left:0;top:50px;width:960px;padding:28px 34px">
+      <h4>지침</h4>
+      <div class="ins-big">우리는 디자인 스튜디오 픽셀공방이야.</div>
+      <div class="ins-big">· <span id="s4-a">결정은 내가 해. 너는 선택지와 근거를 가져와.</span></div>
+      <div class="ins-big">· <span id="s4-b">자료에 없는 건 지어내지 말고 '확인 필요'라고 표시해.</span></div>
+      <div class="ins-big">· 시안은 방향이 겹치지 않게 여러 개.</div>
+      <div class="ins-big">· 답은 짧게, 번호 붙여서.</div>
+    </div>
+    <div class="abs" id="s4-sian" data-char="person:sian:skeptic" style="left:370px;top:580px;width:240px;height:336px"></div>
+  </div>
+
+  <!-- s5: Design도 Claude 안에 -->
+  <div class="scene" id="s5">
+    <div class="demo" style="right:0;top:0">예시 화면</div>
+    <div class="app" id="s5-app" style="left:0;top:50px;width:960px;height:600px">
+      <div class="bbar"><i></i><i></i><i></i><div class="url">claude.ai · Design</div></div>
+      <div class="body"><div class="canvas">
+        <div class="lg" data-logo="Main" id="s5-l1" style="left:60px;top:80px;width:240px;height:240px"></div>
+        <div class="lg" data-logo="L02" id="s5-l2" style="left:350px;top:80px;width:240px;height:240px"></div>
+        <div class="lg" data-logo="L04" id="s5-l3" style="left:640px;top:80px;width:240px;height:240px"></div>
+        <div class="abs" style="left:60px;top:360px;font-size:26px;font-weight:800;color:var(--sub)">아트보드마다 시안 하나</div>
+      </div></div>
+    </div>
+    <div class="sticker red" id="s5-st" style="left:560px;top:700px">요금제 먼저 확인!</div>
+    <div class="abs" id="s5-sian" data-char="person:sian:grin" style="left:60px;top:660px;width:200px;height:280px"></div>
+    <div class="abs cs" id="s5-note" style="left:300px;top:840px;font-size:24px;font-weight:700">메뉴 이름과 위치는 화면마다 다를 수 있어요</div>
+  </div>
+
+  <!-- s6: 결론 -->
+  <div class="scene" id="s6">
+    <div class="abs" data-chair style="left:350px;top:0;width:260px;height:364px"></div>
+    <div class="abs" id="s6-sian" data-char="person:sian:proud" style="left:370px;top:10px;width:220px;height:308px"></div>
+    <div class="abs conclude" id="s6-c" style="top:400px"><div class="k">오늘의 결론</div><div class="t">프로젝트 =<br><span>우리 팀 회의실</span></div></div>
+  </div>
+
+</div></div></div>
+<script src="timeline.js"></script>
+<script src="../../lib/engine.js"></script>
+<script src="../s2.js"></script>
+<script>
+const INS = `우리는 디자인 스튜디오 픽셀공방, 이 프로젝트는 모닝빵 2호점 리브랜딩이야.
+- 결정은 내가 해. 너는 선택지와 근거를 가져와.
+- 자료에 없는 건 지어내지 말고 '확인 필요'라고 표시해.
+- 시안은 방향이 겹치지 않게 여러 개.
+- 답은 짧게, 번호 붙여서.`;
+
+start({
+  s1(t, d, m, W) {
+    rise($('s1-app'), t, 0.05, 0.3, 40);
+    const done = typeText($('s1-url'), 'claude.ai', t, when(W, 'claude.ai') - 0.2, 12);
+    $('s1-caret').style.opacity = done ? 0 : 1;
+    pop($('s1-login'), t, when(W, '로그인하세요') - 0.1, 0.4);
+    rise($('s1-sian'), t, 0.3, 0.4, 60);
+  },
+
+  s2(t, d, m, W) {
+    const tn = when(W, '모닝빵') - 0.4;
+    cursorAt($('s2-cur'), t, [[0.2, 500, 600], [0.9, 30, 140], [1.6, 800, 100], [tn + 1.6, 800, 100], [tn + 2.0, 700, 450]],
+      [1.0, 1.7, tn + 2.1]);
+    $('s2-pj').classList.toggle('on', t >= 1.0);
+    fade($('s2-list'), t, 1.05, 0.25);
+    pop($('s2-modal'), t, 1.8, 0.35);
+    typeText($('s2-name'), '모닝빵 2호점 리브랜딩', t, tn, 9);
+    $('s2-make').style.transform = `scale(${t >= tn + 2.1 && t < tn + 2.25 ? 0.92 : 1})`;
+  },
+
+  s3(t, d, m, W) {
+    typeText($('s3-ins'), INS, t, 0.3, Math.max(INS.length / (d - 1.2), 30));
+  },
+
+  s4(t, d, m, W) {
+    rise($('s4-card'), t, 0.05, 0.3, 30);
+    $('s4-a').classList.toggle('hlt', t >= when(W, '결정은') - 0.1);
+    $('s4-b').classList.toggle('hlt', t >= when(W, '모르는') - 0.1);
+    rise($('s4-sian'), t, 0.3, 0.4, 60);
+  },
+
+  s5(t, d, m, W) {
+    rise($('s5-app'), t, 0.05, 0.3, 40);
+    ['s5-l1', 's5-l2', 's5-l3'].forEach((id, i) => pop($(id), t, 0.4 + i * 0.15, 0.35));
+    rise($('s5-sian'), t, m[1] - 0.3, 0.4, 60);
+    pop($('s5-st'), t, when(W, '먼저') - 0.1, 0.4, -3);
+    fade($('s5-note'), t, when(W, '먼저') + 0.4, 0.3);
+  },
+
+  s6(t, d, m, W) {
+    rise($('s6-sian'), t, 0.1, 0.4, 60);
+    pop($('s6-c'), t, Math.max(when(W, '우리') - 0.3, 0.6), 0.45);
+  },
+});
+</script>
+</body>
+</html>

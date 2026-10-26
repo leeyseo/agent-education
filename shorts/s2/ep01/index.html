@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>디자이너 편 EP1 고르는 사람이 된다</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700;900&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../../lib/base.css">
+<link rel="stylesheet" href="../s2.css">
+<style>
+  .half { position: absolute; top: 0; width: 460px; height: 900px; }
+  .fname { position: absolute; font: 22px var(--mono); color: var(--sub); white-space: nowrap; }
+  .mini { position: absolute; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .mini .lg { position: relative; aspect-ratio: 1 / 1; border-radius: 12px; border-width: 2px; }
+  .step { position: absolute; left: 0; width: 960px; height: 118px; background: #fff; border: 4px solid var(--line); border-radius: 24px;
+    display: flex; align-items: center; gap: 22px; padding: 0 30px; font-size: 40px; font-weight: 900; }
+  .step .ico { width: 64px; height: 64px; flex: none; }
+  .step .tm { margin-left: auto; font-size: 30px; color: var(--sub); }
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage"><div class="abs" id="area">
+
+  <!-- s1: 한 사람은 하나, 한 사람은 열두 개 -->
+  <div class="scene" id="s1">
+    <div class="half" id="s1-l" style="left:0">
+      <div class="tag-old" style="left:0;top:0;position:absolute">예전</div>
+      <div class="lg" data-logo="L03" id="s1-one" style="left:70px;top:110px;width:320px;height:320px"></div>
+      <div class="fname" id="s1-fn" style="left:40px;top:446px">로고_최종_진짜최종_v17.psd</div>
+      <div class="abs" id="s1-sian1" data-char="person:sian:oops" style="left:100px;top:520px;width:260px;height:364px"></div>
+    </div>
+    <div class="half" id="s1-r" style="left:500px">
+      <div class="tag-new" style="left:0;top:0;position:absolute">이제</div>
+      <div class="mini" id="s1-mini" style="left:0;top:110px;width:460px"></div>
+      <div class="abs" id="s1-sian2" data-char="person:sian:grin" style="left:100px;top:520px;width:260px;height:364px"></div>
+    </div>
+  </div>
+
+  <!-- s2: 예전 방식 -->
+  <div class="scene" id="s2">
+    <div class="tag-old" style="left:0;top:0">예전</div>
+    <div class="step" id="s2-a" style="top:80px"><span class="ico" data-icon="mag:#7A6E62"></span>자료 찾기<span class="tm">반나절</span></div>
+    <div class="step" id="s2-b" style="top:220px"><span class="ico" data-icon="file:#7A6E62"></span>스케치<span class="tm">하루</span></div>
+    <div class="step" id="s2-c" style="top:360px"><span class="ico" data-icon="save:#7A6E62"></span>포토샵에서 밤새 다듬기<span class="tm">새벽 2시</span></div>
+    <div class="lg" data-logo="L03" id="s2-one" style="left:330px;top:520px;width:300px;height:300px"></div>
+    <div class="sticker red" id="s2-st" style="left:600px;top:740px">겨우 하나</div>
+  </div>
+
+  <!-- s3: 한 줄 던지기 -->
+  <div class="scene" id="s3">
+    <div class="tag-new" style="left:0;top:0">이제</div>
+    <div class="chat" id="s3-chat" style="left:0;top:80px;width:960px;height:560px">
+      <div class="chd"><i></i>Claude</div>
+      <div class="ub" id="s3-ub" style="top:100px;max-width:820px">모닝빵 베이커리 2호점 오픈해. 2012년부터 동네에서 새벽마다 빵 굽는 집이야. 로고 리뉴얼 시안 열두 개 뽑아 줘. 방향은 다 다르게.</div>
+      <div class="inp" id="s3-inp"><span id="s3-typed"></span><span class="caret" id="s3-caret"></span></div>
+    </div>
+    <div class="abs" id="s3-sian" data-char="person:sian:smile" style="left:680px;top:620px;width:220px;height:308px"></div>
+    <div class="sticker orange" id="s3-st" style="left:60px;top:700px">툭, 한 줄</div>
+  </div>
+
+  <!-- s4: 실제 결과 12개 -->
+  <div class="scene" id="s4">
+    <div class="real" id="s4-real" style="left:0;top:0">실제 Claude 결과물 · 1차 시안</div>
+    <div class="lgrid4" id="s4-grid" data-r1 style="left:0;top:70px;width:960px"></div>
+    <div class="sticker mint" id="s4-st" style="left:300px;top:810px">방향이 다른 12개</div>
+  </div>
+
+  <!-- s5: 보고, 고르고, 방향 정하기 -->
+  <div class="scene" id="s5">
+    <div class="lgrid4" id="s5-grid" data-r1 style="left:100px;top:0;width:760px"></div>
+    <div class="abs" id="s5-sian" data-char="person:sian:skeptic" style="left:20px;top:600px;width:220px;height:308px"></div>
+    <div class="ub" id="s5-ub" style="left:280px;right:auto;top:660px">2번, 이 방향으로 더 가 보자</div>
+  </div>
+
+  <!-- s6: 결론 -->
+  <div class="scene" id="s6">
+    <div class="abs" data-chair style="left:350px;top:0;width:260px;height:364px"></div>
+    <div class="abs" id="s6-sian" data-char="person:sian:proud" style="left:370px;top:10px;width:220px;height:308px"></div>
+    <div class="abs conclude" id="s6-c" style="top:400px"><div class="k">오늘의 결론</div><div class="t">만드는 사람에서<br><span>고르는 사람으로</span></div></div>
+  </div>
+
+</div></div></div>
+<script src="timeline.js"></script>
+<script src="../../lib/engine.js"></script>
+<script>
+// s1의 작은 격자는 s2.js가 채우기 전에 만들어 둔다
+$('s1-mini').innerHTML = ['Main', 'L02', 'L03', 'L04', 'L05', 'L06', 'L07', 'L08', 'L09', 'L10', 'L11', 'L12']
+  .map(id => `<div class="lg" data-logo="${id}"></div>`).join('');
+</script>
+<script src="../s2.js"></script>
+<script>
+const minis = $$('#s1-mini .lg');
+const PROMPT = $('s3-ub').textContent;
+
+start({
+  s1(t, d, m, W) {
+    rise($('s1-l'), t, 0.1, 0.35, 40);
+    rise($('s1-r'), t, m[2] - 0.1, 0.35, 40);   // 둘째 줄 "한 사람은 열두 개를…"
+    pop($('s1-one'), t, when(W, '시안') - 0.1, 0.4, -2);
+    fade($('s1-fn'), t, when(W, '붙잡고') - 0.1, 0.3);
+    const t12 = when(W, '열두') - 0.2;
+    minis.forEach((el, i) => pop(el, t, t12 + i * 0.06, 0.3));
+  },
+
+  s2(t, d, m, W) {
+    rise($('s2-a'), t, when(W, '자료') - 0.1, 0.3, 30);
+    rise($('s2-b'), t, when(W, '스케치하고') - 0.1, 0.3, 30);
+    rise($('s2-c'), t, when(W, '밤새') - 0.1, 0.3, 30);
+    pop($('s2-one'), t, when(W, '겨우') - 0.2, 0.4);
+    pop($('s2-st'), t, when(W, '겨우'), 0.4, -4);
+  },
+
+  s3(t, d, m, W) {
+    rise($('s3-chat'), t, 0.1, 0.35, 40);
+    // 입력창에 한 줄을 치고(0.3~2.2초), 보내면 말풍선이 된다
+    const sent = t >= 2.4;
+    const done = typeText($('s3-typed'), PROMPT, t, 0.3, 38);
+    $('s3-typed').style.opacity = sent ? 0 : 1;
+    $('s3-caret').style.opacity = sent ? 0 : done ? blink(t) : 1;
+    pop($('s3-ub'), t, 2.4, 0.35);
+    rise($('s3-sian'), t, 0.3, 0.4, 60);
+    pop($('s3-st'), t, when(W, '한') + 0.1, 0.4, -4);
+  },
+
+  s4(t, d, m, W) {
+    for (let i = 1; i <= 12; i++) pop(cell('s4-grid', i), t, 0.15 + (i - 1) * 0.12, 0.3);
+    pop($('s4-real'), t, when(W, '실제로') - 0.1, 0.35);
+    pop($('s4-st'), t, when(W, '열두') + 0.1, 0.4, -3);
+  },
+
+  s5(t, d, m, W) {
+    const tPick = when(W, '고르고') - 0.1, tDir = when(W, '방향을') - 0.1;
+    for (let i = 1; i <= 12; i++) {
+      const c = cell('s5-grid', i);
+      c.classList.toggle('dim', t >= tPick && i !== 2);
+      c.classList.toggle('pick', t >= tPick && i === 2);
+    }
+    mark('s5-grid', 2, 'o', '살려', t, tDir);
+    rise($('s5-sian'), t, 0.2, 0.4, 60);
+    pop($('s5-ub'), t, tDir, 0.35);
+  },
+
+  s6(t, d, m, W) {
+    rise($('s6-sian'), t, 0.1, 0.4, 60);
+    pop($('s6-c'), t, Math.max(when(W, '고르는') - 0.3, 0.6), 0.45);
+  },
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>디자이너 편 EP3 넙죽넙죽 신입</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Myeongjo:wght@800&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700;900&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../../lib/base.css">
+<link rel="stylesheet" href="../s2.css">
+<style>
+  .counter { position: absolute; background: #fff; border: 4px solid var(--line); border-radius: 28px; padding: 18px 30px; text-align: center; }
+  .counter .cl { font-size: 32px; font-weight: 900; color: var(--sub); }
+  .counter .cn { font-family: 'Black Han Sans', sans-serif; font-size: 120px; line-height: 1.05; }
+  .resign { position: absolute; width: 260px; height: 340px; background: #fff; border: 3px solid #E6DCCF; border-radius: 10px;
+    box-shadow: 0 16px 30px rgba(0, 0, 0, .18); text-align: center; padding-top: 40px; }
+  .resign .rh { font-family: 'Nanum Myeongjo', serif; font-size: 58px; font-weight: 800; letter-spacing: 8px; }
+  .resign .rl { height: 12px; margin: 22px 30px 0; border-radius: 6px; background: #EFE6DA; }
+  .tear { position: absolute; width: 16px; height: 26px; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; background: #7EC8F5; }
+  .dclock { position: absolute; background: var(--ink); color: #FF8A3D; border-radius: 30px; padding: 16px 40px;
+    font-family: var(--mono); font-size: 110px; font-weight: 900; letter-spacing: 4px; }
+  .again { position: absolute; font-size: 40px; font-weight: 900; background: var(--blue); color: #fff; padding: 12px 26px;
+    border-radius: 26px 26px 26px 8px; white-space: nowrap; }
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage"><div class="abs" id="area">
+
+  <!-- s1: 사람 신입 -->
+  <div class="scene" id="s1">
+    <div class="counter" id="s1-cnt" style="left:0;top:20px;width:400px"><div class="cl">"다시 해 와"</div><div class="cn" id="s1-n">0번</div></div>
+    <div class="abs" id="s1-jr" data-char="person:junior:sad" style="left:80px;top:330px;width:400px;height:560px"></div>
+    <div class="tear" id="s1-t1" style="left:190px;top:560px"></div>
+    <div class="tear" id="s1-t2" style="left:368px;top:560px"></div>
+    <div class="resign" id="s1-res" style="left:620px;top:220px"><div class="rh">사직서</div><div class="rl"></div><div class="rl"></div><div class="rl" style="width:60%"></div></div>
+  </div>
+
+  <!-- s2: AI 신입 -->
+  <div class="scene" id="s2">
+    <div class="counter" id="s2-cnt" style="left:0;top:20px;width:400px"><div class="cl">"다시 해 와"</div><div class="cn" id="s2-n">0번</div></div>
+    <div class="abs" id="s2-yj" data-char="yj:cheer:proud" style="left:420px;top:180px;width:440px;height:704px"></div>
+    <div class="ab" id="s2-b" style="left:0;top:330px;width:420px;font-size:44px;font-weight:900;text-align:center">네, 바로요!</div>
+  </div>
+
+  <!-- s3: 지치지도 삐지지도 않음 -->
+  <div class="scene" id="s3">
+    <div class="dclock" id="s3-clk" style="left:240px;top:0">03:00</div>
+    <div class="abs" id="s3-yj" data-char="yj:laptop:smile" style="left:280px;top:220px;width:400px;height:560px"></div>
+    <div class="sticker mint" id="s3-a" style="left:0;top:300px">지침 없음</div>
+    <div class="sticker blue" id="s3-b" style="left:700px;top:420px">삐짐 없음</div>
+    <div class="sticker orange" id="s3-c" style="left:20px;top:620px">속도 그대로</div>
+  </div>
+
+  <!-- s4: 마음에 들 때까지 -->
+  <div class="scene" id="s4">
+    <div class="again" id="s4-a1" style="left:40px;top:20px">다시!</div>
+    <div class="again" id="s4-a2" style="left:330px;top:80px">이건 아니야, 다시</div>
+    <div class="again" id="s4-a3" style="left:90px;top:190px">색만 바꿔서 다시</div>
+    <div class="again" id="s4-a4" style="left:470px;top:260px">2번이랑 섞어서 다시</div>
+    <div class="abs" id="s4-sian" data-char="person:sian:grin" style="left:60px;top:420px;width:340px;height:476px"></div>
+    <div class="abs" id="s4-yj" data-char="yj:thumb:smile" style="left:560px;top:400px;width:300px;height:480px"></div>
+  </div>
+
+  <!-- s5: 결론 -->
+  <div class="scene" id="s5">
+    <div class="abs" id="s5-yj" data-char="yj:thumb:proud" style="left:370px;top:0;width:220px;height:352px"></div>
+    <div class="abs conclude" id="s5-c" style="top:400px"><div class="k">오늘의 결론</div><div class="t">다시 시키는 데<br><span>눈치 보지 말 것</span></div></div>
+  </div>
+
+</div></div></div>
+<script src="timeline.js"></script>
+<script src="../../lib/engine.js"></script>
+<script src="../s2.js"></script>
+<script>
+start({
+  s1(t, d, m, W) {
+    rise($('s1-cnt'), t, 0.1, 0.3, 30);
+    const a = when(W, '열'), b = when(W, '울면서') - 0.2;
+    countTo($('s1-n'), t, a - 0.2, Math.max(b - a, 0.6), 10, v => v + '번');
+    rise($('s1-jr'), t, 0.2, 0.4, 80);
+    [$('s1-t1'), $('s1-t2')].forEach((el, i) => {
+      const k = prog(t, b + i * 0.15, 0.8);
+      put(el, k > 0 && k < 1 ? 1 : 0, k * 120);
+    });
+    pop($('s1-res'), t, when(W, '퇴사') - 0.1, 0.45, 8);
+  },
+
+  s2(t, d, m, W) {
+    rise($('s2-cnt'), t, 0.1, 0.3, 30);
+    const a = when(W, '열'), b = when(W, '열한');
+    countTo($('s2-n'), t, a - 0.2, Math.max(b - a, 0.6), 11, v => v + '번');
+    $('s2-n').style.color = t >= b ? 'var(--mint)' : '';
+    rise($('s2-yj'), t, 0.2, 0.4, 80);
+    pop($('s2-b'), t, when(W, "'네") - 0.1, 0.35);
+  },
+
+  s3(t, d, m, W) {
+    pop($('s3-clk'), t, when(W, '새벽') - 0.2, 0.4);
+    rise($('s3-yj'), t, 0.1, 0.4, 60);
+    pop($('s3-a'), t, when(W, '지치지') - 0.05, 0.35, -4);
+    pop($('s3-b'), t, when(W, '삐지지') - 0.05, 0.35, 4);
+    pop($('s3-c'), t, when(W, '같은') - 0.05, 0.35, -3);
+  },
+
+  s4(t, d, m, W) {
+    ['s4-a1', 's4-a2', 's4-a3', 's4-a4'].forEach((id, i) => pop($(id), t, 0.3 + i * 0.55, 0.3));
+    rise($('s4-sian'), t, 0.1, 0.4, 60);
+    rise($('s4-yj'), t, when(W, '마음에') - 0.2, 0.4, 60);
+  },
+
+  s5(t, d, m, W) {
+    rise($('s5-yj'), t, 0.1, 0.4, 80);
+    pop($('s5-c'), t, Math.max(when(W, '눈치') - 0.4, 0.6), 0.45);
+  },
+});
+</script>
+</body>
+</html>

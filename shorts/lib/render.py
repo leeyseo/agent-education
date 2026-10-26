@@ -12,6 +12,7 @@ from playwright.sync_api import sync_playwright
 
 SHORTS = Path(__file__).resolve().parent.parent
 FPS = 30
+HAS_CLIP = "document.querySelectorAll('canvas[data-src]').length > 0"   # 화면 녹화 클립이 있는 편
 
 
 def open_page(p, ep_dir):
@@ -27,12 +28,19 @@ def open_page(p, ep_dir):
     return browser, page
 
 
+def seek(page, t, has_video):
+    page.evaluate(f"seek({t})")
+    if has_video:
+        page.evaluate("window.settle()")   # 녹화 클립이 그 프레임으로 탐색을 마칠 때까지
+
+
 def stills(ep_dir, times, outdir):
     outdir.mkdir(parents=True, exist_ok=True)
     with sync_playwright() as p:
         browser, page = open_page(p, ep_dir)
+        has_video = page.evaluate(HAS_CLIP)
         for t in times:
-            page.evaluate(f"seek({t})")
+            seek(page, t, has_video)
             path = outdir / f"still_{t:05.1f}.png"
             page.screenshot(path=str(path))
             print(path)
@@ -53,8 +61,9 @@ def video(ep_dir):
             "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p",
             "-c:a", "aac", "-b:a", "192k", "-shortest", "-movflags", "+faststart", str(out),
         ], stdin=subprocess.PIPE)
+        has_video = page.evaluate(HAS_CLIP)
         for i in range(frames):
-            page.evaluate(f"seek({i / FPS})")
+            seek(page, i / FPS, has_video)
             ff.stdin.write(page.screenshot(type="jpeg", quality=93))
         ff.stdin.close()
         ff.wait()

@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>디자이너 편 EP2 AI랑 회의하라</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700;900&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../../lib/base.css">
+<link rel="stylesheet" href="../s2.css">
+<style>
+  .sbox { position: absolute; left: 40px; right: 40px; top: 40px; height: 84px; border: 4px solid var(--line); border-radius: 999px;
+    display: flex; align-items: center; gap: 18px; padding: 0 28px; font-size: 34px; font-weight: 700; }
+  .sbox .ico { width: 40px; height: 40px; flex: none; }
+  .res { position: absolute; left: 48px; right: 48px; }
+  .res .rt { font-size: 30px; font-weight: 800; color: var(--blue); }
+  .res .rl { height: 16px; margin-top: 12px; border-radius: 8px; background: #EFE6DA; width: 86%; }
+  .demo { position: absolute; font-size: 22px; font-weight: 800; color: var(--sub); background: #fff; border: 3px solid var(--line);
+    border-radius: 999px; padding: 4px 14px; white-space: nowrap; }
+  .clone { position: absolute; top: 20px; width: 180px; height: 288px; }
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage"><div class="abs" id="area">
+
+  <!-- s1: 검색창처럼 -->
+  <div class="scene" id="s1">
+    <div class="browser" id="s1-br" style="left:0;top:40px;width:960px;height:560px">
+      <div class="bbar"><i></i><i></i><i></i><div class="url">search</div></div>
+      <div class="bbody">
+        <div class="sbox"><span class="ico" data-icon="mag:#7A6E62"></span><span id="s1-q"></span><span class="caret"></span></div>
+        <div class="res" id="s1-r1" style="top:170px"><div class="rt">빵집 로고 디자인 트렌드 2026</div><div class="rl"></div></div>
+        <div class="res" id="s1-r2" style="top:270px"><div class="rt">베이커리 로고 무료 템플릿 모음</div><div class="rl" style="width:70%"></div></div>
+        <div class="res" id="s1-r3" style="top:370px"><div class="rt">감성 빵집 로고 레퍼런스 50선</div><div class="rl" style="width:78%"></div></div>
+      </div>
+    </div>
+    <div class="abs" id="s1-sian" data-char="person:sian:skeptic" style="left:680px;top:590px;width:240px;height:336px"></div>
+  </div>
+
+  <!-- s2: 질문 하나, 답 하나 -->
+  <div class="scene" id="s2">
+    <div class="chat" id="s2-chat" style="left:0;top:40px;width:960px;height:520px">
+      <div class="chd"><i></i>Claude</div>
+      <div class="ub" id="s2-u" style="top:100px">빵집 로고 어떻게 만들어?</div>
+      <div class="ab" id="s2-a" style="top:210px">따뜻한 갈색을 쓰고, 밀 이삭이나 손글씨를 넣어 보세요.</div>
+      <div class="demo" style="right:20px;top:14px">예시 화면</div>
+    </div>
+    <div class="abs" id="s2-sian" data-char="person:sian:sad" style="left:60px;top:600px;width:220px;height:308px"></div>
+    <div class="sticker" id="s2-st" style="left:360px;top:690px">질문 하나 → 답 하나 → 끝</div>
+  </div>
+
+  <!-- s3: 회의실 -->
+  <div class="scene" id="s3">
+    <div class="clone" id="s3-c1" data-char="yj:stand:smile:analyst" style="left:0"></div>
+    <div class="clone" id="s3-c2" data-char="yj:stand:smile:planner" style="left:195px"></div>
+    <div class="clone" id="s3-c3" data-char="yj:stand:proud:designer" style="left:390px"></div>
+    <div class="clone" id="s3-c4" data-char="yj:stand:smile:copy" style="left:585px"></div>
+    <div class="clone" id="s3-c5" data-char="yj:stand:skeptic:critic" style="left:780px"></div>
+    <div class="mtable" style="left:-20px;top:250px;width:1000px;height:230px"></div>
+    <div class="plate" id="s3-p1" style="left:90px;top:290px;--c:#3D6EF0">분석가</div>
+    <div class="plate" id="s3-p2" style="left:285px;top:290px;--c:#C99A12">기획자</div>
+    <div class="plate" id="s3-p3" style="left:480px;top:290px;--c:#FF7A2F">디자이너</div>
+    <div class="plate" id="s3-p4" style="left:675px;top:290px;--c:#D9468F">카피라이터</div>
+    <div class="plate" id="s3-p5" style="left:870px;top:290px;--c:#E5484D">비평가</div>
+    <div class="abs" data-chair style="left:340px;top:520px;width:280px;height:392px"></div>
+    <div class="abs" id="s3-sian" data-char="person:sian:grin" style="left:362px;top:530px;width:236px;height:330px"></div>
+    <div class="sticker blue" id="s3-st" style="left:20px;top:600px">회의 시작</div>
+  </div>
+
+  <!-- s4: 사실 다 한 AI -->
+  <div class="scene" id="s4">
+    <div class="clone" id="s4-c1" data-char="yj:stand:smile:analyst" style="left:0"></div>
+    <div class="clone" id="s4-c2" data-char="yj:stand:smile:planner" style="left:195px"></div>
+    <div class="clone" id="s4-c3" data-char="yj:stand:proud:designer" style="left:390px"></div>
+    <div class="clone" id="s4-c4" data-char="yj:stand:smile:copy" style="left:585px"></div>
+    <div class="clone" id="s4-c5" data-char="yj:stand:skeptic:critic" style="left:780px"></div>
+    <div class="abs" id="s4-one" data-char="yj:cheer:proud" style="left:330px;top:0;width:300px;height:480px"></div>
+    <div class="sticker mint" id="s4-st" style="left:250px;top:560px">전부 Claude 하나</div>
+    <div class="abs center" id="s4-l" style="top:680px;font-size:40px;font-weight:900">역할만 정해 주면 <span class="cb">각자 보고</span>합니다</div>
+  </div>
+
+  <!-- s5: 역할별 보고 -->
+  <div class="scene" id="s5">
+    <div class="demo" style="right:0;top:0">예시 화면</div>
+    <div class="ub" id="s5-u1" style="top:40px;right:0">동네 빵집 로고들 어때?</div>
+    <div class="rep" id="s5-r1" style="left:0;top:140px;width:860px;--c:#3D6EF0"><span class="who">분석가</span><br>근처 빵집 로고는 대부분 갈색, 밀 이삭, 손글씨예요. 서로 잘 구분이 안 돼요.</div>
+    <div class="ub" id="s5-u2" style="top:440px;right:0">그럼 우린 뭘로 달라 보여?</div>
+    <div class="rep" id="s5-r2" style="left:0;top:540px;width:860px;--c:#C99A12"><span class="who">기획자</span><br>'새벽 다섯 시에 굽는 집' 이야기로 가요. 색은 남들이 안 쓰는 새벽 남색으로.</div>
+  </div>
+
+  <!-- s6: 결론 -->
+  <div class="scene" id="s6">
+    <div class="abs" id="s6-yj" data-char="yj:stand:smile:analyst" style="left:250px;top:0;width:200px;height:320px"></div>
+    <div class="abs" id="s6-yj2" data-char="yj:stand:proud:designer" style="left:510px;top:0;width:200px;height:320px"></div>
+    <div class="abs conclude" id="s6-c" style="top:400px"><div class="k">오늘의 결론</div><div class="t">질문만 하지 말고<br><span>회의를 여세요</span></div></div>
+  </div>
+
+</div></div></div>
+<script src="timeline.js"></script>
+<script src="../../lib/engine.js"></script>
+<script src="../s2.js"></script>
+<script>
+const ROLES_AT = ['분석가와', '기획자', '디자이너와', '카피라이터', '비평가'];
+
+start({
+  s1(t, d, m, W) {
+    rise($('s1-br'), t, 0.05, 0.3, 40);
+    typeText($('s1-q'), '빵집 로고 트렌드', t, 0.3, 12);
+    ['s1-r1', 's1-r2', 's1-r3'].forEach((id, i) => rise($(id), t, 1.5 + i * 0.2, 0.3, 20));
+    rise($('s1-sian'), t, when(W, '검색창') - 0.2, 0.4, 60);
+  },
+
+  s2(t, d, m, W) {
+    rise($('s2-chat'), t, 0.05, 0.3, 40);
+    pop($('s2-u'), t, 0.3, 0.3);
+    rise($('s2-a'), t, when(W, '답') - 0.1, 0.3, 20);
+    rise($('s2-sian'), t, 0.2, 0.4, 60);
+    pop($('s2-st'), t, when(W, '끝.') - 0.1, 0.4, -3);
+  },
+
+  s3(t, d, m, W) {
+    pop($('s3-st'), t, when(W, '회의') - 0.1, 0.4, -4);
+    ROLES_AT.forEach((w, i) => {
+      const at = when(W, w, 3 + i * 0.6) - 0.15;
+      rise($(`s3-c${i + 1}`), t, at, 0.35, 60);
+      pop($(`s3-p${i + 1}`), t, at + 0.1, 0.3);
+    });
+    rise($('s3-sian'), t, 0.1, 0.4, 60);
+  },
+
+  s4(t, d, m, W) {
+    // 다섯 분신이 가운데로 모여 하나가 된다
+    const at = when(W, '한') - 0.2, k = eo(prog(t, at, 0.5));
+    for (let i = 1; i <= 5; i++) {
+      const el = $(`s4-c${i}`), x0 = (i - 1) * 195;
+      put(el, 1 - k, 0, 1 - 0.2 * k, 0, (390 - x0) * k);
+    }
+    pop($('s4-one'), t, at + 0.4, 0.4);
+    pop($('s4-st'), t, at + 0.6, 0.4, -3);
+    rise($('s4-l'), t, when(W, '역할만') - 0.1, 0.3, 20);
+  },
+
+  s5(t, d, m, W) {
+    pop($('s5-u1'), t, 0.2, 0.3);
+    rise($('s5-r1'), t, when(W, '분석가') - 0.1, 0.35, 30);
+    pop($('s5-u2'), t, m[1] - 0.1, 0.3);
+    rise($('s5-r2'), t, when(W, '기획자') - 0.1, 0.35, 30);
+  },
+
+  s6(t, d, m, W) {
+    rise($('s6-yj'), t, 0.1, 0.4, 60);
+    rise($('s6-yj2'), t, 0.2, 0.4, 60);
+    pop($('s6-c'), t, Math.max(when(W, '회의를') - 0.3, 0.6), 0.45);
+  },
+});
+</script>
+</body>
+</html>

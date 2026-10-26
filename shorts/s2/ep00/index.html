@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>디자이너 편 EP0 예고편</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700;900&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../../lib/base.css">
+<link rel="stylesheet" href="../s2.css">
+<style>
+  .day { width: 170px; height: 170px; background: #fff; border-radius: 22px; border: 4px solid var(--line); text-align: center; overflow: hidden; }
+  .day .dh2 { background: var(--red); color: #fff; font-size: 26px; font-weight: 900; padding: 6px 0; }
+  .day .dn { font-family: 'Black Han Sans', sans-serif; font-size: 70px; margin-top: 8px; }
+  .titlecard { position: absolute; left: 0; top: 0; width: 960px; height: 900px; background: var(--ink); border-radius: 40px; color: #fff;
+    text-align: center; overflow: hidden; }
+  .titlecard .t { font-family: 'Black Han Sans', sans-serif; font-size: 112px; letter-spacing: -2px; margin-top: 280px; }
+  .titlecard .s { font-size: 36px; font-weight: 800; color: #CFC3B4; margin-top: 10px; }
+  .titlecard .s b { color: var(--yellow); }
+  .parts { margin: 34px auto 0; width: 760px; text-align: left; }
+  .parts div { font-size: 34px; font-weight: 800; padding: 11px 0; border-top: 2px solid #3A332C; }
+  .parts b { display: inline-block; width: 90px; color: var(--yellow); }
+  .crew { position: absolute; top: 40px; width: 150px; height: 240px; }
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage"><div class="abs" id="area">
+
+  <!-- s1: 시안 하나에 사흘 -->
+  <div class="scene" id="s1">
+    <div class="abs" id="s1-days" style="left:0;top:40px;display:flex;gap:16px">
+      <div class="day"><div class="dh2">월</div><div class="dn">1</div></div>
+      <div class="day"><div class="dh2">화</div><div class="dn">2</div></div>
+      <div class="day"><div class="dh2">수</div><div class="dn">3</div></div>
+    </div>
+    <div class="lg" data-logo="L03" id="s1-one" style="left:640px;top:20px;width:300px;height:300px"></div>
+    <div class="abs" id="s1-sian" data-char="person:sian:oops" style="left:300px;top:380px;width:360px;height:504px"></div>
+    <div class="sticker red" id="s1-st" style="left:20px;top:300px">시안 1개 = 사흘</div>
+  </div>
+
+  <!-- s2: 한 줄 던지기 -->
+  <div class="scene" id="s2">
+    <div class="chat" id="s2-chat" style="left:0;top:60px;width:960px;height:420px">
+      <div class="chd"><i></i>Claude</div>
+      <div class="inp" id="s2-inp" style="bottom:auto;top:110px"><span id="s2-typed"></span><span class="caret"></span></div>
+    </div>
+    <div class="abs" id="s2-sian" data-char="person:sian:smile" style="left:340px;top:520px;width:280px;height:392px"></div>
+  </div>
+
+  <!-- s3: 실제 결과 12개 -->
+  <div class="scene" id="s3">
+    <div class="real" id="s3-real" style="left:0;top:0">실제 Claude 결과물</div>
+    <div class="lgrid4" id="s3-grid" data-r1 style="left:0;top:70px;width:960px"></div>
+  </div>
+
+  <!-- s4: 고르고, 버리고, 다시 시키기 -->
+  <div class="scene" id="s4">
+    <div class="lgrid4" id="s4-grid" data-r1 style="left:0;top:70px;width:960px"></div>
+  </div>
+
+  <!-- s5: 타이틀 -->
+  <div class="scene" id="s5">
+    <div class="titlecard" id="s5-card">
+      <div class="crew" data-char="yj:stand:smile:analyst" style="left:60px"></div>
+      <div class="crew" data-char="yj:stand:smile:planner" style="left:235px"></div>
+      <div class="crew" data-char="yj:stand:proud:designer" style="left:405px"></div>
+      <div class="crew" data-char="yj:stand:smile:copy" style="left:575px"></div>
+      <div class="crew" data-char="yj:stand:skeptic:critic" style="left:750px"></div>
+      <div class="t">디자이너 편</div>
+      <div class="s">시안은 AI 팀이 뽑고, <b>결정은 당신이</b></div>
+      <div class="parts" id="s5-parts">
+        <div><b>1부</b>디자이너의 일이 바뀐다</div>
+        <div><b>2부</b>회의실 차리기</div>
+        <div><b>3부</b>시안 뽑기 · 로고 · 브로셔 · 홈페이지</div>
+        <div><b>4부</b>사수의 피드백</div>
+        <div><b>5부</b>사고 일지</div>
+      </div>
+    </div>
+  </div>
+
+</div></div></div>
+<script src="timeline.js"></script>
+<script src="../../lib/engine.js"></script>
+<script src="../s2.js"></script>
+<script>
+const PROMPT = '모닝빵 2호점 로고 시안 열두 개 뽑아 줘. 방향은 다 다르게.';
+const days = $$('#s1-days .day');
+const crew = $$('#s5-card .crew');
+const parts = $$('#s5-parts div');
+
+start({
+  s1(t, d, m, W) {
+    days.forEach((el, i) => pop(el, t, 0.15 + i * 0.25, 0.3));
+    pop($('s1-one'), t, 0.4, 0.4, 3);
+    rise($('s1-sian'), t, 0.1, 0.4, 80);
+    pop($('s1-st'), t, when(W, '사흘') - 0.1, 0.4, -4);
+  },
+
+  s2(t, d, m, W) {
+    rise($('s2-chat'), t, 0.05, 0.3, 40);
+    typeText($('s2-typed'), PROMPT, t, 0.25, 26);
+    rise($('s2-sian'), t, 0.2, 0.4, 60);
+  },
+
+  s3(t, d, m, W) {
+    for (let i = 1; i <= 12; i++) pop(cell('s3-grid', i), t, 0.05 + (i - 1) * 0.08, 0.28);
+    pop($('s3-real'), t, when(W, '진짜로') - 0.1, 0.35);
+  },
+
+  s4(t, d, m, W) {
+    const a = when(W, '고르고') - 0.1, b = when(W, '버리고') - 0.1, c = when(W, '다시') - 0.1;
+    mark('s4-grid', 2, 'o', '살려', t, a);
+    [6, 11, 12].forEach((n, i) => {
+      mark('s4-grid', n, 'x', '버려', t, b + i * 0.12);
+      cell('s4-grid', n).classList.toggle('dim', t >= b + i * 0.12);
+    });
+    mark('s4-grid', 4, 't', '보강', t, c);
+  },
+
+  s5(t, d, m, W) {
+    pop($('s5-card'), t, 0.05, 0.4);
+    crew.forEach((el, i) => rise(el, t, 0.3 + i * 0.1, 0.35, 40));
+    parts.forEach((el, i) => rise(el, t, when(W, '디자이너') + i * 0.12, 0.3, 20));
+  },
+});
+</script>
+</body>
+</html>
