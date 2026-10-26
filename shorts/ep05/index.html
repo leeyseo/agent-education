@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EP5 AI에게 작업 폴더 열쇠 주기</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700;900&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../lib/base.css">
+<style>
+  .vsc { position: absolute; background: #1E1F24; border-radius: 26px; overflow: hidden; color: #D7DCE2; box-shadow: 0 18px 40px rgba(0,0,0,.25); }
+  .vsc .act { position: absolute; left: 0; top: 58px; bottom: 0; width: 70px; background: #17181C; }
+  .vsc .act i { display: block; width: 34px; height: 34px; margin: 22px auto 0; border-radius: 8px; background: #3A3D45; }
+  .vsc .act i.on { background: var(--blue); }
+  .vsc .pane { position: absolute; left: 70px; top: 58px; right: 0; bottom: 0; padding: 26px 30px; }
+  .vsc .srch { height: 64px; border-radius: 12px; background: #2A2C33; border: 2px solid #3D6EF0; font-size: 28px; padding: 0 20px;
+    display: flex; align-items: center; gap: 6px; }
+  .ext { margin-top: 24px; display: flex; gap: 22px; align-items: center; background: #26282E; border-radius: 18px; padding: 22px; }
+  .ext .lg { width: 96px; height: 96px; border-radius: 22px; background: #D97757; flex: none; }
+  .ext .nm { font-size: 34px; font-weight: 900; color: #fff; }
+  .ext .pb { font-size: 22px; color: #9AA3AE; margin-top: 4px; }
+  .ext .bt { margin-left: auto; padding: 14px 28px; border-radius: 12px; font-size: 26px; font-weight: 900; color: #fff; background: var(--blue); }
+  .ext .bt.done { background: #3A3D45; color: #9AA3AE; }
+  .login { margin-top: 26px; display: flex; align-items: center; gap: 14px; font-size: 30px; font-weight: 800; color: #7FF0D6; }
+  .tree { position: absolute; background: #fff; border-radius: 26px; border: 3px solid var(--line); padding: 26px 30px;
+    box-shadow: 0 18px 40px rgba(60, 40, 20, .12); }
+  .tree .tr { display: flex; align-items: center; gap: 14px; height: 58px; font-size: 28px; font-weight: 700; }
+  .tree .tr .fi { width: 38px; height: 38px; flex: none; }
+  .deskglow { position: absolute; border: 8px dashed var(--mint); border-radius: 34px; }
+  .exp { font-size: 30px; font-weight: 600; color: #CFE9E2; white-space: normal; line-height: 1.5; min-height: 0; padding: 4px 0; }
+  .dlg { position: absolute; background: #fff; border-radius: 28px; border: 4px solid var(--ink); padding: 30px; box-shadow: 0 24px 50px rgba(0,0,0,.25); }
+  .dlg .q { font-size: 38px; font-weight: 900; margin-bottom: 18px; }
+  .diff { font: 28px/1.6 var(--mono); border-radius: 14px; overflow: hidden; }
+  .diff div { padding: 6px 16px; white-space: nowrap; }
+  .diff .m { background: var(--red-soft); color: #B4232A; }
+  .diff .p { background: var(--mint-soft); color: #137A65; }
+  .btns { display: flex; gap: 16px; margin-top: 24px; }
+  .btns span { flex: 1; text-align: center; padding: 16px 0; border-radius: 14px; font-size: 30px; font-weight: 900; border: 3px solid var(--line); }
+  .btns .ok { background: var(--mint); border-color: var(--mint); color: #fff; }
+  .cursor { position: absolute; width: 0; height: 0; border-left: 26px solid var(--ink); border-top: 16px solid transparent; border-bottom: 16px solid transparent;
+    transform-origin: 0 0; }
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage"><div class="abs" id="area">
+
+  <!-- s1: 열쇠 건네기 -->
+  <div class="scene" id="s1">
+    <div class="abs" id="s1-boss" data-char="boss:grin" style="left:20px;top:220px;width:330px;height:462px"></div>
+    <div class="abs" id="s1-yj" data-char="yj:stand:smile" style="left:640px;top:180px;width:300px;height:480px"></div>
+    <div class="abs" id="s1-yj2" data-char="yj:cheer:proud" style="left:640px;top:180px;width:300px;height:480px;opacity:0"></div>
+    <div class="abs" id="s1-key" data-icon="key:#E3B04B" style="left:300px;top:420px;width:150px;height:75px"></div>
+    <div class="sticker yellow" id="s1-st" style="left:300px;top:20px">작업 폴더 열쇠</div>
+  </div>
+
+  <!-- s2: 설치하고 로그인 -->
+  <div class="scene" id="s2">
+    <div class="label" id="s2-label"><div class="l1 disp">① 설치하고 로그인</div><div class="l2">VS Code → 확장 → Claude Code</div></div>
+    <div class="vsc" id="s2-win" style="left:0;top:160px;width:960px;height:560px">
+      <div class="tbar" style="padding:0 24px"><i></i><i></i><i></i><span>Visual Studio Code</span></div>
+      <div class="act"><i></i><i></i><i class="on"></i><i></i></div>
+      <div class="pane">
+        <div class="srch"><span id="s2-q"></span><i class="caret" id="s2-caret" style="background:#D7DCE2"></i></div>
+        <div class="ext" id="s2-ext"><div class="lg"></div><div><div class="nm">Claude Code</div><div class="pb">Anthropic</div></div><div class="bt" id="s2-bt">설치</div></div>
+        <div class="login" id="s2-login"><span style="width:40px;height:40px" data-icon="check:#1FB394"></span>로그인 완료</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- s3: 폴더 = 책상 -->
+  <div class="scene" id="s3">
+    <div class="label" id="s3-label"><div class="l1 disp">② 사이트 폴더 열기</div><div class="l2">이 폴더가 신입의 책상</div></div>
+    <div class="tree" id="s3-tree" style="left:0;top:160px;width:520px;height:600px">
+      <div class="tr"><span class="fi" data-icon="folder:#E3B04B"></span><b>morningbread-site</b></div>
+      <div class="tr" style="padding-left:44px"><span class="fi" data-icon="folder:#E3B04B"></span>images</div>
+      <div class="tr" style="padding-left:44px"><span class="fi" data-icon="folder:#E3B04B"></span>css</div>
+      <div class="tr" style="padding-left:44px"><span class="fi" data-icon="file:#7A6E62"></span>index.html</div>
+      <div class="tr" style="padding-left:44px"><span class="fi" data-icon="file:#7A6E62"></span>menu.html</div>
+      <div class="tr" style="padding-left:44px"><span class="fi" data-icon="file:#7A6E62"></span>about.html</div>
+      <div class="tr" style="padding-left:44px;color:var(--sub)">… 외 9개</div>
+    </div>
+    <div class="deskglow" id="s3-glow" style="left:-14px;top:146px;width:548px;height:628px"></div>
+    <div class="abs" id="s3-yj" data-char="yj:laptop:smile" style="left:580px;top:300px;width:360px;height:504px"></div>
+    <div class="sticker mint" id="s3-st" style="left:560px;top:190px">여기가 내 책상!</div>
+  </div>
+
+  <!-- s4: 첫 명령은 설명만 -->
+  <div class="scene" id="s4">
+    <div class="label" id="s4-label"><div class="l1 disp">③ 첫 명령: <span class="cm">설명만 해 줘</span></div></div>
+    <div class="term" id="s4-term" style="left:0;top:110px;width:960px;height:600px">
+      <div class="tbar"><i></i><i></i><i></i><span>morningbread-site</span></div>
+      <div class="tl prompt"><b>&gt;</b><span id="s4-p"></span></div>
+      <div class="tl exp" id="s4-e1">· 빵집 소개 사이트예요. HTML 페이지 12개로 되어 있어요.</div>
+      <div class="tl exp" id="s4-e2">· 메뉴(헤더)가 페이지마다 복사돼 있어서, 바꾸려면 12곳을 다 고쳐야 해요.</div>
+      <div class="tl exp" id="s4-e3">· 모바일 화면 대응이 없어요.</div>
+      <div class="tl exp" id="s4-e4">· 아무 파일도 고치지 않았어요.</div>
+    </div>
+  </div>
+
+  <!-- s5: 고치기 전에 허락 -->
+  <div class="scene" id="s5">
+    <div class="label" id="s5-label"><div class="l1 disp">④ 고치기 전엔 <span class="co">허락</span>부터</div></div>
+    <div class="dlg" id="s5-dlg" style="left:0;top:120px;width:960px">
+      <div class="q">index.html을 이렇게 고쳐도 될까요?</div>
+      <div class="diff">
+        <div class="m">- &lt;title&gt;모닝빵&lt;/title&gt;</div>
+        <div class="p">+ &lt;title&gt;모닝빵 베이커리 | 매일 아침 굽는 빵&lt;/title&gt;</div>
+      </div>
+      <div class="btns"><span class="ok" id="s5-ok">수락</span><span>거절</span><span>다르게 해 줘</span></div>
+    </div>
+    <div class="cursor" id="s5-cur" style="left:600px;top:700px"></div>
+    <div class="sticker mint" id="s5-st" style="left:250px;top:560px">내가 눌러야 바뀐다</div>
+  </div>
+
+  <!-- s6: 결론 -->
+  <div class="scene" id="s6">
+    <div class="abs" id="s6-key" data-icon="key:#E3B04B" style="left:360px;top:60px;width:240px;height:120px"></div>
+    <div class="abs conclude" id="s6-c" style="top:260px"><div class="k">오늘의 결론</div><div class="t">열쇠는 주되<br><span>허락은 내가 한다</span></div></div>
+  </div>
+
+</div></div></div>
+<script src="timeline.js"></script>
+<script src="../lib/engine.js"></script>
+<script>
+start({
+  s1(t, d, m, W) {
+    rise($('s1-boss'), t, 0.05, 0.4, 80);
+    rise($('s1-yj'), t, 0.2, 0.4, 80);
+    // 열쇠가 김기획 손에서 열정이에게 날아간다
+    const tk = when(W, '열쇠') - 0.3, k = eo(prog(t, tk, 0.6));
+    put($('s1-key'), t >= tk - 0.2 ? 1 : 0, -Math.sin(k * Math.PI) * 120, 1 + 0.3 * Math.sin(k * Math.PI), k * 360, k * 330);
+    const got = t >= tk + 0.6;
+    $('s1-yj').style.opacity = t < 0.2 ? 0 : got ? 0 : 1;
+    $('s1-yj2').style.opacity = got ? 1 : 0;
+    pop($('s1-st'), t, tk + 0.7, 0.4, -3);
+  },
+
+  s2(t, d, m, W) {
+    rise($('s2-label'), t, 0);
+    rise($('s2-win'), t, 0.15, 0.4, 50);
+    const typed = typeText($('s2-q'), 'Claude Code', t, 0.5, 18);
+    $('s2-caret').style.opacity = typed ? 0 : blink(t);
+    rise($('s2-ext'), t, 1.2, 0.3, 20);
+    const ti = Math.max(when(W, '설치하고'), 1.6);
+    $('s2-bt').textContent = t >= ti + 0.6 ? '설치됨' : t >= ti ? '설치 중…' : '설치';
+    $('s2-bt').classList.toggle('done', t >= ti + 0.6);
+    rise($('s2-login'), t, when(W, '로그인') + 0.2, 0.3, 20);
+  },
+
+  s3(t, d, m, W) {
+    rise($('s3-label'), t, 0);
+    rise($('s3-tree'), t, 0.15, 0.4, 50);
+    const tb = when(W, '책상') - 0.4;
+    pop($('s3-glow'), t, tb, 0.4);
+    rise($('s3-yj'), t, tb + 0.1, 0.4, 100);
+    $('s3-yj').querySelector('.tap').style.opacity = t > tb + 0.5 && Math.floor(t * 8) % 2 ? 1 : 0;
+    pop($('s3-st'), t, tb + 0.5, 0.4, -3);
+  },
+
+  s4(t, d, m, W) {
+    rise($('s4-label'), t, 0);
+    rise($('s4-term'), t, 0.15, 0.4, 50);
+    const P = ' 이 폴더에 뭐가 있는지 쉽게 설명해줘. 아무것도 고치지 마.';
+    typeText($('s4-p'), P, t, 0.4, 30);
+    const e0 = Math.max(when(W, '설명만'), 0.5 + P.length / 30);
+    ['s4-e1', 's4-e2', 's4-e3', 's4-e4'].forEach((id, i) => rise($(id), t, e0 + i * 0.35, 0.25, 12));
+  },
+
+  s5(t, d, m, W) {
+    rise($('s5-label'), t, 0);
+    pop($('s5-dlg'), t, 0.2, 0.45);
+    // 커서가 '수락'으로 가서 누른다
+    const tc = when(W, '수락해야') - 0.4, k = eo(prog(t, tc, 0.5));
+    put($('s5-cur'), t >= tc - 0.1 ? 1 : 0, -330 * k, 1, -20, -420 * k);
+    const pressed = t >= tc + 0.6;
+    $('s5-ok').style.transform = pressed && t < tc + 0.8 ? 'scale(.94)' : '';
+    $('s5-ok').textContent = pressed ? '수락됨 ✓' : '수락';
+    pop($('s5-st'), t, tc + 0.8, 0.4, -3);
+  },
+
+  s6(t, d, m, W) {
+    pop($('s6-key'), t, 0.1, 0.4, -10);
+    pop($('s6-c'), t, 0.4, 0.45);
+  },
+});
+</script>
+</body>
+</html>

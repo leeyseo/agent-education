@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EP3 왜 똑똑한 신입이어야 할까</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700;900&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../lib/base.css">
+<style>
+  .domino { position: absolute; top: 330px; width: 54px; height: 210px; border-radius: 10px; background: var(--ink);
+    transform-origin: 100% 100%; box-shadow: inset -8px 0 0 rgba(255, 255, 255, .12); }
+  .domino::after { content: ''; position: absolute; left: 50%; top: 50%; width: 30px; height: 4px; margin: -2px 0 0 -15px; background: #FFF6E9; }
+  .floor { position: absolute; left: 0; top: 540px; width: 960px; height: 6px; border-radius: 3px; background: #D9CBB8; }
+  .steps20 { position: absolute; left: 0; top: 150px; width: 960px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+  .st20 { height: 120px; background: #fff; border: 4px solid var(--line); border-radius: 20px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; font-size: 27px; font-weight: 800; color: var(--sub); }
+  .st20 small { font-size: 20px; font-weight: 900; color: #C2B39F; margin-bottom: 4px; }
+  .st20.on { border-color: var(--mint); background: var(--mint-soft); color: #137A65; }
+  .st20.on small { color: var(--mint); }
+  .barrow { margin-bottom: 44px; }
+  .barrow .bl { font-size: 36px; font-weight: 900; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: flex-end; }
+  .barrow .bl .big { font-size: 110px; }
+  .barrow .meter { height: 84px; }
+  .note20 { font-size: 26px; color: var(--sub); font-weight: 700; line-height: 1.5; }
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage"><div class="abs" id="area">
+
+  <!-- s1: 도미노 -->
+  <div class="scene" id="s1">
+    <div class="label" id="s1-label"><div class="l1 disp">AI는 다 비슷하다?</div><div class="l2" id="s1-l2">일을 맡기면 얘기가 달라집니다</div></div>
+    <div class="floor"></div>
+    <div id="s1-dominoes"></div>
+    <div class="abs" id="s1-yj" data-char="yj:stand:smile" style="left:690px;top:570px;width:220px;height:352px"></div>
+    <div class="abs" id="s1-yj2" data-char="yj:stand:oops" style="left:690px;top:570px;width:220px;height:352px;opacity:0"></div>
+  </div>
+
+  <!-- s2: 채팅은 한 단계 -->
+  <div class="scene" id="s2">
+    <div class="label" id="s2-label"><div class="l1 disp">채팅 = 질문 하나, 답 하나</div></div>
+    <div class="card" id="s2-card" style="left:0;top:120px;width:960px;height:400px">
+      <div class="ub" id="s2-u" style="top:30px">메뉴에 '오시는 길' 추가하는 코드 알려줘</div>
+      <div class="ab" id="s2-a" style="top:140px">이렇게 넣으세요.<div class="code">&lt;li&gt;&lt;a href="location.html"&gt;오시는 길&lt;/a&gt;&lt;/li&gt;</div></div>
+    </div>
+    <div class="abs" id="s2-boss" data-char="boss:grin" style="left:40px;top:560px;width:220px;height:308px"></div>
+    <div class="sticker mint" id="s2-st" style="left:330px;top:640px">틀려도 바로 보임 ✓</div>
+  </div>
+
+  <!-- s3: 에이전트는 20단계 -->
+  <div class="scene" id="s3">
+    <div class="label" id="s3-label"><div class="l1 disp">에이전트 = 혼자서 <span class="cm">20단계</span></div></div>
+    <div class="steps20" id="s3-steps"></div>
+    <div class="sticker orange" id="s3-st" style="left:240px;top:740px">중간에 하나만 틀려도…</div>
+  </div>
+
+  <!-- s4: 확률 막대 -->
+  <div class="scene" id="s4">
+    <div class="label" id="s4-label"><div class="l1 disp">20단계를 다 맞힐 확률</div></div>
+    <div class="card" id="s4-card" style="left:0;top:120px;width:960px;height:640px;padding:44px 48px">
+      <div class="barrow" id="s4-r1">
+        <div class="bl"><span>단계마다 95점 AI</span><span class="big co" id="s4-n1">0%</span></div>
+        <div class="meter"><i id="s4-b1" style="background:var(--orange)"></i></div>
+      </div>
+      <div class="barrow" id="s4-r2">
+        <div class="bl"><span>단계마다 99점 AI</span><span class="big cm" id="s4-n2">0%</span></div>
+        <div class="meter"><i id="s4-b2"></i></div>
+      </div>
+      <div class="note20" id="s4-note">설명을 위한 예시 계산이에요.<br>0.95를 20번 곱하면 약 0.36, 0.99를 20번 곱하면 약 0.82</div>
+    </div>
+  </div>
+
+  <!-- s5: 결론 -->
+  <div class="scene" id="s5">
+    <div class="abs" id="s5-yj" data-char="yj:thumb:proud" style="left:370px;top:0;width:220px;height:352px"></div>
+    <div class="abs conclude" id="s5-c" style="top:400px"><div class="k">오늘의 결론</div><div class="t">질문은 아무 AI나<br><span>일은 가장 똑똑한 AI에게</span></div></div>
+  </div>
+
+</div></div></div>
+<script src="timeline.js"></script>
+<script src="../lib/engine.js"></script>
+<script>
+const N = 12, dominoes = [];
+for (let i = 0; i < N; i++) {
+  const el = document.createElement('div');
+  el.className = 'domino';
+  el.style.left = (20 + i * 56) + 'px';
+  $('s1-dominoes').appendChild(el);
+  dominoes.push(el);
+}
+const VERBS = ['폴더 보기', '파일 찾기', '열기', '읽기', '고치기', '저장', '다음 파일', '열기', '고치기', '저장',
+               '다음 파일', '열기', '고치기', '저장', '새 파일', '만들기', '메뉴 연결', '브라우저', '열어 보기', '확인'];
+$('s3-steps').innerHTML = VERBS.map((v, i) => `<div class="st20"><small>${i + 1}</small>${v}</div>`).join('');
+const steps = $$('#s3-steps .st20');
+
+start({
+  s1(t, d, m, W) {
+    rise($('s1-label'), t, 0);
+    fade($('s1-l2'), t, when(W, '일을') - 0.1, 0.3);
+    // 첫 조각이 삐뚤게 서 있다가, '달라집니다'에서 와르르
+    const tf = when(W, '달라집니다', 2.2) - 0.2;
+    dominoes.forEach((el, i) => {
+      const k = eo(prog(t, tf + i * 0.07, 0.22));
+      el.style.transform = `rotate(${(i === 0 ? 8 : 0) + k * (i === N - 1 ? 82 : 52)}deg)`;
+    });
+    const oops = t >= tf + N * 0.07;
+    rise($('s1-yj'), t, 0.2, 0.4, 80);
+    $('s1-yj').style.opacity = t < 0.2 ? 0 : oops ? 0 : 1;
+    $('s1-yj2').style.opacity = oops ? 1 : 0;
+  },
+
+  s2(t, d, m, W) {
+    rise($('s2-label'), t, 0);
+    rise($('s2-card'), t, 0.15, 0.35, 40);
+    pop($('s2-u'), t, 0.4, 0.3);
+    rise($('s2-a'), t, 0.9, 0.3, 20);
+    rise($('s2-boss'), t, when(W, '틀려도') - 0.2, 0.4, 80);
+    pop($('s2-st'), t, when(W, '바로'), 0.4, -3);
+  },
+
+  s3(t, d, m, W) {
+    rise($('s3-label'), t, 0);
+    rise($('s3-steps'), t, 0.15, 0.35, 40);
+    const t0 = 0.5, t1 = d - 1.1;
+    steps.forEach((el, i) => el.classList.toggle('on', t >= t0 + (t1 - t0) * i / 19));
+    pop($('s3-st'), t, d - 0.9, 0.4, -3);
+  },
+
+  s4(t, d, m, W) {
+    rise($('s4-label'), t, 0);
+    rise($('s4-card'), t, 0.15, 0.35, 40);
+    const a = m[1] + 0.3, b = when(W, '99점') - 0.1;
+    meterTo($('s4-b1'), t, a, 0.9, 36);
+    countTo($('s4-n1'), t, a, 0.9, 36, v => v + '%');
+    rise($('s4-r2'), t, b - 0.2, 0.3, 20);
+    meterTo($('s4-b2'), t, b + 0.2, 0.9, 82);
+    countTo($('s4-n2'), t, b + 0.2, 0.9, 82, v => v + '%');
+    fade($('s4-note'), t, b + 1.0, 0.4);
+  },
+
+  s5(t, d, m, W) {
+    rise($('s5-yj'), t, 0.1, 0.4, 80);
+    pop($('s5-c'), t, Math.max(when(W, '일을') - 0.2, 0.6), 0.45);
+  },
+});
+</script>
+</body>
+</html>

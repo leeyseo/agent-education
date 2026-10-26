@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EP0 예고편 커피 한 잔에 시안 3개</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700;900&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../lib/base.css">
+<style>
+  .clock { position: absolute; width: 260px; height: 260px; border-radius: 50%; background: #fff; border: 10px solid var(--ink); }
+  .clock i { position: absolute; left: 50%; top: 50%; width: 10px; margin-left: -5px; border-radius: 5px; background: var(--ink); transform-origin: 50% 100%; }
+  .ph3 { position: absolute; top: 60px; width: 290px; height: 600px; }
+  .ph3 .phone { position: absolute; inset: 0; width: auto; height: auto; }
+  .ph3 .scr { position: absolute; inset: 40px 0 0 0; }
+  .day { width: 170px; height: 170px; background: #fff; border-radius: 22px; border: 4px solid var(--line); text-align: center; position: relative; overflow: hidden; }
+  .day .dh2 { background: var(--red); color: #fff; font-size: 26px; font-weight: 900; padding: 6px 0; }
+  .day .dn { font-family: 'Black Han Sans', sans-serif; font-size: 70px; margin-top: 8px; }
+  .vs { position: absolute; font-family: 'Black Han Sans', sans-serif; font-size: 90px; color: #C2B39F; }
+  .win { position: absolute; width: 300px; height: 200px; background: #fff; border-radius: 16px; border: 3px solid #E6DCCF; box-shadow: 0 10px 22px rgba(0,0,0,.14); overflow: hidden; }
+  .win .wb { height: 34px; background: var(--paper); border-bottom: 2px solid var(--line); }
+  .win .wt { padding: 16px; font-size: 26px; font-weight: 900; }
+  .titlecard { position: absolute; left: 0; top: 0; width: 960px; height: 880px; background: var(--ink); border-radius: 40px; color: #fff; text-align: center; padding-top: 50px; overflow: hidden; }
+  .titlecard .t { font-family: 'Black Han Sans', sans-serif; font-size: 112px; letter-spacing: -2px; }
+  .titlecard .s { font-size: 34px; font-weight: 800; color: #CFC3B4; margin-top: 8px; }
+  .parts { margin: 34px auto 0; width: 760px; text-align: left; }
+  .parts div { font-size: 36px; font-weight: 800; padding: 12px 0; border-top: 2px solid #3A332C; }
+  .parts b { display: inline-block; width: 90px; color: var(--yellow); }
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage"><div class="abs" id="area">
+
+  <!-- s1: 커피 마시고 왔더니 -->
+  <div class="scene" id="s1">
+    <div class="sticker" id="s1-st" style="left:40px;top:30px">회의 끝!</div>
+    <div class="clock" id="s1-clock" style="left:60px;top:220px"><i id="s1-h" style="height:70px;margin-top:-70px"></i><i id="s1-m" style="height:100px;margin-top:-100px"></i></div>
+    <div class="abs" id="s1-yj" data-char="yj:coffee:smile" style="left:520px;top:100px;width:400px;height:640px"></div>
+  </div>
+
+  <!-- s2: 시안 세 개 -->
+  <div class="scene" id="s2">
+    <div class="ph3" id="s2-a" style="left:0"><div class="phone"><div class="scr" data-site="A:0.95"></div></div></div>
+    <div class="ph3" id="s2-b" style="left:335px"><div class="phone"><div class="scr" data-site="B:0.95"></div></div></div>
+    <div class="ph3" id="s2-c" style="left:670px"><div class="phone"><div class="scr" data-site="C:0.95"></div></div></div>
+    <div class="sticker mint" id="s2-st" style="left:260px;top:700px">진짜로 클릭되는 시안</div>
+  </div>
+
+  <!-- s3: 예전엔 사흘 -->
+  <div class="scene" id="s3">
+    <div class="abs" id="s3-days" style="left:0;top:120px;display:flex;gap:16px">
+      <div class="day"><div class="dh2">월</div><div class="dn">1</div></div>
+      <div class="day"><div class="dh2">화</div><div class="dn">2</div></div>
+      <div class="day"><div class="dh2">수</div><div class="dn">3</div></div>
+    </div>
+    <div class="abs center" id="s3-l1" style="top:330px;width:560px;left:0;font-size:40px;font-weight:900">포토샵 시안 <span class="cr">사흘</span></div>
+    <div class="vs" id="s3-vs" style="left:600px;top:150px">vs</div>
+    <div class="abs" id="s3-yj" data-char="yj:coffee:proud" style="left:720px;top:60px;width:240px;height:384px"></div>
+    <div class="abs" id="s3-l2" style="left:690px;top:450px;width:300px;text-align:center;font-size:40px;font-weight:900">커피 <span class="cm">한 잔</span></div>
+    <div class="abs" id="s3-tag" data-char="person:sian:shock" style="left:330px;top:520px;width:280px;height:392px"></div>
+  </div>
+
+  <!-- s4: 근데 사고도 친다 -->
+  <div class="scene" id="s4">
+    <div class="win" id="s4-w1" style="left:20px;top:40px"><div class="wb"></div><div class="wt">+ 회원가입</div></div>
+    <div class="win" id="s4-w2" style="left:340px;top:0"><div class="wb"></div><div class="wt">+ 로그인</div></div>
+    <div class="win" id="s4-w3" style="left:650px;top:60px"><div class="wb"></div><div class="wt">~ 폴더 전부 변경</div></div>
+    <div class="abs center" id="s4-n" style="top:280px"><span class="big cr" id="s4-num" style="font-size:150px">+0줄</span></div>
+    <div class="abs" id="s4-yj" data-char="yj:cheer:proud" style="left:80px;top:480px;width:260px;height:416px"></div>
+    <div class="abs" id="s4-boss" data-char="boss:facepalm" style="left:600px;top:500px;width:300px;height:420px"></div>
+  </div>
+
+  <!-- s5: 타이틀 -->
+  <div class="scene" id="s5">
+    <div class="titlecard" id="s5-card">
+      <div class="t">AI 신입 길들이기</div>
+      <div class="s">에이전트, 시키는 법부터 다루는 법까지</div>
+      <div class="parts">
+        <div id="s5-p1"><b>1부</b>에이전트가 뭔데?</div>
+        <div id="s5-p2"><b>2부</b>작업 순서가 바뀐다</div>
+        <div id="s5-p3"><b>3부</b>신입 사고 일지</div>
+        <div id="s5-p4"><b>4부</b>사수의 기술</div>
+      </div>
+      <div class="abs" id="s5-yj" data-char="yj:cheer:proud" style="left:640px;top:560px;width:220px;height:352px"></div>
+    </div>
+  </div>
+
+</div></div></div>
+<script src="timeline.js"></script>
+<script src="../lib/engine.js"></script>
+<script>
+start({
+  s1(t, d, m, W) {
+    pop($('s1-st'), t, 0.05, 0.35, -4);
+    rise($('s1-clock'), t, 0.1, 0.4, 40);
+    // 시곗바늘이 빙글빙글 (시간이 흐른다)
+    $('s1-m').style.transform = `rotate(${t * 720}deg)`;
+    $('s1-h').style.transform = `rotate(${t * 60}deg)`;
+    slide($('s1-yj'), t, when(W, '커피') - 0.3, 0.5, 300);
+  },
+
+  s2(t, d, m, W) {
+    ['s2-a', 's2-b', 's2-c'].forEach((id, i) => pop($(id), t, 0.1 + i * 0.25, 0.4, [-3, 0, 3][i]));
+    pop($('s2-st'), t, when(W, '시안') - 0.1, 0.4, -3);
+  },
+
+  s3(t, d, m, W) {
+    rise($('s3-days'), t, 0.05, 0.35, 40);
+    fade($('s3-l1'), t, when(W, '사흘') - 0.2, 0.25);
+    fade($('s3-vs'), t, when(W, '걸리던') - 0.2, 0.25);
+    rise($('s3-yj'), t, when(W, '걸리던'), 0.4, 60);
+    fade($('s3-l2'), t, when(W, '걸리던') + 0.3, 0.25);
+    rise($('s3-tag'), t, when(W, '일이죠') - 0.2, 0.4, 80);
+  },
+
+  s4(t, d, m, W) {
+    const ta = when(W, '사고') - 0.2;
+    ['s4-w1', 's4-w2', 's4-w3'].forEach((id, i) => pop($(id), t, ta + i * 0.12, 0.3, [-4, 3, -2][i]));
+    countTo($('s4-num'), t, ta, 0.7, 5000, v => '+' + v.toLocaleString() + '줄');
+    rise($('s4-yj'), t, 0.1, 0.4, 80);
+    rise($('s4-boss'), t, ta + 0.4, 0.4, 80);
+  },
+
+  s5(t, d, m, W) {
+    pop($('s5-card'), t, 0.05, 0.45);
+    ['s5-p1', 's5-p2', 's5-p3', 's5-p4'].forEach((id, i) => rise($(id), t, when(W, '지금') - 0.3 + i * 0.25, 0.3, 14));
+    rise($('s5-yj'), t, when(W, '시작합니다'), 0.4, 80);
+  },
+});
+</script>
+</body>
+</html>

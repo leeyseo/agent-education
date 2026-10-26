@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EP11 FTP 업로드도 말로</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700;900&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../lib/base.css">
+<style>
+  .fz { position: absolute; background: #ECE7E1; border-radius: 22px; overflow: hidden; border: 3px solid #D9CFC2; box-shadow: 0 18px 40px rgba(60,40,20,.14); }
+  .fz .ttl { height: 52px; background: #B9302B; color: #fff; font-size: 24px; font-weight: 900; display: flex; align-items: center; padding: 0 22px; }
+  .fz .panes { display: flex; gap: 12px; padding: 14px; }
+  .fz .pane { flex: 1; background: #fff; border-radius: 12px; height: 320px; overflow: hidden; }
+  .fz .ph { background: #F4EFE9; font-size: 22px; font-weight: 900; padding: 10px 14px; border-bottom: 2px solid var(--line); }
+  .fz .row { display: flex; align-items: center; gap: 10px; height: 44px; padding: 0 14px; font: 21px var(--mono); color: #4A433C; }
+  .fz .row .fi { width: 28px; height: 28px; flex: none; }
+  .fz .queue { margin: 0 14px 14px; background: #fff; border-radius: 12px; padding: 14px 18px; }
+  .fz .queue .qt { font-size: 22px; font-weight: 800; margin-bottom: 10px; }
+  .fz .meter { height: 30px; }
+  .drag { position: absolute; display: flex; align-items: center; gap: 10px; background: #fff; border: 3px solid var(--blue); border-radius: 12px;
+    padding: 8px 14px; font: 22px var(--mono); box-shadow: 0 10px 22px rgba(0,0,0,.18); }
+  .drag .fi { width: 34px; height: 30px; }
+  .cursor { position: absolute; width: 0; height: 0; border-left: 26px solid var(--ink); border-top: 16px solid transparent; border-bottom: 16px solid transparent; }
+  .chk { position: absolute; display: flex; align-items: center; gap: 12px; background: #fff; border: 4px solid var(--mint); border-radius: 18px;
+    padding: 12px 20px; font-size: 32px; font-weight: 900; color: #137A65; box-shadow: 0 10px 22px rgba(0,0,0,.12); }
+  .chk .fi { width: 40px; height: 40px; }
+  .pw { position: absolute; top: 40px; width: 440px; height: 360px; background: #fff; border-radius: 28px; border: 5px solid var(--line); padding: 30px; }
+  .pw .pt { font-size: 32px; font-weight: 900; margin-bottom: 20px; }
+  .pw .bubble { background: var(--blue); color: #fff; border-radius: 24px 24px 6px 24px; padding: 18px 22px; font-size: 28px; font-weight: 700; }
+  .pw .envf { background: #1C1E23; color: #DDE6E3; border-radius: 16px; padding: 18px 20px; font: 26px/1.6 var(--mono); }
+  .pw .mark { position: absolute; right: -22px; top: -22px; width: 76px; height: 76px; }
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage"><div class="abs" id="area">
+
+  <!-- s1: FileZilla로 통째로 -->
+  <div class="scene" id="s1">
+    <div class="tag-old" id="s1-old" style="left:0;top:0">예전</div>
+    <div class="fz" id="s1-fz" style="left:0;top:60px;width:960px">
+      <div class="ttl">FileZilla</div>
+      <div class="panes">
+        <div class="pane"><div class="ph">내 컴퓨터</div>
+          <div class="row"><span class="fi" data-icon="folder:#E3B04B"></span>morningbread-site</div>
+          <div class="row" style="padding-left:50px"><span class="fi" data-icon="file:#7A6E62"></span>index.html</div>
+          <div class="row" style="padding-left:50px"><span class="fi" data-icon="file:#7A6E62"></span>menu.html</div>
+          <div class="row" style="padding-left:50px"><span class="fi" data-icon="folder:#E3B04B"></span>images</div>
+        </div>
+        <div class="pane"><div class="ph">서버 /public_html</div>
+          <div class="row"><span class="fi" data-icon="file:#7A6E62"></span>index.html</div>
+          <div class="row"><span class="fi" data-icon="file:#7A6E62"></span>menu.html</div>
+          <div class="row"><span class="fi" data-icon="folder:#E3B04B"></span>images</div>
+        </div>
+      </div>
+      <div class="queue"><div class="qt" id="s1-qt">전송 대기</div><div class="meter"><i id="s1-bar" style="background:var(--blue)"></i></div></div>
+    </div>
+    <div class="drag" id="s1-drag" style="left:40px;top:220px"><span class="fi" data-icon="folder:#E3B04B"></span>morningbread-site</div>
+    <div class="cursor" id="s1-cur" style="left:300px;top:250px"></div>
+    <div class="abs" id="s1-tag" data-char="person:tag:sad" style="left:700px;top:560px;width:240px;height:336px"></div>
+    <div class="sticker" id="s1-st" style="left:60px;top:640px">덮어쓰기 할까요? 예(모두)…</div>
+  </div>
+
+  <!-- s2: 테스트 폴더에 먼저 -->
+  <div class="scene" id="s2">
+    <div class="tag-new" id="s2-new" style="left:0;top:0">이제</div>
+    <div class="term" id="s2-term" style="left:0;top:60px;width:960px;height:520px">
+      <div class="tbar"><i></i><i></i><i></i><span>morningbread-site</span></div>
+      <div class="tl prompt"><b>&gt;</b><span id="s2-p"></span></div>
+      <div class="tl" id="s2-a"><span class="ic">✓</span>FTP 접속 (.env 파일의 접속 정보 사용)</div>
+      <div class="tl" id="s2-b"><span class="ic" id="s2-b-ic"></span><span id="s2-b-t"></span></div>
+      <div class="tl done" id="s2-c">→ test.morningbread.example 에서 확인하세요</div>
+    </div>
+    <div class="abs" id="s2-yj" data-char="yj:laptop:smile" style="left:640px;top:560px;width:280px;height:392px"></div>
+  </div>
+
+  <!-- s3: 백업하고 바뀐 파일만 -->
+  <div class="scene" id="s3">
+    <div class="term" id="s3-term" style="left:0;top:0;width:960px;height:640px">
+      <div class="tbar"><i></i><i></i><i></i><span>morningbread-site</span></div>
+      <div class="tl prompt"><b>&gt;</b><span id="s3-p"></span></div>
+      <div class="tl" id="s3-a"><span class="ic" id="s3-a-ic"></span><span id="s3-a-t"></span></div>
+      <div class="tl" id="s3-b"><span class="ic">✓</span>바뀐 파일 5개만 업로드</div>
+      <div class="grid g3" id="s3-grid">
+        <div class="fc">index.html</div><div class="fc">menu.html</div><div class="fc">style.css</div><div class="fc">location.html</div><div class="fc">order.html</div>
+      </div>
+      <div class="tl done" id="s3-done">나머지 113개는 그대로</div>
+    </div>
+  </div>
+
+  <!-- s4: 실제 사이트 확인 -->
+  <div class="scene" id="s4">
+    <div class="browser" id="s4-site" style="left:0;top:0;width:620px;height:760px">
+      <div class="bbar"><i></i><i></i><i></i><div class="url">morningbread.example</div></div>
+      <div class="bbody" style="height:700px" data-site="B:1.9"></div>
+    </div>
+    <div class="chk" id="s4-c1" style="left:560px;top:120px"><span class="fi" data-icon="check:#1FB394"></span>메인 화면 열림</div>
+    <div class="chk" id="s4-c2" style="left:560px;top:230px"><span class="fi" data-icon="check:#1FB394"></span>폰 화면 정상</div>
+    <div class="chk" id="s4-c3" style="left:560px;top:340px"><span class="fi" data-icon="check:#1FB394"></span>깨진 링크 0개</div>
+    <div class="abs" id="s4-yj" data-char="yj:thumb:proud" style="left:700px;top:450px;width:230px;height:368px"></div>
+  </div>
+
+  <!-- s5: 비밀번호는 파일에 -->
+  <div class="scene" id="s5">
+    <div class="pw" id="s5-bad" style="left:0">
+      <div class="pt cr">채팅에 쓰기</div>
+      <div class="bubble">FTP 비번은 morning1234야</div>
+      <div class="mark" data-icon="x:#E5484D"></div>
+    </div>
+    <div class="pw" id="s5-good" style="left:520px;border-color:var(--mint)">
+      <div class="pt cm">.env 파일에 두기</div>
+      <div class="envf">FTP_HOST=●●●●<br>FTP_PASSWORD=●●●●</div>
+      <div class="mark" data-icon="check:#1FB394"></div>
+    </div>
+    <div class="abs conclude" id="s5-c" style="top:460px"><div class="k">오늘의 결론</div><div class="t">배포도 말로<br><span>비밀번호는 파일에</span></div></div>
+  </div>
+
+</div></div></div>
+<script src="timeline.js"></script>
+<script src="../lib/engine.js"></script>
+<script>
+start({
+  s1(t, d, m, W) {
+    fade($('s1-old'), t, 0, 0.2);
+    rise($('s1-fz'), t, 0.1, 0.4, 40);
+    // 폴더를 왼쪽 창에서 오른쪽 창으로 끌어다 놓는다
+    const td = when(W, 'FileZilla') - 0.1, k = eo(prog(t, td, 0.9));
+    const vis = t >= td && t < td + 1.0 ? 1 : 0;
+    put($('s1-drag'), vis, -20 * Math.sin(k * Math.PI), 1, 0, 480 * k);
+    put($('s1-cur'), vis, -20 * Math.sin(k * Math.PI), 1, 0, 480 * k);
+    const tq = td + 1.0;
+    $('s1-qt').textContent = t >= tq ? `전송 중… ${Math.round(eo(prog(t, tq, d - tq)) * 37)} / 120` : '전송 대기';
+    meterTo($('s1-bar'), t, tq, d - tq, 31);
+    rise($('s1-tag'), t, when(W, '통째로') - 0.2, 0.4, 80);
+    pop($('s1-st'), t, when(W, '작업') - 0.2, 0.4, -2);
+  },
+
+  s2(t, d, m, W) {
+    fade($('s2-new'), t, 0, 0.2);
+    rise($('s2-term'), t, 0.1, 0.4, 40);
+    const P = ' 먼저 테스트 폴더(/test)에 올려줘.';
+    typeText($('s2-p'), P, t, when(W, '먼저') - 0.1, 22);
+    const w0 = when(W, '먼저') + P.length / 22;
+    rise($('s2-a'), t, w0, 0.2, 10);
+    rise($('s2-b'), t, w0 + 0.3, 0.2, 10);
+    const bDone = t >= w0 + 0.9;
+    $('s2-b-ic').textContent = bDone ? '✓' : spin(t);
+    $('s2-b-t').textContent = bDone ? '/test 에 파일 18개 업로드' : '/test 에 올리는 중…';
+    rise($('s2-c'), t, w0 + 1.1, 0.25, 10);
+    rise($('s2-yj'), t, 0.4, 0.4, 100);
+    $('s2-yj').querySelector('.tap').style.opacity = t > 0.8 && Math.floor(t * 8) % 2 ? 1 : 0;
+  },
+
+  s3(t, d, m, W) {
+    rise($('s3-term'), t, 0.1, 0.4, 40);
+    const P = ' 확인했어. 서버 백업하고, 바뀐 파일만 올려줘.';
+    typeText($('s3-p'), P, t, 0.3, 26);
+    const w0 = Math.max(when(W, '백업') - 0.1, 0.4 + P.length / 26);
+    rise($('s3-a'), t, w0, 0.2, 10);
+    const aDone = t >= w0 + 0.5;
+    $('s3-a-ic').textContent = aDone ? '✓' : spin(t);
+    $('s3-a-t').textContent = aDone ? '서버 백업: backup_2026-10-26.zip' : '서버 백업하는 중…';
+    rise($('s3-b'), t, w0 + 0.7, 0.2, 10);
+    rise($('s3-grid'), t, w0 + 0.8, 0.2, 10);
+    $$('#s3-grid .fc').forEach((el, i) => el.classList.toggle('ok', t >= w0 + 0.9 + i * 0.15));
+    rise($('s3-done'), t, w0 + 1.8, 0.25, 10);
+  },
+
+  s4(t, d, m, W) {
+    rise($('s4-site'), t, 0.1, 0.4, 40);
+    const tc = when(W, '접속해서') - 0.3;
+    ['s4-c1', 's4-c2', 's4-c3'].forEach((id, i) => slide($(id), t, tc + i * 0.3, 0.35, 120));
+    rise($('s4-yj'), t, tc + 1.0, 0.4, 80);
+  },
+
+  s5(t, d, m, W) {
+    rise($('s5-bad'), t, 0.1, 0.4, 50);
+    pop($('s5-bad').querySelector('.mark'), t, when(W, '쓰지') - 0.1, 0.35);
+    rise($('s5-good'), t, when(W, '파일에') - 0.3, 0.4, 50);
+    pop($('s5-good').querySelector('.mark'), t, when(W, '불러오게') - 0.1, 0.35);
+    pop($('s5-c'), t, d - 1.5, 0.45);
+  },
+});
+</script>
+</body>
+</html>

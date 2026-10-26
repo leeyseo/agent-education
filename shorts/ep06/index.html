@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EP6 기획 PPT 대신 텍스트 기획서</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700;900&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../lib/base.css">
+<style>
+  .slide { position: absolute; width: 520px; height: 320px; background: #fff; border-radius: 18px; border: 3px solid #E6DCCF;
+    box-shadow: 0 12px 28px rgba(60, 40, 20, .14); padding: 26px 30px; }
+  .slide .sb { height: 26px; width: 60%; border-radius: 6px; background: var(--orange); margin-bottom: 22px; }
+  .slide .sl { height: 16px; border-radius: 6px; background: #EFE6DA; margin-bottom: 14px; }
+  .slide .sl.s { width: 70%; }
+  .slide .pic { position: absolute; right: 30px; bottom: 30px; width: 160px; height: 110px; border-radius: 12px; background: #F4E3D3; }
+  .tx { position: absolute; background: #fff; border-radius: 22px; border: 3px solid var(--line); padding: 24px 26px;
+    font-size: 25px; line-height: 1.55; box-shadow: 0 14px 30px rgba(60, 40, 20, .12); }
+  .tx b { color: var(--blue); }
+  .tx .th { font-size: 22px; font-weight: 900; color: var(--sub); margin-bottom: 8px; }
+  .drop { position: absolute; left: 160px; top: 560px; width: 640px; height: 210px; border: 5px dashed var(--blue); border-radius: 28px;
+    background: var(--blue-soft); text-align: center; padding-top: 34px; }
+  .drop .dt { font-size: 34px; font-weight: 900; color: var(--blue); }
+  .drop .dp { margin-top: 16px; font-size: 28px; font-weight: 700; color: var(--ink); }
+  .doc.lg .dh { font-size: 52px; } .doc.lg .ds { font-size: 32px; } .doc.lg .dl { font-size: 32px; }
+  .flowline { position: absolute; top: 330px; font-size: 80px; font-weight: 900; color: #C2B39F; }
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage"><div class="abs" id="area">
+
+  <!-- s1: PPT 더미 → 아닙니다 -->
+  <div class="scene" id="s1">
+    <div class="label" id="s1-label"><div class="l1 disp">회의 끝 → 기획 PPT?</div></div>
+    <div class="slide" id="s1-p1" style="left:120px;top:170px"><div class="sb"></div><div class="sl"></div><div class="sl s"></div><div class="pic"></div></div>
+    <div class="slide" id="s1-p2" style="left:220px;top:250px"><div class="sb" style="background:var(--blue)"></div><div class="sl"></div><div class="sl s"></div><div class="pic"></div></div>
+    <div class="slide" id="s1-p3" style="left:320px;top:330px"><div class="sb" style="background:var(--mint)"></div><div class="sl"></div><div class="sl s"></div><div class="pic"></div></div>
+    <div class="stamp" id="s1-x" style="left:300px;top:420px">이제는 NO</div>
+  </div>
+
+  <!-- s2: 수첩 사진 + 녹음 텍스트를 그대로 던진다 -->
+  <div class="scene" id="s2">
+    <div class="label" id="s2-label"><div class="l1 disp">있는 그대로 던진다</div></div>
+    <div class="note" id="s2-note" style="left:0;top:110px;width:450px;transform:rotate(-2deg)">
+      <div>모닝빵 리뉴얼 회의</div><div>- 폰에서 잘 보이게!!</div><div>- 메뉴·가격 쉽게 수정</div><div>- 오시는 길 지도</div><div>- 단체주문 문의 / 인스타</div>
+    </div>
+    <div class="tx" id="s2-rec" style="left:490px;top:120px;width:470px">
+      <div class="th">회의_녹음.txt</div>
+      <b>사장님</b> 인스타 보고 오는 손님이 많은데 폰에서 다 깨져요.<br>
+      <b>김기획</b> 메뉴랑 가격은 사장님이 직접 바꾸실 수 있게…<br>
+      <b>사장님</b> 단체주문 문의도 받고 싶어요.
+    </div>
+    <div class="drop" id="s2-drop"><div class="dt">Cowork</div><div class="dp" id="s2-p"></div></div>
+  </div>
+
+  <!-- s3: 기획서가 정리돼 나온다 -->
+  <div class="scene" id="s3">
+    <div class="doc lg" id="s3-doc" style="left:0;top:0;width:960px">
+      <div class="dh">모닝빵 홈페이지 리뉴얼 기획서</div>
+      <div class="ds" id="s3-h1">1. 메뉴 구성</div>
+      <div class="dl" id="s3-l1">홈 · 메뉴와 가격 · 오시는 길 · 단체주문 · 인스타그램</div>
+      <div class="ds" id="s3-h2">2. 메인 화면 섹션</div>
+      <div class="dl" id="s3-l2">대표 빵 3종 · 오늘 굽는 빵 · 단체주문 버튼</div>
+      <div class="dl" id="s3-l3">폰 화면을 먼저 설계 (손님 대부분이 인스타에서 유입)</div>
+      <div class="ds" id="s3-h3">3. 문구</div>
+      <div class="dl" id="s3-l4">"매일 아침 굽는 빵, 모닝빵"</div>
+      <div class="ds" id="s3-h4">4. 사장님이 직접 고칠 것</div>
+      <div class="dl" id="s3-l5">메뉴·가격표는 표 하나만 고치면 바뀌게</div>
+    </div>
+  </div>
+
+  <!-- s4: 다음 에이전트가 읽고 일한다 -->
+  <div class="scene" id="s4">
+    <div class="label" id="s4-label"><div class="l1 disp">꾸밀 필요 없는 이유</div><div class="l2">읽는 사람이 에이전트니까</div></div>
+    <div class="doc" id="s4-doc" style="left:0;top:180px;width:380px;padding:26px 28px">
+      <div class="dh" style="font-size:40px">기획서.md</div>
+      <div class="dl" style="font-size:28px">메뉴 구성</div><div class="dl" style="font-size:28px">메인 섹션</div>
+      <div class="dl" style="font-size:28px">문구</div><div class="dl" style="font-size:28px">폰 먼저</div>
+    </div>
+    <div class="flowline" id="s4-arrow" style="left:400px">›</div>
+    <div class="abs" id="s4-yj" data-char="yj:laptop:smile" style="left:500px;top:170px;width:420px;height:588px"></div>
+    <div class="sticker mint" id="s4-st" style="left:470px;top:150px">기획서 읽는 중…</div>
+  </div>
+
+  <!-- s5: 결론 -->
+  <div class="scene" id="s5">
+    <div class="abs conclude" id="s5-c" style="top:120px"><div class="k">오늘의 결론</div><div class="t">기획서 =<br><span>에이전트에게 주는 작업 지시서</span></div></div>
+    <div class="abs center" id="s5-sub" style="top:560px;font-size:40px;font-weight:900;color:var(--sub)">PPT 말고, <span class="cb">텍스트면 충분</span></div>
+  </div>
+
+</div></div></div>
+<script src="timeline.js"></script>
+<script src="../lib/engine.js"></script>
+<script>
+start({
+  s1(t, d, m, W) {
+    rise($('s1-label'), t, 0);
+    ['s1-p1', 's1-p2', 's1-p3'].forEach((id, i) => rise($(id), t, 0.3 + i * 0.3, 0.35, 60));
+    const tx = when(W, '아닙니다') - 0.1;
+    const k = prog(t, tx, 0.3);
+    put($('s1-x'), clamp(k * 3), 0, k ? 1 + 0.8 * (1 - eo(k)) : 1.8, -8);
+  },
+
+  s2(t, d, m, W) {
+    rise($('s2-label'), t, 0);
+    rise($('s2-note'), t, 0.2, 0.4, 60);
+    rise($('s2-rec'), t, when(W, '녹음') - 0.2, 0.4, 60);
+    rise($('s2-drop'), t, when(W, '던집니다') - 0.4, 0.35, 40);
+    typeText($('s2-p'), '이 두 개로 홈페이지 기획서 정리해줘', t, when(W, '던집니다'), 24);
+  },
+
+  s3(t, d, m, W) {
+    rise($('s3-doc'), t, 0.1, 0.4, 50);
+    const order = ['s3-h1', 's3-l1', 's3-h2', 's3-l2', 's3-l3', 's3-h3', 's3-l4', 's3-h4', 's3-l5'];
+    order.forEach((id, i) => rise($(id), t, 0.5 + i * 0.32, 0.25, 12));
+  },
+
+  s4(t, d, m, W) {
+    rise($('s4-label'), t, 0);
+    rise($('s4-doc'), t, 0.2, 0.4, 50);
+    const tr = when(W, '에이전트가') - 0.2;
+    fade($('s4-arrow'), t, tr, 0.3);
+    rise($('s4-yj'), t, tr + 0.1, 0.4, 100);
+    $('s4-yj').querySelector('.tap').style.opacity = t > tr + 0.6 && Math.floor(t * 8) % 2 ? 1 : 0;
+    pop($('s4-st'), t, when(W, '읽고') - 0.1, 0.4, -3);
+  },
+
+  s5(t, d, m, W) {
+    pop($('s5-c'), t, 0.1, 0.45);
+    rise($('s5-sub'), t, when(W, '텍스트면') - 0.1, 0.35, 20);
+  },
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EP9 포토샵 대신 바로 HTML 시안</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700;900&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../lib/base.css">
+<style>
+  .psd { position: absolute; background: #2B2D33; border-radius: 22px; overflow: hidden; box-shadow: 0 18px 40px rgba(0,0,0,.25); }
+  .psd .art { position: absolute; left: 24px; top: 70px; width: 360px; height: 300px; border-radius: 8px; overflow: hidden; }
+  .psd .layers { position: absolute; right: 20px; top: 70px; width: 210px; }
+  .psd .ly { height: 46px; margin-bottom: 8px; border-radius: 8px; background: #3A3D45; color: #C9CED6; font-size: 19px; font-weight: 700;
+    display: flex; align-items: center; padding: 0 12px; white-space: nowrap; overflow: hidden; }
+  .cal { position: absolute; display: flex; gap: 14px; }
+  .day { width: 150px; height: 150px; background: #fff; border-radius: 20px; border: 4px solid var(--line); text-align: center; position: relative; overflow: hidden; }
+  .day .dh2 { background: var(--red); color: #fff; font-size: 24px; font-weight: 900; padding: 6px 0; }
+  .day .dn { font-family: 'Black Han Sans', sans-serif; font-size: 60px; margin-top: 6px; }
+  .day .xx { position: absolute; inset: 0; }
+  .day .xx::before, .day .xx::after { content: ''; position: absolute; left: 50%; top: 50%; width: 150px; height: 8px; margin: -4px 0 0 -75px;
+    background: var(--red); border-radius: 4px; transform: rotate(45deg); }
+  .day .xx::after { transform: rotate(-45deg); }
+  .ph3 { position: absolute; top: 90px; width: 290px; height: 580px; }
+  .ph3 .phone { position: absolute; inset: 0; width: auto; height: auto; }
+  .ph3 .scr { position: absolute; inset: 40px 0 0 0; }
+  .ph3 .nm { position: absolute; left: 0; width: 100%; top: -60px; text-align: center; font-family: 'Black Han Sans', sans-serif; font-size: 44px; }
+  .tapfx { position: absolute; width: 90px; height: 90px; border-radius: 50%; border: 8px solid var(--yellow); }
+  .strike { position: relative; display: inline-block; }
+  .strike::after { content: ''; position: absolute; left: -6px; right: -6px; top: 52%; height: 8px; background: var(--red); border-radius: 4px;
+    transform: scaleX(var(--k, 0)); transform-origin: left; }
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage"><div class="abs" id="area">
+
+  <!-- s1: 포토샵 3일 + 다시 마크업 -->
+  <div class="scene" id="s1">
+    <div class="tag-old" id="s1-old" style="left:0;top:0">예전</div>
+    <div class="psd" id="s1-psd" style="left:0;top:60px;width:640px;height:400px">
+      <div class="tbar" style="padding:0 22px"><i></i><i></i><i></i><span style="color:#8B949E">시안_최종_진짜최종.psd</span></div>
+      <div class="art" data-site="A:1.1"></div>
+      <div class="layers">
+        <div class="ly">배경</div><div class="ly">로고</div><div class="ly">빵사진 copy 3</div><div class="ly">버튼_최종</div><div class="ly">레이어 47</div>
+      </div>
+    </div>
+    <div class="cal" id="s1-cal" style="left:0;top:500px">
+      <div class="day"><div class="dh2">월</div><div class="dn">1</div><div class="xx" id="s1-x1"></div></div>
+      <div class="day"><div class="dh2">화</div><div class="dn">2</div><div class="xx" id="s1-x2"></div></div>
+      <div class="day"><div class="dh2">수</div><div class="dn">3</div><div class="xx" id="s1-x3"></div></div>
+    </div>
+    <div class="abs" id="s1-tag" data-char="person:tag:sad" style="left:690px;top:300px;width:260px;height:364px"></div>
+    <div class="sticker" id="s1-st" style="left:440px;top:700px">그리고 다시 HTML로…</div>
+  </div>
+
+  <!-- s2: HTML 시안 3개 요청 -->
+  <div class="scene" id="s2">
+    <div class="tag-new" id="s2-new" style="left:0;top:0">이제</div>
+    <div class="term" id="s2-term" style="left:0;top:60px;width:960px;height:560px">
+      <div class="tbar"><i></i><i></i><i></i><span>morningbread-site</span></div>
+      <div class="tl prompt"><b>&gt;</b><span id="s2-p"></span></div>
+      <div class="tl" id="s2-a"><span class="ic">✓</span>sian-a.html · 따뜻한 동네 빵집</div>
+      <div class="tl" id="s2-b"><span class="ic">✓</span>sian-b.html · 깔끔한 모던</div>
+      <div class="tl" id="s2-c"><span class="ic">✓</span>sian-c.html · 클래식 고급</div>
+      <div class="tl done" id="s2-done">완료: 시안 3개 · 폰 화면 포함</div>
+    </div>
+    <div class="abs" id="s2-yj" data-char="yj:laptop:smile" style="left:640px;top:560px;width:280px;height:392px"></div>
+  </div>
+
+  <!-- s3: 클릭되는 시안, 폰 화면까지 -->
+  <div class="scene" id="s3">
+    <div class="ph3" id="s3-a" style="left:0"><div class="nm co">A</div><div class="phone"><div class="scr" data-site="A:0.95"></div></div></div>
+    <div class="ph3" id="s3-b" style="left:335px"><div class="nm cm">B</div><div class="phone"><div class="scr" id="s3-bscr" data-site="B:0.95"></div></div></div>
+    <div class="ph3" id="s3-c" style="left:670px"><div class="nm">C</div><div class="phone"><div class="scr" data-site="C:0.95"></div></div></div>
+    <div class="tapfx" id="s3-tap" style="left:435px;top:500px"></div>
+    <div class="sticker mint" id="s3-st" style="left:250px;top:720px">진짜로 눌린다!</div>
+  </div>
+
+  <!-- s4: 고른 시안 = 결과물 -->
+  <div class="scene" id="s4">
+    <div class="ph3" id="s4-a" style="left:0"><div class="nm co">A</div><div class="phone"><div class="scr" data-site="A:0.95"></div></div></div>
+    <div class="ph3" id="s4-b" style="left:335px"><div class="nm cm">B</div><div class="phone"><div class="scr" data-site="B:0.95"></div></div></div>
+    <div class="ph3" id="s4-c" style="left:670px"><div class="nm">C</div><div class="phone"><div class="scr" data-site="C:0.95"></div></div></div>
+    <div class="stamp ok" id="s4-ok" style="left:350px;top:330px">확정</div>
+    <div class="abs center" id="s4-txt" style="top:720px;font-size:46px;font-weight:900"><span class="strike" id="s4-strike">다시 마크업</span> → 필요 없음</div>
+  </div>
+
+  <!-- s5: 결론 -->
+  <div class="scene" id="s5">
+    <div class="abs conclude" id="s5-c" style="top:160px"><div class="k">오늘의 결론</div><div class="t">시안이 곧 결과물<br><span>만드는 게 아니라 고르는 것</span></div></div>
+  </div>
+
+</div></div></div>
+<script src="timeline.js"></script>
+<script src="../lib/engine.js"></script>
+<script>
+start({
+  s1(t, d, m, W) {
+    fade($('s1-old'), t, 0, 0.2);
+    rise($('s1-psd'), t, 0.1, 0.4, 40);
+    rise($('s1-cal'), t, when(W, '사흘') - 0.6, 0.3, 30);
+    ['s1-x1', 's1-x2', 's1-x3'].forEach((id, i) => fade($(id), t, when(W, '사흘') - 0.2 + i * 0.2, 0.15));
+    rise($('s1-tag'), t, when(W, '퍼블리셔가') - 0.2, 0.4, 80);
+    pop($('s1-st'), t, when(W, '마크업') - 0.1, 0.4, -3);
+  },
+
+  s2(t, d, m, W) {
+    fade($('s2-new'), t, 0, 0.2);
+    rise($('s2-term'), t, 0.1, 0.4, 40);
+    const P = ' 기획서.md와 레퍼런스 분석표를 보고, 시안 3개를 HTML로 만들어줘. 폰 화면도.';
+    typeText($('s2-p'), P, t, 0.4, 32);
+    const w0 = Math.max(when(W, '세') + 0.2, 0.4 + P.length / 32);
+    ['s2-a', 's2-b', 's2-c'].forEach((id, i) => rise($(id), t, w0 + i * 0.45, 0.2, 10));
+    rise($('s2-done'), t, w0 + 1.5, 0.25, 10);
+    rise($('s2-yj'), t, 0.5, 0.4, 100);
+    $('s2-yj').querySelector('.tap').style.opacity = t > 0.9 && Math.floor(t * 8) % 2 ? 1 : 0;
+  },
+
+  s3(t, d, m, W) {
+    ['s3-a', 's3-b', 's3-c'].forEach((id, i) => rise($(id), t, 0.1 + i * 0.2, 0.4, 60));
+    // B의 '단체주문 문의' 버튼을 톡 누른다
+    const tc = when(W, '클릭') - 0.1, k = prog(t, tc, 0.4);
+    put($('s3-tap'), k > 0 && k < 1 ? 1 - k : 0, 0, 0.4 + k);
+    $('s3-bscr').querySelector('.btn').style.transform = k > 0 && k < 0.5 ? 'scale(.92)' : '';
+    pop($('s3-st'), t, tc + 0.3, 0.4, -3);
+  },
+
+  s4(t, d, m, W) {
+    const ts = when(W, '결과물') - 0.2;
+    ['s4-a', 's4-c'].forEach(id => { $(id).style.opacity = 1 - 0.75 * prog(t, ts, 0.3); });
+    const kb = eo(prog(t, ts, 0.4));
+    put($('s4-b'), 1, -20 * kb, 1 + 0.06 * kb);
+    const k = prog(t, ts + 0.2, 0.3);
+    put($('s4-ok'), clamp(k * 3), 0, k ? 1 + 0.8 * (1 - eo(k)) : 1.8, -8);
+    rise($('s4-txt'), t, when(W, '다시') - 0.2, 0.3, 20);
+    $('s4-strike').style.setProperty('--k', eo(prog(t, when(W, '필요') - 0.1, 0.35)));
+  },
+
+  s5(t, d, m, W) {
+    pop($('s5-c'), t, 0.2, 0.45);
+  },
+});
+</script>
+</body>
+</html>

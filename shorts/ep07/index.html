@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EP7 남이 짠 옛날 코드, 몇 분 만에 파악</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700;900&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../lib/base.css">
+<style>
+  .mess { position: absolute; background: #fff; border-radius: 24px; border: 3px solid var(--line); padding: 22px 24px;
+    box-shadow: 0 14px 30px rgba(60, 40, 20, .12); }
+  .mess div { font: 23px/1.75 var(--mono); color: #5A5047; white-space: nowrap; }
+  .mess div.w { color: var(--red); font-weight: 700; }
+  .rep { position: absolute; background: #fff; border-radius: 28px; border: 3px solid var(--line); padding: 30px 34px;
+    box-shadow: 0 18px 40px rgba(60, 40, 20, .12); }
+  .rep .rh { font-family: 'Black Han Sans', sans-serif; font-size: 48px; margin-bottom: 18px; }
+  .ri { display: flex; gap: 22px; align-items: center; padding: 18px 0; border-top: 2px solid #F1E9DF; }
+  .ri .ic2 { width: 64px; height: 58px; flex: none; }
+  .ri .rt { font-size: 38px; font-weight: 900; }
+  .ri .rd { font-size: 26px; font-weight: 600; color: var(--sub); margin-top: 4px; }
+  .ri .num { margin-left: auto; font-family: 'Black Han Sans', sans-serif; font-size: 64px; color: var(--red); }
+  .rf { margin-top: 14px; font-size: 26px; font-weight: 800; color: #137A65; }
+  .e404 { position: absolute; inset: 0; background: #F2F2F2; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-family: 'Times New Roman', serif; color: #333; }
+  .e404 b { font-size: 64px; } .e404 span { font-size: 26px; margin-top: 10px; }
+  .pinr { position: absolute; background: var(--red); color: #fff; border-radius: 18px; padding: 10px 18px; font-size: 26px; font-weight: 900;
+    box-shadow: 0 6px 14px rgba(0,0,0,.15); }
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage"><div class="abs" id="area">
+
+  <!-- s1: 옛 사이트와 뒤죽박죽 폴더 -->
+  <div class="scene" id="s1">
+    <div class="label" id="s1-label"><div class="l1 disp">몇 년 전, 그 사이트</div></div>
+    <div class="browser" id="s1-site" style="left:0;top:110px;width:580px;height:470px">
+      <div class="bbar"><i></i><i></i><i></i><div class="url">morningbread.example</div></div>
+      <div class="bbody" style="height:410px" data-site="old:1.5"></div>
+    </div>
+    <div class="mess" id="s1-files" style="left:610px;top:110px;width:350px">
+      <div>index.html</div><div class="w">index_old.html</div><div class="w">index_final.html</div><div class="w">index_final_진짜.html</div>
+      <div>menu.html</div><div class="w">menu2.html</div><div>sub01.html</div><div>sub02.html</div><div class="w">copy_of_about.html</div><div>… 외 14개</div>
+    </div>
+    <div class="abs" id="s1-boss" data-char="boss:shock" style="left:30px;top:600px;width:220px;height:308px"></div>
+    <div class="sticker orange" id="s1-st" style="left:270px;top:690px">어디부터 보지…?</div>
+  </div>
+
+  <!-- s2: 진단 요청 -->
+  <div class="scene" id="s2">
+    <div class="label" id="s2-label"><div class="l1 disp">한 마디로 <span class="cb">진단 요청</span></div></div>
+    <div class="term" id="s2-term" style="left:0;top:110px;width:960px;height:470px">
+      <div class="tbar"><i></i><i></i><i></i><span>morningbread-site</span></div>
+      <div class="tl prompt"><b>&gt;</b><span id="s2-p"></span></div>
+      <div class="tl" id="s2-a"><span class="ic" id="s2-a-ic"></span><span id="s2-a-t"></span></div>
+      <div class="tl" id="s2-b"><span class="ic">✓</span>페이지끼리 연결 관계 정리</div>
+      <div class="tl" id="s2-c"><span class="ic">✓</span>고칠 점 3가지 찾음 · 수정한 파일 0개</div>
+    </div>
+    <div class="abs" id="s2-yj" data-char="yj:laptop:smile" style="left:620px;top:560px;width:300px;height:420px"></div>
+  </div>
+
+  <!-- s3: 진단 결과 -->
+  <div class="scene" id="s3">
+    <div class="rep" id="s3-rep" style="left:0;top:0;width:960px">
+      <div class="rh">진단 결과</div>
+      <div class="ri" id="s3-r1"><span class="ic2" data-icon="warn:#E5484D"></span><div><div class="rt">헤더 복붙</div><div class="rd">메뉴 하나 바꾸려면 파일 12개 수정</div></div><div class="num">12곳</div></div>
+      <div class="ri" id="s3-r2"><span class="ic2" data-icon="warn:#FF7A2F"></span><div><div class="rt">모바일 대응 없음</div><div class="rd">폰에서 글자가 깨알같이 작아요</div></div><div class="num" style="color:var(--orange)">0%</div></div>
+      <div class="ri" id="s3-r3"><span class="ic2" data-icon="warn:#E5484D"></span><div><div class="rt">깨진 링크</div><div class="rd">event.html, qna.html</div></div><div class="num">2개</div></div>
+      <div class="rf" id="s3-f">✓ 아무 파일도 고치지 않았어요</div>
+    </div>
+  </div>
+
+  <!-- s4: 직접 열어 보니 진짜 -->
+  <div class="scene" id="s4">
+    <div class="label" id="s4-label"><div class="l1 disp">직접 열어 보니</div></div>
+    <div class="phone" id="s4-phone" style="left:30px;top:110px;width:330px;height:640px"><div style="position:absolute;inset:44px 0 0 0" data-site="old:0.62"></div></div>
+    <div class="pinr" id="s4-p1" style="left:200px;top:300px">글자 깨알!</div>
+    <div class="browser" id="s4-404" style="left:420px;top:150px;width:540px;height:420px">
+      <div class="bbar"><i></i><i></i><i></i><div class="url">…/event.html</div></div>
+      <div class="bbody" style="height:360px"><div class="e404"><b>404</b><span>Not Found</span></div></div>
+    </div>
+    <div class="stamp" id="s4-x" style="left:540px;top:620px">진짜네</div>
+  </div>
+
+  <!-- s5: 결론 -->
+  <div class="scene" id="s5">
+    <div class="abs" id="s5-yj" data-char="yj:thumb:proud" style="left:370px;top:0;width:220px;height:352px"></div>
+    <div class="abs conclude" id="s5-c" style="top:400px"><div class="k">오늘의 결론</div><div class="t">남이 짠 옛날 코드도<br><span>몇 분이면 파악</span></div></div>
+  </div>
+
+</div></div></div>
+<script src="timeline.js"></script>
+<script src="../lib/engine.js"></script>
+<script>
+start({
+  s1(t, d, m, W) {
+    rise($('s1-label'), t, 0);
+    rise($('s1-site'), t, 0.15, 0.4, 50);
+    rise($('s1-files'), t, 0.5, 0.4, 50);
+    rise($('s1-boss'), t, when(W, '어디부터') - 0.3, 0.4, 80);
+    pop($('s1-st'), t, when(W, '막막') - 0.1, 0.4, -3);
+  },
+
+  s2(t, d, m, W) {
+    rise($('s2-label'), t, 0);
+    rise($('s2-term'), t, 0.15, 0.4, 50);
+    const P = ' 이 사이트 구조를 설명하고, 고칠 점을 알려줘. 아무것도 고치지 마.';
+    typeText($('s2-p'), P, t, when(W, '구조') - 0.3, 26);
+    const w0 = Math.max(when(W, '아무것도') + 0.2, when(W, '구조') + P.length / 26 - 0.2);
+    rise($('s2-a'), t, w0, 0.2, 10);
+    const aDone = t >= w0 + 0.5;
+    $('s2-a-ic').textContent = aDone ? '✓' : spin(t);
+    $('s2-a-t').textContent = aDone ? '파일 23개 읽음' : '파일 읽는 중…';
+    rise($('s2-b'), t, w0 + 0.6, 0.2, 10);
+    rise($('s2-c'), t, w0 + 0.9, 0.2, 10);
+    rise($('s2-yj'), t, 0.6, 0.4, 100);
+    $('s2-yj').querySelector('.tap').style.opacity = t > 1 && Math.floor(t * 8) % 2 ? 1 : 0;
+  },
+
+  s3(t, d, m, W) {
+    rise($('s3-rep'), t, 0.1, 0.4, 50);
+    rise($('s3-r1'), t, when(W, '열두') - 0.2, 0.3, 20);
+    rise($('s3-r2'), t, when(W, '모바일') - 0.2, 0.3, 20);
+    rise($('s3-r3'), t, when(W, '링크') - 0.2, 0.3, 20);
+    fade($('s3-f'), t, d - 1.0, 0.3);
+  },
+
+  s4(t, d, m, W) {
+    rise($('s4-label'), t, 0);
+    rise($('s4-phone'), t, 0.15, 0.4, 50);
+    pop($('s4-p1'), t, 0.7, 0.35, -4);
+    rise($('s4-404'), t, 0.5, 0.4, 50);
+    const k = prog(t, when(W, '진짜') - 0.05, 0.3);
+    put($('s4-x'), clamp(k * 3), 0, k ? 1 + 0.8 * (1 - eo(k)) : 1.8, -8);
+  },
+
+  s5(t, d, m, W) {
+    rise($('s5-yj'), t, 0.1, 0.4, 80);
+    pop($('s5-c'), t, 0.4, 0.45);
+  },
+});
+</script>
+</body>
+</html>

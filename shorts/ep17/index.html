@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EP17 세이브 포인트와 회사 규칙집</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700;900&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../lib/base.css">
+<style>
+  .slot { position: absolute; left: 280px; width: 680px; height: 110px; background: #fff; border: 5px solid var(--ink); border-radius: 20px;
+    display: flex; align-items: center; gap: 22px; padding: 0 26px; font-size: 36px; font-weight: 900; box-shadow: 8px 8px 0 var(--ink); }
+  .slot small { font: 800 26px var(--mono); color: var(--sub); }
+  .tline { position: absolute; left: 40px; top: 330px; width: 880px; height: 10px; border-radius: 5px; background: #D9CBB8; }
+  .cmt { position: absolute; top: 300px; width: 70px; height: 70px; border-radius: 50%; background: var(--mint); border: 8px solid #fff;
+    box-shadow: 0 6px 14px rgba(0,0,0,.15); }
+  .cmt.bad { background: var(--red); }
+  .cl { position: absolute; top: 400px; width: 200px; text-align: center; font-size: 28px; font-weight: 900; line-height: 1.3; }
+  .rew { position: absolute; left: 520px; top: 150px; width: 300px; height: 150px; }
+  .rule { font-size: 32px; font-weight: 800; padding: 14px 0 14px 50px; position: relative; border-top: 2px solid #F1E9DF; }
+  .rule::before { content: '-'; position: absolute; left: 14px; color: var(--mint); font-weight: 900; }
+  .md { font-family: var(--mono); }
+  .glow { box-shadow: 0 0 0 10px rgba(31,179,148,.25), 0 18px 40px rgba(60,40,20,.12) !important; }
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage"><div class="abs" id="area">
+
+  <!-- s1: 세이브 -->
+  <div class="scene" id="s1">
+    <div class="abs" id="s1-icon" data-icon="save:#3D6EF0" style="left:20px;top:150px;width:220px;height:220px"></div>
+    <div class="slot" id="s1-s1" style="top:60px">SAVE 1 <small>시안 완성</small></div>
+    <div class="slot" id="s1-s2" style="top:210px">SAVE 2 <small>메뉴 수정</small></div>
+    <div class="slot" id="s1-s3" style="top:360px">SAVE 3 <small>배포 직전</small></div>
+    <div class="abs" id="s1-yj" data-char="yj:cheer:proud" style="left:40px;top:470px;width:240px;height:384px"></div>
+  </div>
+
+  <!-- s2: git 타임라인과 되돌리기 -->
+  <div class="scene" id="s2">
+    <div class="label" id="s2-label"><div class="l1 disp"><span class="cb">git</span> = 작업 세이브</div></div>
+    <div class="tline"></div>
+    <div class="cmt" id="s2-c1" style="left:60px"></div><div class="cl" id="s2-l1" style="left:-5px">시안 완성</div>
+    <div class="cmt" id="s2-c2" style="left:300px"></div><div class="cl" id="s2-l2" style="left:235px">메뉴 수정</div>
+    <div class="cmt" id="s2-c3" style="left:540px"></div><div class="cl" id="s2-l3" style="left:475px">배포 직전</div>
+    <div class="cmt bad" id="s2-c4" style="left:780px"></div><div class="cl cr" id="s2-l4" style="left:715px">망함</div>
+    <svg class="rew" id="s2-rew" viewBox="0 0 300 150"><path d="M290 140 C 250 10, 60 10, 20 130" fill="none" stroke="#3D6EF0" stroke-width="10" stroke-linecap="round" pathLength="1" stroke-dasharray="1" id="s2-path"/><path d="M4 112 L20 140 L40 116" fill="none" stroke="#3D6EF0" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" id="s2-head"/></svg>
+    <div class="sticker blue" id="s2-st" style="left:420px;top:520px">그 시점으로 되돌리기</div>
+  </div>
+
+  <!-- s3: CLAUDE.md 규칙집 -->
+  <div class="scene" id="s3">
+    <div class="doc" id="s3-doc" style="left:0;top:0;width:960px;padding:30px 40px">
+      <div class="dh md" style="font-size:46px">CLAUDE.md</div>
+      <div class="ds" style="font-size:32px"># 픽셀공방 작업 규칙</div>
+      <div class="rule" id="s3-r1">운영 서버에 올리기 전에 반드시 백업하고 나한테 물어볼 것</div>
+      <div class="rule" id="s3-r2">시키지 않은 기능은 추가하지 말 것</div>
+      <div class="rule" id="s3-r3">파일을 지우기 전에 목록을 보여줄 것</div>
+      <div class="rule" id="s3-r4">끝나면 바꾼 파일 목록과 확인 결과를 보고할 것</div>
+    </div>
+  </div>
+
+  <!-- s4: 매번 읽고 지킨다 -->
+  <div class="scene" id="s4">
+    <div class="doc" id="s4-doc" style="left:0;top:40px;width:430px;padding:26px 30px">
+      <div class="dh md" style="font-size:36px">CLAUDE.md</div>
+      <div class="dl" style="font-size:26px">배포 전 백업·확인</div><div class="dl" style="font-size:26px">시킨 것만</div>
+      <div class="dl" style="font-size:26px">삭제 전 목록</div><div class="dl" style="font-size:26px">끝나면 보고</div>
+    </div>
+    <div class="arrow" id="s4-arrow" style="left:450px;top:150px">›</div>
+    <div class="abs" id="s4-yj" data-char="yj:laptop:smile" style="left:520px;top:20px;width:420px;height:588px"></div>
+    <div class="sticker mint" id="s4-st" style="left:150px;top:660px">일 시작할 때마다 먼저 읽음 ✓</div>
+  </div>
+
+  <!-- s5: 결론 -->
+  <div class="scene" id="s5">
+    <div class="abs conclude" id="s5-c" style="top:160px"><div class="k" style="background:var(--mint);color:#fff">사수의 기술 #3</div><div class="t">저장은 자주<br><span>규칙은 한 번</span></div></div>
+  </div>
+
+</div></div></div>
+<script src="timeline.js"></script>
+<script src="../lib/engine.js"></script>
+<script>
+start({
+  s1(t, d, m, W) {
+    pop($('s1-icon'), t, 0.1, 0.4, -6);
+    ['s1-s1', 's1-s2', 's1-s3'].forEach((id, i) => slide($(id), t, when(W, '세이브') - 0.1 + i * 0.25, 0.35, 120));
+    rise($('s1-yj'), t, when(W, '작업에도') - 0.2, 0.4, 80);
+  },
+
+  s2(t, d, m, W) {
+    rise($('s2-label'), t, 0);
+    const t0 = when(W, '저장해') - 0.4;
+    [1, 2, 3].forEach(i => { pop($('s2-c' + i), t, t0 + (i - 1) * 0.3, 0.3); fade($('s2-l' + i), t, t0 + (i - 1) * 0.3, 0.2); });
+    const tb = when(W, '망해도') - 0.1;
+    pop($('s2-c4'), t, tb, 0.3);
+    fade($('s2-l4'), t, tb, 0.2);
+    const tr = when(W, '그') - 0.1;
+    $('s2-rew').style.opacity = t >= tr ? 1 : 0;
+    $('s2-path').style.strokeDashoffset = 1 - eo(prog(t, tr, 0.6));
+    $('s2-head').style.opacity = t >= tr + 0.55 ? 1 : 0;
+    pop($('s2-st'), t, tr + 0.5, 0.35, -3);
+  },
+
+  s3(t, d, m, W) {
+    rise($('s3-doc'), t, 0.1, 0.4, 40);
+    ['s3-r1', 's3-r2', 's3-r3', 's3-r4'].forEach((id, i) => rise($(id), t, when(W, 'CLAUDE') + 0.3 + i * 0.35, 0.25, 12));
+  },
+
+  s4(t, d, m, W) {
+    rise($('s4-doc'), t, 0.1, 0.4, 40);
+    fade($('s4-arrow'), t, when(W, '신입이') - 0.2, 0.25);
+    rise($('s4-yj'), t, when(W, '신입이') - 0.1, 0.4, 80);
+    $('s4-yj').querySelector('.tap').style.opacity = t > when(W, '매번') && Math.floor(t * 8) % 2 ? 1 : 0;
+    $('s4-doc').classList.toggle('glow', t >= when(W, '매번') - 0.1 && Math.floor(t * 3) % 2 === 0);
+    pop($('s4-st'), t, when(W, '지켜요') - 0.2, 0.4, -3);
+  },
+
+  s5(t, d, m, W) {
+    pop($('s5-c'), t, 0.2, 0.45);
+  },
+});
+</script>
+</body>
+</html>

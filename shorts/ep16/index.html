@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EP16 꼬치꼬치 캐묻기 5종</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700;900&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../lib/base.css">
+<style>
+  .ck { position: absolute; left: 0; top: 0; width: 960px; background: #fff; border-radius: 30px; border: 3px solid var(--line);
+    padding: 22px 30px; box-shadow: 0 18px 40px rgba(60,40,20,.12); }
+  .ck .ch { font-family: 'Black Han Sans', sans-serif; font-size: 44px; margin-bottom: 6px; }
+  .q { position: relative; padding: 16px 0 16px 76px; border-top: 2px solid #F1E9DF; min-height: 132px; }
+  .q .no { position: absolute; left: 0; top: 18px; width: 56px; height: 56px; border-radius: 50%; background: var(--line); color: var(--sub);
+    font-family: 'Black Han Sans', sans-serif; font-size: 32px; text-align: center; line-height: 58px; }
+  .q.on .no { background: var(--mint); color: #fff; }
+  .q .qt { font-size: 36px; font-weight: 900; color: #C9BBA9; }
+  .q.on .qt { color: var(--ink); }
+  .q .an { margin-top: 8px; display: inline-block; background: var(--paper); border-radius: 14px; padding: 8px 16px; font-size: 29px; font-weight: 700; color: var(--sub); }
+  .q .an.bad { background: var(--red-soft); color: #B4232A; }
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage"><div class="abs" id="area">
+  <div class="scene" id="s1"><div class="ck" id="ck1"></div></div>
+  <div class="scene" id="s2"><div class="ck" id="ck2"></div></div>
+  <div class="scene" id="s3"><div class="ck" id="ck3"></div></div>
+  <div class="scene" id="s4"><div class="ck" id="ck4"></div>
+    <div class="abs" id="s4-yj" data-char="yj:stand:oops" style="left:700px;top:560px;width:240px;height:384px"></div>
+  </div>
+  <div class="scene" id="s5">
+    <div class="abs" id="s5-boss" data-char="boss:proud" style="left:330px;top:0;width:300px;height:420px"></div>
+    <div class="abs conclude" id="s5-c" style="top:440px"><div class="k" style="background:var(--mint);color:#fff">사수의 기술 #2</div><div class="t">끝나면 다섯 가지를 묻는다<br><span>의심이 곧 품질</span></div></div>
+  </div>
+</div></div></div>
+<script src="timeline.js"></script>
+<script src="../lib/engine.js"></script>
+<script>
+const QS = [
+  ['바꾼 파일 목록 보여 줘', 'index.html, header.html, style.css 3개요', ''],
+  ['왜 그렇게 했어?', '메뉴를 한 곳에서만 고치게 하려고요', ''],
+  ['직접 열어서 확인했어?', '폰이랑 PC 둘 다 열어 봤어요', ''],
+  ['다른 페이지에 영향 있어?', '12개 페이지 헤더 전부 확인했어요', ''],
+  ['시키지 않은 거 한 거 있어?', '사실… 폴더 정리도 좀…', 'bad'],
+];
+// 장면마다 같은 체크리스트를 그리고, 이미 물어본 질문은 켜 둔다
+['ck1', 'ck2', 'ck3', 'ck4'].forEach(id => {
+  $(id).innerHTML = '<div class="ch">일 끝나면 꼭 묻는 5가지</div>' + QS.map(([q, a, c], i) =>
+    `<div class="q"><div class="no">${i + 1}</div><div class="qt">${q}</div><div class="an ${c}">${a}</div></div>`).join('');
+});
+const rows = id => $$('#' + id + ' .q');
+
+// asked: [질문 번호, 그 질문을 말하는 단어] — 이 장면에서 새로 묻는 질문들
+function checklist(id, t, W, before, asked) {
+  rows(id).forEach((el, i) => {
+    const a = asked.find(x => x[0] === i);
+    const on = i < before || (!!a && t >= when(W, a[1]) - 0.1);
+    el.classList.toggle('on', on);
+    const an = el.querySelector('.an');
+    if (i < before) put(an, 1);
+    else if (a) rise(an, t, when(W, a[1]) + 0.9, 0.3, 10);
+    else an.style.opacity = 0;
+  });
+}
+
+start({
+  s1(t, d, m, W) {
+    rise($('ck1'), t, 0.1, 0.4, 40);
+    checklist('ck1', t, W, 0, []);
+  },
+  s2(t, d, m, W) {
+    checklist('ck2', t, W, 0, [[0, '하나'], [1, '둘']]);
+  },
+  s3(t, d, m, W) {
+    checklist('ck3', t, W, 2, [[2, '셋'], [3, '넷']]);
+  },
+  s4(t, d, m, W) {
+    checklist('ck4', t, W, 4, [[4, '다섯']]);
+    rise($('s4-yj'), t, when(W, '다섯') + 0.9, 0.4, 80);
+  },
+  s5(t, d, m, W) {
+    rise($('s5-boss'), t, 0.1, 0.4, 80);
+    pop($('s5-c'), t, 0.4, 0.45);
+  },
+});
+</script>
+</body>
+</html>

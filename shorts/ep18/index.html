@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EP18 이제 우리는 디렉터</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700;900&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../lib/base.css">
+<style>
+  .stp { position: absolute; left: 120px; width: 720px; height: 104px; background: #fff; border: 4px solid var(--line); border-radius: 22px;
+    display: flex; align-items: center; gap: 20px; padding: 0 28px; font-size: 40px; font-weight: 900; }
+  .stp .nn { width: 56px; height: 56px; border-radius: 50%; background: var(--line); color: var(--sub); font-family: 'Black Han Sans', sans-serif;
+    font-size: 30px; text-align: center; line-height: 58px; flex: none; }
+  .stp .who { margin-left: auto; font-size: 26px; font-weight: 800; color: var(--sub); }
+  .stp.ai { border-color: var(--mint); }
+  .stp.ai .nn { background: var(--mint); color: #fff; }
+  .stp.ai .who { color: var(--mint); }
+  .role { position: absolute; top: 40px; width: 290px; height: 620px; background: #fff; border: 4px solid var(--line); border-radius: 30px;
+    text-align: center; padding-top: 24px; box-shadow: 0 12px 28px rgba(60,40,20,.1); }
+  .role .who2 { width: 230px; height: 322px; margin: 0 auto; }
+  .role .nm { font-size: 34px; font-weight: 900; margin-top: 8px; }
+  .role .was { font-size: 26px; font-weight: 700; color: var(--sub); text-decoration: line-through; margin-top: 10px; }
+  .role .now { display: inline-block; margin-top: 12px; font-family: 'Black Han Sans', sans-serif; font-size: 46px; color: #fff; background: var(--ink);
+    padding: 8px 24px; border-radius: 18px; }
+  .duo { position: absolute; top: 60px; width: 420px; text-align: center; }
+  .duo .lab { font-family: 'Black Han Sans', sans-serif; font-size: 64px; margin-top: 14px; }
+  .plus { position: absolute; left: 430px; top: 280px; font-family: 'Black Han Sans', sans-serif; font-size: 110px; color: #C2B39F; }
+  .end { position: absolute; left: 0; top: 0; width: 960px; height: 860px; background: var(--ink); border-radius: 40px; color: #fff; text-align: center;
+    padding-top: 60px; overflow: hidden; }
+  .end .s { font-size: 34px; font-weight: 900; color: var(--yellow); }
+  .end .t { font-family: 'Black Han Sans', sans-serif; font-size: 110px; margin-top: 10px; letter-spacing: -2px; }
+  .end .u { font-family: 'Black Han Sans', sans-serif; font-size: 64px; margin-top: 24px; }
+  .end .u span { color: var(--yellow); }
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage"><div class="abs" id="area">
+
+  <!-- s1: 예전 다섯 단계 -->
+  <div class="scene" id="s1">
+    <div class="tag-old" id="s1-tag" style="left:120px;top:0">예전</div>
+    <div class="stp" id="s1-1" style="top:70px"><div class="nn">1</div>회의<div class="who">사람</div></div>
+    <div class="stp" id="s1-2" style="top:194px"><div class="nn">2</div>기획 PPT<div class="who">사람</div></div>
+    <div class="stp" id="s1-3" style="top:318px"><div class="nn">3</div>포토샵 시안<div class="who">사람</div></div>
+    <div class="stp" id="s1-4" style="top:442px"><div class="nn">4</div>마크업<div class="who">사람</div></div>
+    <div class="stp" id="s1-5" style="top:566px"><div class="nn">5</div>FTP 업로드<div class="who">사람</div></div>
+    <div class="sticker" id="s1-st" style="left:300px;top:700px">전부 사람 손</div>
+  </div>
+
+  <!-- s2: 지금 다섯 단계 -->
+  <div class="scene" id="s2">
+    <div class="tag-new" id="s2-tag" style="left:120px;top:0">이제</div>
+    <div class="stp" id="s2-1" style="top:70px"><div class="nn">1</div>회의<div class="who">사람</div></div>
+    <div class="stp ai" id="s2-2" style="top:194px"><div class="nn">2</div>텍스트로 정리<div class="who">에이전트</div></div>
+    <div class="stp ai" id="s2-3" style="top:318px"><div class="nn">3</div>시안 만들기<div class="who">에이전트</div></div>
+    <div class="stp" id="s2-4" style="top:442px"><div class="nn">4</div>보고 피드백<div class="who">사람</div></div>
+    <div class="stp ai" id="s2-5" style="top:566px"><div class="nn">5</div>수정·배포 → 사람이 확인<div class="who">함께</div></div>
+  </div>
+
+  <!-- s3: 새 역할 -->
+  <div class="scene" id="s3">
+    <div class="role" id="s3-1" style="left:0"><div class="who2" data-char="boss:proud"></div><div class="nm">김기획</div><div class="was">PPT 만들기</div><div class="now">방향</div></div>
+    <div class="role" id="s3-2" style="left:335px"><div class="who2" data-char="person:sian:smile"></div><div class="nm">최시안</div><div class="was">포토샵 3일</div><div class="now">보는 눈</div></div>
+    <div class="role" id="s3-3" style="left:670px"><div class="who2" data-char="person:tag:smile"></div><div class="nm">박태그</div><div class="was">복붙 마크업</div><div class="now">검수</div></div>
+  </div>
+
+  <!-- s4: 손은 에이전트, 판단은 사람 -->
+  <div class="scene" id="s4">
+    <div class="duo" id="s4-l" style="left:0"><div data-char="yj:laptop:smile" style="width:340px;height:476px;margin:0 auto"></div><div class="lab cm">손 = 에이전트</div></div>
+    <div class="plus" id="s4-plus">+</div>
+    <div class="duo" id="s4-r" style="left:540px"><div data-char="boss:proud" style="width:340px;height:476px;margin:0 auto"></div><div class="lab">판단 = 사람</div></div>
+  </div>
+
+  <!-- s5: 엔딩 -->
+  <div class="scene" id="s5">
+    <div class="end" id="s5-end">
+      <div class="s">시리즈 끝</div>
+      <div class="t">AI 신입 길들이기</div>
+      <div class="u">이제 <span>당신이 사수</span>입니다</div>
+      <div class="abs" id="s5-yj" data-char="yj:cheer:proud" style="left:150px;top:420px;width:270px;height:432px"></div>
+      <div class="abs" id="s5-boss" data-char="boss:proud" style="left:540px;top:470px;width:280px;height:392px"></div>
+    </div>
+  </div>
+
+</div></div></div>
+<script src="timeline.js"></script>
+<script src="../lib/engine.js"></script>
+<script>
+start({
+  s1(t, d, m, W) {
+    fade($('s1-tag'), t, 0, 0.2);
+    [['s1-1', '회의'], ['s1-2', 'PPT'], ['s1-3', '포토샵'], ['s1-4', '마크업'], ['s1-5', 'FTP']].forEach(([id, w]) => slide($(id), t, when(W, w) - 0.15, 0.3, -120));
+    pop($('s1-st'), t, when(W, '사람') - 0.1, 0.4, -3);
+  },
+
+  s2(t, d, m, W) {
+    fade($('s2-tag'), t, 0, 0.2);
+    [['s2-1', '회의'], ['s2-2', '텍스트로'], ['s2-3', '시안을'], ['s2-4', '피드백'], ['s2-5', '확인']].forEach(([id, w]) => slide($(id), t, when(W, w) - 0.2, 0.3, 120));
+  },
+
+  s3(t, d, m, W) {
+    [['s3-1', '방향'], ['s3-2', '보는'], ['s3-3', '검수']].forEach(([id, w], i) => {
+      rise($(id), t, 0.1 + i * 0.2, 0.4, 60);
+      pop($(id).querySelector('.now'), t, when(W, w) - 0.1, 0.35, -3);
+    });
+  },
+
+  s4(t, d, m, W) {
+    rise($('s4-l'), t, 0.1, 0.4, 60);
+    fade($('s4-plus'), t, when(W, '판단') - 0.3, 0.2);
+    rise($('s4-r'), t, when(W, '판단') - 0.2, 0.4, 60);
+  },
+
+  s5(t, d, m, W) {
+    pop($('s5-end'), t, 0.1, 0.45);
+    rise($('s5-yj'), t, when(W, '이제') - 0.2, 0.4, 100);
+    rise($('s5-boss'), t, when(W, '이제'), 0.4, 100);
+    const hop = -Math.abs(Math.sin(t * 5)) * 14;
+    if (t > when(W, '이제') + 0.5) $('s5-yj').style.transform = `translateY(${hop}px)`;
+  },
+});
+</script>
+</body>
+</html>

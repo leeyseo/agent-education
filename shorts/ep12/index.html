@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EP12 버전 올려달랬더니 5,000줄</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700;900&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../lib/base.css">
+<style>
+  .tl.add { color: #8FF5DC; } .tl.chg { color: #FFD58A; }
+  #s2-term .tl { font-size: 34px; min-height: 64px; }
+  .tl.add .ic { color: #5BE3C3; } .tl.chg .ic { color: #FFB020; }
+  .login { position: absolute; background: #fff; border-radius: 26px; border: 4px solid var(--line); padding: 30px 34px;
+    box-shadow: 0 18px 40px rgba(60,40,20,.14); }
+  .login .lt { font-size: 36px; font-weight: 900; margin-bottom: 20px; }
+  .login .in { height: 64px; border-radius: 14px; border: 3px solid var(--line); margin-bottom: 14px; font-size: 24px; color: #B0A598;
+    display: flex; align-items: center; padding: 0 18px; }
+  .login .lb { height: 66px; border-radius: 14px; background: var(--ink); color: #fff; font-size: 28px; font-weight: 900;
+    display: flex; align-items: center; justify-content: center; }
+  .cloud { position: absolute; background: #fff; border: 5px solid var(--ink); border-radius: 60px; padding: 34px 40px; text-align: center;
+    font-size: 44px; font-weight: 900; line-height: 1.3; }
+  .small { position: absolute; background: var(--blue); color: #fff; border-radius: 28px 28px 28px 6px; padding: 18px 26px; font-size: 36px; font-weight: 800; }
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage"><div class="abs" id="area">
+
+  <!-- s1: 버전 올려줘 -->
+  <div class="scene" id="s1">
+    <div class="abs" id="s1-tag" data-char="person:tag:grin" style="left:0;top:200px;width:330px;height:462px"></div>
+    <div class="term" id="s1-term" style="left:360px;top:200px;width:600px;height:240px">
+      <div class="tbar"><i></i><i></i><i></i><span>morningbread-site</span></div>
+      <div class="tl prompt" style="font-size:44px"><b>&gt;</b><span id="s1-p"></span></div>
+    </div>
+    <div class="sticker red" id="s1-st" style="left:440px;top:500px">이게 사고의 시작</div>
+  </div>
+
+  <!-- s2: 신나서 다 해버림 -->
+  <div class="scene" id="s2">
+    <div class="term" id="s2-term" style="left:0;top:0;width:640px;height:620px">
+      <div class="tbar"><i></i><i></i><i></i><span>morningbread-site</span></div>
+      <div class="tl add" id="s2-1"><span class="ic">+</span>회원가입 페이지 추가</div>
+      <div class="tl add" id="s2-2"><span class="ic">+</span>로그인 기능 추가</div>
+      <div class="tl chg" id="s2-3"><span class="ic">~</span>버그 23개 수정</div>
+      <div class="tl chg" id="s2-4"><span class="ic">~</span>폴더 구조 전부 변경</div>
+      <div class="tl add" id="s2-5"><span class="ic">+</span>관리자 페이지 추가</div>
+      <div class="tl chg" id="s2-6"><span class="ic">~</span>디자인도 살짝 바꿈</div>
+      <div class="tl chg" id="s2-7"><span class="ic">~</span>글꼴 전부 교체</div>
+      <div class="tl add" id="s2-8"><span class="ic">+</span>다크 모드 추가</div>
+    </div>
+    <div class="abs" id="s2-yj" data-char="yj:cheer:proud" style="left:640px;top:120px;width:320px;height:512px"></div>
+  </div>
+
+  <!-- s3: 5,000줄 + 로그인 화면 -->
+  <div class="scene" id="s3">
+    <div class="abs center" style="top:0"><span class="big cr" id="s3-n" style="font-size:180px">+0줄</span></div>
+    <div class="abs center" id="s3-sub" style="top:200px;font-size:36px;font-weight:900;color:var(--sub)">바뀐 줄 수 · 파일 87개</div>
+    <div class="login" id="s3-login" style="left:0;top:300px;width:520px">
+      <div class="lt">모닝빵 회원 로그인</div>
+      <div class="in">아이디</div><div class="in">비밀번호</div><div class="lb">로그인</div>
+    </div>
+    <div class="stamp" id="s3-q" style="left:300px;top:560px">빵집에 왜?</div>
+    <div class="abs" id="s3-boss" data-char="boss:facepalm" style="left:620px;top:380px;width:320px;height:448px"></div>
+  </div>
+
+  <!-- s4: 애매하면 최대한 -->
+  <div class="scene" id="s4">
+    <div class="small" id="s4-said" style="left:0;top:40px">버전 올려줘</div>
+    <div class="arrow" id="s4-arrow" style="left:360px;top:20px">›</div>
+    <div class="cloud" id="s4-heard" style="left:440px;top:0;width:520px">전부 다<br><span class="cr">최대한</span> 좋게!</div>
+    <div class="abs" id="s4-yj" data-char="yj:thumb:proud" style="left:560px;top:290px;width:300px;height:480px"></div>
+    <div class="abs" id="s4-tag" data-char="person:tag:shock" style="left:20px;top:300px;width:300px;height:420px"></div>
+    <div class="sticker" id="s4-st" style="left:20px;top:730px">애매한 지시 = 최대한 해석</div>
+  </div>
+
+  <!-- s5: 결론 -->
+  <div class="scene" id="s5">
+    <div class="abs conclude" id="s5-c" style="top:160px"><div class="k" style="background:var(--red);color:#fff">사고 일지 #1</div><div class="t">시킨 것보다<br><span>더 하는 것도 사고</span></div></div>
+  </div>
+
+</div></div></div>
+<script src="timeline.js"></script>
+<script src="../lib/engine.js"></script>
+<script>
+start({
+  s1(t, d, m, W) {
+    rise($('s1-tag'), t, 0.05, 0.4, 80);
+    rise($('s1-term'), t, 0.3, 0.4, 40);
+    typeText($('s1-p'), ' 버전 올려줘', t, when(W, '버전') - 0.1, 10);
+    pop($('s1-st'), t, d - 0.9, 0.4, -3);
+  },
+
+  s2(t, d, m, W) {
+    rise($('s2-term'), t, 0.05, 0.35, 40);
+    rise($('s2-yj'), t, 0.1, 0.4, 100);
+    // 시키지 않은 일이 점점 빨라지며 쏟아진다
+    const t0 = 0.5, span = d - 1.0;
+    for (let i = 1; i <= 8; i++) rise($('s2-' + i), t, t0 + span * Math.sqrt((i - 1) / 7), 0.18, 10);
+  },
+
+  s3(t, d, m, W) {
+    const tn = when(W, '5,000줄') - 0.4;
+    countTo($('s3-n'), t, tn, 0.8, 5000, v => '+' + v.toLocaleString() + '줄');
+    fade($('s3-sub'), t, tn + 0.8, 0.3);
+    rise($('s3-login'), t, when(W, '빵집에') - 0.3, 0.4, 50);
+    const k = prog(t, when(W, '왜') - 0.1, 0.3);
+    put($('s3-q'), clamp(k * 3), 0, k ? 1 + 0.8 * (1 - eo(k)) : 1.8, -8);
+    rise($('s3-boss'), t, when(W, '필요하죠') - 0.2, 0.4, 80);
+  },
+
+  s4(t, d, m, W) {
+    pop($('s4-said'), t, 0.1, 0.35);
+    rise($('s4-tag'), t, 0.2, 0.4, 80);
+    fade($('s4-arrow'), t, when(W, '신입은') - 0.3, 0.25);
+    pop($('s4-heard'), t, when(W, '최대한') - 0.2, 0.4);
+    rise($('s4-yj'), t, when(W, '최대한'), 0.4, 80);
+    pop($('s4-st'), t, d - 0.9, 0.4, -2);
+  },
+
+  s5(t, d, m, W) {
+    pop($('s5-c'), t, 0.2, 0.45);
+  },
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EP10 피드백은 빨간 펜 한 장이면 끝</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700;900&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../lib/base.css">
+<style>
+  .say { position: absolute; background: #fff; border: 5px solid var(--ink); border-radius: 36px; padding: 22px 30px; font-size: 40px; font-weight: 900; }
+  .say::after { content: ''; position: absolute; left: 60px; bottom: -34px; border: 18px solid transparent; border-top: 26px solid var(--ink); border-bottom: 0; }
+  .shot { position: absolute; background: #fff; border-radius: 20px; padding: 14px; box-shadow: 0 18px 40px rgba(60, 40, 20, .16); transform: rotate(-2deg); }
+  .shot .scr { position: relative; width: 100%; height: 100%; border-radius: 12px; overflow: hidden; }
+  .pen { position: absolute; font-family: 'Nanum Pen Script', cursive; color: var(--red); font-size: 64px; line-height: 1; transform: rotate(-6deg); }
+  .attach { display: inline-flex; align-items: center; gap: 8px; background: #2A2D34; border-radius: 10px; padding: 6px 14px; font-size: 22px; color: #C9CED6; margin-left: 12px; }
+  .ba { position: absolute; top: 60px; width: 380px; height: 700px; }
+  .ba .phone { position: absolute; inset: 60px 0 0 0; width: auto; height: auto; }
+  .ba .scr { position: absolute; inset: 40px 0 0 0; }
+  .ba .lb { position: absolute; left: 0; top: 0; width: 100%; text-align: center; }
+  .node { position: absolute; width: 250px; height: 250px; border-radius: 50%; background: #fff; border: 6px solid var(--line);
+    display: flex; align-items: center; justify-content: center; font-family: 'Black Han Sans', sans-serif; font-size: 52px; }
+  .node.on { border-color: var(--blue); background: var(--blue-soft); color: var(--blue); }
+  .ring { position: absolute; }
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage"><div class="abs" id="area">
+
+  <!-- s1: 사장님 한 마디 -->
+  <div class="scene" id="s1">
+    <div class="abs" id="s1-owner" data-char="person:owner:sad" style="left:0;top:260px;width:340px;height:476px"></div>
+    <div class="say" id="s1-say" style="left:20px;top:60px">주문 버튼이 잘 안 보여요~</div>
+    <div class="phone" id="s1-phone" style="left:560px;top:150px;width:360px;height:700px"><div style="position:absolute;inset:40px 0 0 0" data-site="B:1.15"></div></div>
+    <div class="abs" id="s1-mag" data-icon="mag:#E5484D" style="left:610px;top:560px;width:150px;height:150px"></div>
+  </div>
+
+  <!-- s2: 스크린샷에 빨간 펜 -->
+  <div class="scene" id="s2">
+    <div class="shot" id="s2-shot" style="left:60px;top:0;width:440px;height:760px"><div class="scr" data-site="B:1.4"></div></div>
+    <svg class="abs" id="s2-circle" style="left:60px;top:480px" width="460" height="180" viewBox="0 0 460 180">
+      <ellipse cx="230" cy="90" rx="210" ry="66" fill="none" stroke="#E5484D" stroke-width="10" stroke-linecap="round" pathLength="1" stroke-dasharray="1" id="s2-el"/>
+    </svg>
+    <div class="pen" id="s2-pen" style="left:540px;top:420px">더 크게!<br>주황색으로!</div>
+    <div class="abs" id="s2-boss" data-char="boss:grin" style="left:620px;top:0;width:280px;height:392px"></div>
+    <div class="term" id="s2-term" style="left:460px;top:690px;width:500px;height:120px;padding-top:0">
+      <div class="tl prompt" style="font-size:28px"><b>&gt;</b><span>이 스크린샷대로 고쳐줘</span></div>
+      <div class="attach">첨부 · screenshot.png</div>
+    </div>
+  </div>
+
+  <!-- s3: 고친 화면 전/후 -->
+  <div class="scene" id="s3">
+    <div class="ba" id="s3-before" style="left:20px"><div class="lb"><span class="tag-old" style="position:static">전</span></div><div class="phone"><div class="scr" id="s3-bs"></div></div></div>
+    <div class="arrow" id="s3-arrow" style="left:440px;top:380px">›</div>
+    <div class="ba" id="s3-after" style="left:560px"><div class="lb"><span class="tag-new" style="position:static">후</span></div><div class="phone"><div class="scr" id="s3-as"></div></div></div>
+  </div>
+
+  <!-- s4: 왕복이 몇 분으로 -->
+  <div class="scene" id="s4">
+    <div class="node" id="s4-n1" style="left:355px;top:20px">피드백</div>
+    <div class="node" id="s4-n2" style="left:600px;top:400px">수정</div>
+    <div class="node" id="s4-n3" style="left:110px;top:400px">확인</div>
+    <div class="abs center" id="s4-time" style="top:300px;font-size:50px;font-weight:900">
+      <span class="strike-t" id="s4-day" style="color:var(--sub)">하루</span> → <span class="cb" id="s4-min">몇 분</span>
+    </div>
+  </div>
+
+  <!-- s5: 결론 -->
+  <div class="scene" id="s5">
+    <div class="abs conclude" id="s5-c" style="top:160px"><div class="k">오늘의 결론</div><div class="t">말로든 그림으로든<br><span>피드백이 곧 작업 지시</span></div></div>
+  </div>
+
+</div></div></div>
+<script src="timeline.js"></script>
+<script src="../lib/engine.js"></script>
+<script>
+// 전/후 화면: 후는 주문 버튼을 크고 주황색으로
+$('s3-bs').style.setProperty('--s', 1.15);
+$('s3-bs').innerHTML = siteMock('B');
+$('s3-as').style.setProperty('--s', 1.15);
+$('s3-as').innerHTML = siteMock('B', 'height:calc(84px*var(--s));background:#FF7A2F;font-size:calc(24px*var(--s))');
+
+start({
+  s1(t, d, m, W) {
+    rise($('s1-owner'), t, 0.05, 0.4, 80);
+    rise($('s1-phone'), t, 0.2, 0.4, 60);
+    pop($('s1-say'), t, when(W, '주문') - 0.2, 0.4);
+    pop($('s1-mag'), t, when(W, '보여요') - 0.2, 0.4, -10);
+  },
+
+  s2(t, d, m, W) {
+    rise($('s2-shot'), t, 0.05, 0.4, 50);
+    rise($('s2-boss'), t, 0.2, 0.4, 60);
+    const tp = when(W, '빨간') - 0.1;
+    $('s2-el').style.strokeDashoffset = 1 - eo(prog(t, tp, 0.6));
+    $('s2-circle').style.opacity = t >= tp ? 1 : 0;
+    pop($('s2-pen'), t, tp + 0.5, 0.35, -6);
+    rise($('s2-term'), t, when(W, '던져요') - 0.2, 0.35, 30);
+  },
+
+  s3(t, d, m, W) {
+    rise($('s3-before'), t, 0.1, 0.4, 50);
+    fade($('s3-arrow'), t, when(W, '고치고') - 0.1, 0.25);
+    rise($('s3-after'), t, when(W, '바뀐') - 0.2, 0.4, 50);
+  },
+
+  s4(t, d, m, W) {
+    const nodes = ['s4-n1', 's4-n2', 's4-n3'];
+    nodes.forEach((id, i) => pop($(id), t, when(W, ['피드백', '수정', '확인'][i]) - 0.15, 0.35));
+    // 세 단계를 빙빙 도는 하이라이트
+    const t0 = when(W, '하루') - 0.1, cur = Math.floor(Math.max(0, t - t0) / 0.35) % 3;
+    nodes.forEach((id, i) => $(id).classList.toggle('on', t >= t0 && i === cur));
+    rise($('s4-time'), t, t0, 0.3, 20);
+    $('s4-day').style.textDecoration = t >= when(W, '몇') - 0.1 ? 'line-through' : 'none';
+    pop($('s4-min'), t, when(W, '몇') - 0.1, 0.35);
+  },
+
+  s5(t, d, m, W) {
+    pop($('s5-c'), t, 0.2, 0.45);
+  },
+});
+</script>
+</body>
+</html>

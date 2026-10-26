@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EP2 물어보기 vs 시키기</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700;900&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../lib/base.css">
+<style>
+  .sms-head { padding: 50px 0 16px; text-align: center; font-size: 25px; font-weight: 800; border-bottom: 2px solid var(--line); }
+  .sms { margin: 22px 16px; background: #EEE7DE; border-radius: 22px 22px 22px 6px; padding: 18px 20px;
+    font-size: 26px; font-weight: 600; line-height: 1.5; }
+  .sms b { color: var(--orange); }
+  #s1-files { padding: 26px; }
+  .fh { font-size: 24px; font-weight: 800; margin-bottom: 16px; }
+  .fh b { font-family: var(--mono); color: var(--red); }
+  .lgrid.g2 { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .lc.sm { height: 46px; font-size: 20px; }
+  .steps { position: absolute; left: 0; top: 190px; width: 960px; display: flex; align-items: center; justify-content: space-between; }
+  .stepbox { width: 205px; height: 180px; background: #fff; border: 4px solid var(--line); border-radius: 26px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; font-size: 28px; font-weight: 800; }
+  .stepbox .n { width: 64px; height: 64px; border-radius: 50%; background: var(--line); color: var(--sub);
+    font-family: 'Black Han Sans', sans-serif; font-size: 40px; line-height: 66px; text-align: center; }
+  .stepbox.on { border-color: var(--orange); background: var(--orange-soft); }
+  .stepbox.on .n { background: var(--orange); color: #fff; }
+  .steps .ar { font-size: 36px; font-weight: 900; color: #C2B39F; }
+  #s2-count { top: 450px; }
+  #s2-count .big { font-size: 170px; color: var(--orange); }
+  #s2-count .of { font-size: 56px; font-weight: 900; color: var(--sub); }
+  .ring { border: 9px solid var(--red); border-radius: 26px; }
+  .bx-t { margin-top: 112px; font-size: 30px; font-weight: 800; color: var(--sub); }
+  .bx-b { font-size: 110px; line-height: 1.1; margin-top: 8px; }
+  .bx-s { font-size: 30px; font-weight: 700; color: var(--sub); margin-top: 12px; }
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage"><div class="abs" id="area">
+
+  <!-- s1: 사장님 문자 → 번호가 12페이지에 -->
+  <div class="scene" id="s1">
+    <div class="phone" id="s1-phone" style="left:290px;top:0;width:380px;height:720px">
+      <div class="sms-head">모닝빵 사장님</div>
+      <div class="sms" id="s1-msg">사장님이에요~<br>가게 전화번호가 바뀌었어요!<br><b>02-000-5678</b> 로<br>홈페이지도 바꿔 주세요</div>
+    </div>
+    <div class="card" id="s1-files" style="left:470px;top:30px;width:490px;height:610px">
+      <div class="fh"><b>02-000-1234</b> 가 들어 있는 페이지</div>
+      <div class="lgrid g2">
+        <div class="lc sm">index.html</div><div class="lc sm">about.html</div><div class="lc sm">menu.html</div>
+        <div class="lc sm">bread.html</div><div class="lc sm">cake.html</div><div class="lc sm">cookie.html</div>
+        <div class="lc sm">order.html</div><div class="lc sm">notice.html</div><div class="lc sm">gallery.html</div>
+        <div class="lc sm">contact.html</div><div class="lc sm">faq.html</div><div class="lc sm">event.html</div>
+      </div>
+      <div class="big co" style="text-align:center;font-size:96px;margin-top:22px">12개</div>
+    </div>
+  </div>
+
+  <!-- s2: 채팅 AI로 하면 4단계 × 12번 -->
+  <div class="scene" id="s2">
+    <div class="label" id="s2-label"><div class="l1 disp">채팅 AI로 하면</div><div class="l2">파일마다 이 4단계를 반복</div></div>
+    <div class="steps" id="s2-steps">
+      <div class="stepbox"><div class="n">1</div>파일 열기</div><div class="ar">›</div>
+      <div class="stepbox"><div class="n">2</div>코드 복사</div><div class="ar">›</div>
+      <div class="stepbox"><div class="n">3</div>채팅에 질문</div><div class="ar">›</div>
+      <div class="stepbox"><div class="n">4</div>답 붙여넣기</div>
+    </div>
+    <div class="abs center" id="s2-count"><span class="big" id="s2-n">1</span><span class="of"> / 12 파일</span></div>
+    <div class="abs" id="s2-boss" data-char="boss:skeptic" style="left:20px;top:600px;width:200px;height:280px"></div>
+  </div>
+
+  <!-- s3: 12번 반복한 결과, 하나 빠뜨림 -->
+  <div class="scene" id="s3">
+    <div class="label" id="s3-label"><div class="l1 disp">열두 번 반복한 결과</div></div>
+    <div class="card" id="s3-card" style="left:0;top:110px;width:960px;height:400px;padding:30px">
+      <div class="lgrid g3" id="s3-grid">
+        <div class="lc">index.html</div><div class="lc">about.html</div><div class="lc">menu.html</div>
+        <div class="lc">bread.html</div><div class="lc">cake.html</div><div class="lc">cookie.html</div>
+        <div class="lc">order.html</div><div class="lc">notice.html</div><div class="lc">gallery.html</div>
+        <div class="lc">contact.html</div><div class="lc">faq.html</div><div class="lc">event.html</div>
+      </div>
+    </div>
+    <div class="abs ring" id="s3-ring" style="left:16px;top:384px;width:322px;height:104px"></div>
+    <div class="sticker red" id="s3-st" style="left:10px;top:560px;font-size:40px">contact.html: 옛 번호 그대로!</div>
+    <div class="abs" id="s3-boss" data-char="boss:facepalm" style="left:730px;top:600px;width:220px;height:308px"></div>
+  </div>
+
+  <!-- s4: 에이전트는 한 문장 -->
+  <div class="scene" id="s4">
+    <div class="label" id="s4-label"><div class="l1 disp">에이전트에게는 <span class="cm">한 문장</span></div></div>
+    <div class="term" id="s4-term" style="left:0;top:110px;width:960px;height:660px">
+      <div class="tbar"><i></i><i></i><i></i><span>morningbread-site</span></div>
+      <div class="tl prompt"><b>&gt;</b><span id="s4-p"></span></div>
+      <div class="tl" id="s4-a"><span class="ic">✓</span>02-000-1234 검색: 파일 12개</div>
+      <div class="grid g4" id="s4-grid">
+        <div class="fc">index.html</div><div class="fc">about.html</div><div class="fc">menu.html</div><div class="fc">bread.html</div>
+        <div class="fc">cake.html</div><div class="fc">cookie.html</div><div class="fc">order.html</div><div class="fc">notice.html</div>
+        <div class="fc">gallery.html</div><div class="fc">contact.html</div><div class="fc">faq.html</div><div class="fc">event.html</div>
+      </div>
+      <div class="tl" id="s4-b"><span class="ic">✓</span>12개 파일 수정</div>
+      <div class="tl" id="s4-c"><span class="ic" id="s4-c-ic"></span><span id="s4-c-t"></span></div>
+      <div class="tl done" id="s4-done">완료: 바꾼 파일 12개 · 남은 옛 번호 0곳</div>
+    </div>
+  </div>
+
+  <!-- s5: 결론 -->
+  <div class="scene" id="s5">
+    <div class="box" id="s5-l" style="left:0;top:20px;width:450px;height:380px">
+      <div class="tag-old" style="left:24px;top:24px">채팅 AI</div>
+      <div class="bx-t">일하는 손</div><div class="bx-b disp">내 손</div><div class="bx-s">복사·붙여넣기 × 12</div>
+    </div>
+    <div class="box" id="s5-r" style="left:510px;top:20px;width:450px;height:380px;border-color:var(--mint)">
+      <div class="tag-new" style="left:24px;top:24px">에이전트</div>
+      <div class="bx-t">일하는 손</div><div class="bx-b disp cm">AI 손</div><div class="bx-s">한 문장 × 1</div>
+    </div>
+    <div class="abs conclude" id="s5-c" style="top:460px"><div class="k">오늘의 결론</div><div class="t">차이는 똑똑함이 아니라<br><span>누구 손이 일하느냐</span></div></div>
+  </div>
+
+</div></div></div>
+<script src="timeline.js"></script>
+<script src="../lib/engine.js"></script>
+<script>
+const PROMPT = ' 모든 html 파일에서 전화번호 02-000-1234를 02-000-5678로 바꿔줘. 끝나면 바꾼 파일 목록을 보여주고, 옛 번호가 남았는지 다시 검색해줘.';
+const s1Files = $$('#s1-files .lc'), s3Chips = $$('#s3-grid .lc'), s4Chips = $$('#s4-grid .fc'), steps = $$('#s2-steps .stepbox');
+
+start({
+  s1(t, d, m, W) {
+    const kp = prog(t, 0.1, 0.45), k2 = eo(prog(t, when(W, '근데') - 0.15, 0.45));
+    put($('s1-phone'), clamp(kp * 1.6), 0, kp ? 0.6 + 0.4 * eb(kp) : 0.6, 0, -270 * k2);
+    rise($('s1-msg'), t, 0.55, 0.3, 20);
+    slide($('s1-files'), t, when(W, '근데'), 0.4, 200);
+    s1Files.forEach((el, i) => el.classList.toggle('bad', t >= when(W, '페이지') + i * 0.06));
+  },
+
+  s2(t, d, m, W) {
+    rise($('s2-label'), t, 0);
+    rise($('s2-steps'), t, 0.2, 0.35, 40);
+    // 4단계가 빙글빙글 돌고, 그때마다 파일 번호가 올라간다 (점점 빨라짐)
+    const t0 = 0.8, span = d - t0 - 0.6, k = prog(t, t0, span), cycles = 11 * k * k + k;
+    const step = Math.floor(cycles * 4) % 4;
+    steps.forEach((el, i) => { el.classList.toggle('on', t >= t0 && i === step); el.style.transform = t >= t0 && i === step ? 'scale(1.08)' : ''; });
+    rise($('s2-count'), t, t0, 0.3, 30);
+    $('s2-n').textContent = Math.min(12, 1 + Math.floor(cycles));
+    rise($('s2-boss'), t, 0.6, 0.4, 80);
+  },
+
+  s3(t, d, m, W) {
+    rise($('s3-label'), t, 0);
+    rise($('s3-card'), t, 0.15, 0.35, 40);
+    s3Chips.forEach((el, i) => {
+      const on = t >= 0.5 + i * 0.09;
+      el.classList.toggle('ok', on && i !== 9);
+      el.classList.toggle('bad', on && i === 9);
+    });
+    const th = when(W, '하나', 1.8);
+    pop($('s3-ring'), t, th - 0.1, 0.35);
+    pop($('s3-st'), t, th + 0.15, 0.4, -2);
+    rise($('s3-boss'), t, th + 0.35, 0.4, 80);
+  },
+
+  s4(t, d, m, W) {
+    rise($('s4-label'), t, 0);
+    rise($('s4-term'), t, 0.15, 0.4, 50);
+    typeText($('s4-p'), PROMPT, t, 0.4, 42);
+    const w0 = Math.max(when(W, '열두'), 0.5 + PROMPT.length / 42) - 0.1;
+    rise($('s4-a'), t, w0, 0.2, 10);
+    rise($('s4-grid'), t, w0 + 0.2, 0.2, 10);
+    const g0 = w0 + 0.35, g1 = Math.max(g0 + 1.0, when(W, '남은') - 0.2);
+    s4Chips.forEach((el, i) => el.classList.toggle('ok', t >= g0 + (g1 - g0) * i / 11));
+    rise($('s4-b'), t, g1 + 0.1, 0.2, 10);
+    const tc = Math.max(when(W, '다시'), g1 + 0.3);
+    rise($('s4-c'), t, tc - 0.3, 0.2, 10);
+    const cDone = t >= tc + 0.3;
+    $('s4-c-ic').textContent = cDone ? '✓' : spin(t);
+    $('s4-c-t').textContent = cDone ? '옛 번호 다시 검색: 0곳' : '옛 번호 다시 검색 중…';
+    rise($('s4-done'), t, tc + 0.5, 0.25, 10);
+  },
+
+  s5(t, d, m, W) {
+    rise($('s5-l'), t, 0.1, 0.35, 50);
+    rise($('s5-r'), t, 0.45, 0.35, 50);
+    pop($('s5-c'), t, Math.max(m[1] - 0.1, 1.0), 0.45);
+  },
+});
+</script>
+</body>
+</html>

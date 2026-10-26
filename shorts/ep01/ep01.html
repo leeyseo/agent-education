@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EP1 AI는 검색창이 아닙니다</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=block" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #FFF6E9; --ink: #211C17; --sub: #7A6E62; --line: #EADFD1;
+    --mint: #1FB394; --mint-soft: #DDF6EF;
+    --orange: #FF7A2F; --orange-soft: #FFE7D8;
+    --blue: #3D6EF0; --blue-soft: #E3EAFD;
+    --yellow: #FFD84D;
+    --mono: Consolas, 'D2Coding', monospace;
+  }
+  html, body { height: 100%; overflow: hidden; background: #111; }
+  #viewport { position: absolute; left: 50%; top: 50%; width: 1080px; height: 1920px; transform-origin: center center; }
+  .render #viewport { left: 0; top: 0; transform: none; }
+  .render #play { display: none; }
+  #stage { position: absolute; inset: 0; overflow: hidden; background: var(--bg); color: var(--ink);
+    font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif; }
+  #stage::before { content: ''; position: absolute; inset: 0; opacity: .55;
+    background-image: radial-gradient(#E6D7C4 2.5px, transparent 2.5px); background-size: 44px 44px; }
+  .abs { position: absolute; }
+  .disp { font-family: 'Black Han Sans', 'Malgun Gothic', sans-serif; font-weight: 400; }
+  .cb { color: var(--blue); } .co { color: var(--orange); } .cm { color: var(--mint); }
+
+  /* 상단 고정: 시리즈명, 제목, 3단계 표시 */
+  #series { top: 96px; left: 0; width: 100%; text-align: center; }
+  #series span { display: inline-block; background: var(--ink); color: #FFF6E9; font-size: 32px; font-weight: 700;
+    padding: 12px 30px; border-radius: 999px; letter-spacing: -.5px; }
+  #title { top: 172px; width: 100%; text-align: center; font-size: 84px; letter-spacing: -2px; line-height: 1; }
+  #ladder { top: 300px; width: 100%; display: flex; justify-content: center; align-items: center; gap: 14px; }
+  .chip { font-size: 34px; font-weight: 800; padding: 10px 26px; border-radius: 999px; border: 4px solid var(--line);
+    background: #fff; color: var(--sub); white-space: nowrap; opacity: 0; }
+  .chip.on1 { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .chip.on2 { background: var(--orange); border-color: var(--orange); color: #fff; }
+  .chip.on3 { background: var(--mint); border-color: var(--mint); color: #fff; }
+  .sep { font-size: 36px; font-weight: 900; color: #C2B39F; opacity: 0; }
+
+  /* 장면 영역 */
+  #area { left: 60px; top: 400px; width: 960px; height: 920px; }
+  .scene { position: absolute; inset: 0; opacity: 0; visibility: hidden; }
+  .label { position: absolute; left: 0; top: 0; width: 100%; text-align: center; }
+  .label .l1 { font-size: 62px; letter-spacing: -1.5px; line-height: 1.1; }
+  .label .l2 { font-size: 38px; color: var(--sub); font-weight: 700; margin-top: 14px; }
+  .card { position: absolute; background: #fff; border-radius: 32px; border: 3px solid #F0E6DA;
+    box-shadow: 0 18px 40px rgba(60, 40, 20, .12); overflow: hidden; }
+  .sticker { position: absolute; font-size: 44px; font-weight: 900; color: #fff; padding: 16px 30px; border-radius: 22px;
+    white-space: nowrap; box-shadow: 0 10px 24px rgba(0, 0, 0, .18); }
+  .sticker.orange { background: var(--orange); }
+  .sticker.mint { background: var(--mint); }
+  .caret { display: inline-block; width: 5px; height: 1.1em; background: var(--ink); vertical-align: -0.15em; margin-left: 4px; }
+
+  /* s1 */
+  #s1-bubble { left: 90px; top: 10px; width: 780px; padding: 28px 36px; background: #fff; border: 5px solid var(--ink);
+    border-radius: 40px; font-size: 52px; font-weight: 900; text-align: center; line-height: 1.3; letter-spacing: -1px; }
+  #s1-bubble::after { content: ''; position: absolute; left: 50%; bottom: -40px; margin-left: -24px;
+    border: 24px solid transparent; border-top: 30px solid var(--ink); border-bottom: 0; }
+  #s1-boss { left: 300px; top: 270px; width: 360px; height: 504px; }
+  #s1-search { left: 150px; top: 790px; width: 660px; height: 104px; display: flex; align-items: center; gap: 22px;
+    padding: 0 40px; background: #fff; border: 5px solid var(--ink); border-radius: 999px; font-size: 46px; font-weight: 900; }
+  #s1-three { left: 0; top: 150px; width: 100%; text-align: center; }
+  .three-num { width: 300px; height: 300px; margin: 0 auto; border-radius: 50%; background: var(--mint); color: #fff;
+    font-size: 220px; line-height: 310px; }
+  .three-txt { font-size: 84px; margin-top: 44px; letter-spacing: -2px; }
+
+  /* s2 검색 */
+  .sbox { position: absolute; left: 30px; right: 30px; top: 28px; height: 96px; border: 4px solid var(--blue);
+    border-radius: 999px; display: flex; align-items: center; gap: 18px; padding: 0 32px; font-size: 38px; font-weight: 700; }
+  .results { position: absolute; left: 34px; right: 34px; top: 146px; }
+  .res { display: flex; align-items: center; gap: 20px; height: 88px; border-bottom: 2px solid #F1E9DF; }
+  .tag { flex: none; font-size: 24px; font-weight: 800; color: var(--blue); background: var(--blue-soft);
+    padding: 6px 14px; border-radius: 10px; }
+  .rt { font-size: 32px; font-weight: 700; letter-spacing: -.5px; }
+  .ru { font-size: 22px; color: #4C8A5E; margin-top: 2px; }
+
+  /* s3 챗봇 */
+  .ub { position: absolute; right: 30px; top: 28px; max-width: 760px; background: var(--blue); color: #fff; font-size: 32px;
+    font-weight: 700; padding: 18px 28px; border-radius: 30px 30px 8px 30px; white-space: nowrap; }
+  .ab { position: absolute; left: 30px; top: 128px; width: 860px; min-height: 100px; background: #F4EFE9;
+    border-radius: 30px 30px 30px 8px; padding: 22px 26px; font-size: 30px; font-weight: 600; }
+  #s3-at { min-height: 44px; }
+  .code { position: relative; margin-top: 14px; background: #27231F; color: #F7E3C0; font-family: var(--mono);
+    font-size: 26px; padding: 16px 20px; border-radius: 14px; white-space: nowrap; overflow: hidden; }
+  .sel { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: rgba(80, 130, 255, .45); }
+  .key { position: absolute; background: #fff; border: 3px solid var(--ink); border-bottom-width: 9px; border-radius: 16px;
+    padding: 6px 20px; font-size: 34px; font-weight: 900; font-family: var(--mono); white-space: nowrap; }
+  .file { position: absolute; left: 50px; top: 334px; width: 860px; height: 250px; background: #fff;
+    border: 3px solid var(--line); border-radius: 20px; overflow: hidden; box-shadow: 0 12px 28px rgba(60, 40, 20, .14); }
+  .ftab { background: #F4EFE9; font: 800 24px var(--mono); padding: 10px 20px; border-bottom: 2px solid var(--line); }
+  .fcode { margin: 0; padding: 12px 20px; font: 23px/1.45 var(--mono); color: #4A433C; }
+  .paste { background: var(--yellow); color: var(--ink); font-weight: 700; }
+  .count { position: absolute; right: 16px; top: 7px; background: var(--orange); color: #fff; font-size: 26px;
+    font-weight: 900; padding: 3px 16px; border-radius: 999px; }
+
+  /* s4 에이전트 */
+  .term { position: absolute; left: 0; top: 190px; width: 640px; height: 650px; background: #1C1E23; border-radius: 30px;
+    padding: 0 28px; color: #DDE6E3; box-shadow: 0 18px 40px rgba(0, 0, 0, .25); }
+  .tbar { height: 58px; display: flex; align-items: center; gap: 10px; }
+  .tbar i { width: 16px; height: 16px; border-radius: 50%; background: #FF5F57; }
+  .tbar i:nth-child(2) { background: #FEBC2E; } .tbar i:nth-child(3) { background: #28C840; }
+  .tbar span { margin-left: 12px; font: 22px var(--mono); color: #8B949E; }
+  .tl { height: 48px; display: flex; align-items: center; gap: 12px; font-size: 27px; font-weight: 600; white-space: nowrap; }
+  .tl.prompt { height: 60px; font-size: 30px; color: #fff; }
+  .tl.prompt b { color: var(--mint); font-family: var(--mono); }
+  .ic { width: 30px; text-align: center; color: #7FF0D6; font-weight: 900; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 6px 0 10px; }
+  .fc { height: 46px; border-radius: 10px; background: #2A2D34; color: #8C96A3; font: 21px var(--mono);
+    display: flex; align-items: center; justify-content: center; }
+  .fc.ok { background: rgba(31, 179, 148, .22); color: #8FF5DC; outline: 2px solid var(--mint); }
+  .fc.ok::before { content: '✓ '; white-space: pre; }
+  .tl.done { height: 56px; color: #5BE3C3; font-size: 30px; font-weight: 900; }
+  #s4-yj { left: 660px; top: 330px; width: 300px; height: 420px; }
+  .nametag { left: 700px; top: 262px; width: 220px; text-align: center; background: var(--mint); color: #fff;
+    font-size: 30px; font-weight: 900; padding: 8px 0; border-radius: 999px; }
+
+  /* s5 정리 */
+  .step { position: absolute; bottom: 40px; border: 5px solid; border-bottom: 0; border-radius: 28px 28px 0 0;
+    text-align: center; padding-top: 26px; }
+  .step .st { font-size: 42px; letter-spacing: -1px; }
+  .step .ss { font-size: 30px; font-weight: 800; color: var(--sub); margin-top: 8px; }
+  #s5-b1 { left: 0; width: 300px; height: 240px; background: var(--blue-soft); border-color: var(--blue); }
+  #s5-b2 { left: 330px; width: 300px; height: 370px; background: var(--orange-soft); border-color: var(--orange); }
+  #s5-b3 { left: 660px; width: 300px; height: 500px; background: var(--mint-soft); border-color: var(--mint); }
+  #s5-b1 .st { color: var(--blue); } #s5-b2 .st { color: var(--orange); } #s5-b3 .st { color: var(--mint); }
+  #s5-yj { left: 690px; top: 12px; width: 240px; height: 384px; }
+  .endcard { position: absolute; left: 40px; top: 110px; width: 880px; height: 640px; background: var(--ink);
+    border-radius: 40px; color: #fff; text-align: center; padding-top: 70px; box-shadow: 0 24px 50px rgba(0, 0, 0, .3); }
+  .endcard .ep { display: inline-block; background: var(--mint); font-size: 34px; font-weight: 900;
+    padding: 10px 28px; border-radius: 999px; }
+  .endcard .et { font-size: 72px; line-height: 1.25; margin-top: 40px; letter-spacing: -1.5px; }
+  .endcard .et span { color: var(--yellow); font-size: 56px; }
+  .endcard .es { font-size: 36px; color: #CFC3B4; margin-top: 36px; font-weight: 700; }
+
+  /* 자막 */
+  #capwrap { left: 90px; top: 1380px; width: 900px; display: flex; justify-content: center; }
+  #cap { display: inline-block; background: rgba(33, 28, 23, .94); color: #fff; font-size: 58px; font-weight: 900;
+    line-height: 1.32; padding: 20px 36px; border-radius: 26px; text-align: center; letter-spacing: -1px;
+    word-break: keep-all; transform-origin: center top; opacity: 0; }
+  #cap .hl { color: var(--yellow); }
+
+  #play { position: fixed; left: 50%; bottom: 40px; transform: translateX(-50%); z-index: 10; border: 0; cursor: pointer;
+    background: var(--yellow); color: var(--ink); font: 800 22px 'Noto Sans KR', sans-serif; padding: 14px 30px; border-radius: 999px; }
+</style>
+</head>
+<body>
+<div id="viewport">
+  <div id="stage">
+    <div class="abs" id="series"><span>AI 신입 길들이기 · EP1</span></div>
+    <div class="abs disp" id="title">AI는 검색창이 아닙니다</div>
+    <div class="abs" id="ladder">
+      <div class="chip" id="c1">① 검색</div><div class="sep" id="a1">→</div>
+      <div class="chip" id="c2">② 챗봇</div><div class="sep" id="a2">→</div>
+      <div class="chip" id="c3">③ 에이전트</div>
+    </div>
+
+    <div class="abs" id="area">
+      <!-- s1: 훅 -->
+      <div class="scene" id="s1">
+        <div class="abs" id="s1-boss"></div>
+        <div class="abs" id="s1-bubble">AI? 그거<br><span class="co">네이버 검색</span> 같은 거 아냐?</div>
+        <div class="abs" id="s1-search"><span class="mag"></span><span>AI</span><i class="caret" id="s1-caret"></i></div>
+        <div class="abs" id="s1-three"><div class="three-num disp">3</div><div class="three-txt disp">AI의 세 단계</div></div>
+      </div>
+
+      <!-- s2: 검색 -->
+      <div class="scene" id="s2">
+        <div class="label" id="s2-label"><div class="l1 disp">① 검색 = <span class="cb">도서관 사서</span></div><div class="l2">책이 어디 있는지 알려줌</div></div>
+        <div class="card" id="s2-card" style="left:0;top:200px;width:960px;height:610px">
+          <div class="sbox"><span class="mag blue"></span><span id="s2-q"></span><i class="caret" id="s2-caret"></i></div>
+          <div class="results">
+            <div class="res" id="s2-r0"><span class="tag">블로그</span><div><div class="rt">홈페이지 메뉴 추가 방법 총정리</div><div class="ru">blog.example.com</div></div></div>
+            <div class="res" id="s2-r1"><span class="tag">카페</span><div><div class="rt">html 메뉴 추가 질문드려요</div><div class="ru">cafe.example.com</div></div></div>
+            <div class="res" id="s2-r2"><span class="tag">지식</span><div><div class="rt">메뉴바에 항목 넣는 법?</div><div class="ru">qna.example.com</div></div></div>
+            <div class="res" id="s2-r3"><span class="tag">블로그</span><div><div class="rt">초보도 하는 웹사이트 수정</div><div class="ru">blog.example.com</div></div></div>
+            <div class="res" id="s2-r4"><span class="tag">영상</span><div><div class="rt">HTML 기초 강좌 1편</div><div class="ru">video.example.com</div></div></div>
+          </div>
+        </div>
+        <div class="sticker orange" id="s2-st" style="left:330px;top:770px">읽고 따라 하는 건? → 나</div>
+      </div>
+
+      <!-- s3: 챗봇 -->
+      <div class="scene" id="s3">
+        <div class="label" id="s3-label"><div class="l1 disp">② 챗봇 = <span class="co">전화 상담원</span></div><div class="l2">방법을 말로 알려줌. 손은 내가</div></div>
+        <div class="card" id="s3-card" style="left:0;top:200px;width:960px;height:610px">
+          <div class="ub" id="s3-u">메뉴에 '오시는 길' 추가하는 법 알려줘</div>
+          <div class="ab" id="s3-a">
+            <div id="s3-at"></div>
+            <div class="code" id="s3-code"><span class="sel" id="s3-sel"></span>&lt;li&gt;&lt;a href="location.html"&gt;오시는 길&lt;/a&gt;&lt;/li&gt;</div>
+          </div>
+          <div class="file" id="s3-file">
+            <div class="ftab">index.html</div>
+<pre class="fcode">&lt;ul class="menu"&gt;
+  &lt;li&gt;&lt;a href="about.html"&gt;소개&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="menu.html"&gt;메뉴&lt;/a&gt;&lt;/li&gt;
+<span class="paste" id="s3-paste">  &lt;li&gt;&lt;a href="location.html"&gt;오시는 길&lt;/a&gt;&lt;/li&gt;</span>
+&lt;/ul&gt;</pre>
+            <div class="count" id="s3-count">1 / 12 파일</div>
+          </div>
+          <div class="key" id="s3-kc" style="left:400px;top:286px">Ctrl + C</div>
+          <div class="key" id="s3-kv" style="left:400px;top:286px">Ctrl + V</div>
+        </div>
+        <div class="sticker orange" id="s3-st" style="left:300px;top:770px">복사·붙여넣기는? → 나</div>
+      </div>
+
+      <!-- s4: 에이전트 -->
+      <div class="scene" id="s4">
+        <div class="label" id="s4-label"><div class="l1 disp">③ 에이전트 = <span class="cm">내 자리의 신입</span></div><div class="l2">직접 열고, 고치고, 확인함</div></div>
+        <div class="term" id="s4-term">
+          <div class="tbar"><i></i><i></i><i></i><span>morningbread-site</span></div>
+          <div class="tl prompt"><b>&gt;</b><span id="s4-p"></span></div>
+          <div class="tl" id="s4-a"><span class="ic" id="s4-a-ic"></span><span id="s4-a-t"></span></div>
+          <div class="tl" id="s4-b"><span class="ic">✓</span>메뉴가 든 파일 12개 찾음</div>
+          <div class="grid" id="s4-grid">
+            <div class="fc">index.html</div><div class="fc">about.html</div><div class="fc">menu.html</div>
+            <div class="fc">bread.html</div><div class="fc">cake.html</div><div class="fc">cookie.html</div>
+            <div class="fc">order.html</div><div class="fc">notice.html</div><div class="fc">gallery.html</div>
+            <div class="fc">contact.html</div><div class="fc">faq.html</div><div class="fc">event.html</div>
+          </div>
+          <div class="tl" id="s4-loc"><span class="ic">+</span>location.html 새로 만듦</div>
+          <div class="tl" id="s4-chk"><span class="ic">✓</span>브라우저로 열어서 확인</div>
+          <div class="tl done" id="s4-done">완료: 12개 수정 · 1개 추가</div>
+        </div>
+        <div class="abs nametag" id="s4-tag">신입 열정이</div>
+        <div class="abs" id="s4-yj"></div>
+        <div class="sticker mint" id="s4-st" style="left:150px;top:800px">하는 건? → AI</div>
+      </div>
+
+      <!-- s5: 정리 + 다음 편 -->
+      <div class="scene" id="s5">
+        <div class="label" id="s5-label"><div class="l1 disp">정리하면</div></div>
+        <div class="step" id="s5-b1"><div class="st disp">찾아주는 AI</div><div class="ss">검색</div></div>
+        <div class="step" id="s5-b2"><div class="st disp">말해주는 AI</div><div class="ss">챗봇</div></div>
+        <div class="step" id="s5-b3"><div class="st disp">해주는 AI</div><div class="ss">에이전트</div></div>
+        <div class="abs" id="s5-yj"></div>
+        <div class="endcard" id="s5-end">
+          <div class="ep">다음 편</div>
+          <div class="et disp">제미나이에 물어보기<br><span>vs</span><br>에이전트에 시키기</div>
+          <div class="es">같은 일을 직접 시켜 봅니다</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="abs" id="capwrap"><div id="cap"></div></div>
+  </div>
+</div>
+<button id="play" type="button">▶ 미리보기 재생</button>
+<audio id="audio" src="audio/narration.wav" preload="auto"></audio>
+
+<script src="timeline.js"></script>
+<script>
+const TL = window.TIMELINE;
+const $ = id => document.getElementById(id);
+
+// ---------- 캐릭터 ----------
+const SKIN = '#F7D4B8', HAIR = '#2B2420', HOOD = '#4FD1B5';
+
+function yjSVG(kind) {  // 열정이: 'laptop'(노트북 앞) | 'cheer'(만세)
+  const cheer = kind === 'cheer';
+  const legs = cheer ? `
+    <rect x="108" y="396" width="36" height="66" rx="12" fill="#3B3F4A"/><rect x="156" y="396" width="36" height="66" rx="12" fill="#3B3F4A"/>
+    <ellipse cx="120" cy="466" rx="28" ry="11" fill="${HAIR}"/><ellipse cx="180" cy="466" rx="28" ry="11" fill="${HAIR}"/>` : '';
+  const arms = cheer ? `
+    <path d="M86 318 Q44 272 36 216" stroke="${HOOD}" stroke-width="30" stroke-linecap="round" fill="none"/><circle cx="36" cy="206" r="18" fill="${SKIN}"/>
+    <path d="M214 318 Q256 272 264 216" stroke="${HOOD}" stroke-width="30" stroke-linecap="round" fill="none"/><circle cx="264" cy="206" r="18" fill="${SKIN}"/>` : '';
+  const laptop = cheer ? '' : `
+    <path d="M44 322 L256 322 L244 404 L56 404 Z" fill="#C9CED6"/><rect x="24" y="400" width="252" height="18" rx="7" fill="#9EA5B0"/>
+    <circle cx="150" cy="362" r="13" fill="#fff" opacity=".75"/>
+    <g class="tap" stroke="#FFB020" stroke-width="6" stroke-linecap="round">
+      <path d="M30 344 l-20 -10"/><path d="M26 368 l-22 0"/><path d="M30 392 l-20 10"/>
+      <path d="M270 344 l20 -10"/><path d="M274 368 l22 0"/><path d="M270 392 l20 10"/>
+    </g>`;
+  return `<svg viewBox="0 0 300 ${cheer ? 480 : 420}" width="100%" height="100%">
+    ${legs}
+    <path d="M60 420 C60 332 95 286 150 286 C205 286 240 332 240 420 Z" fill="${HOOD}"/>
+    <path d="M100 292 Q150 332 200 292 Q190 320 150 324 Q110 320 100 292 Z" fill="#36B89C"/>
+    <path d="M135 320 L131 362" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+    <path d="M165 320 L169 362" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+    <rect x="176" y="352" width="48" height="28" rx="6" fill="#fff"/>
+    <text x="200" y="372" font-size="16" font-weight="900" text-anchor="middle" fill="#1FB394" font-family="sans-serif">NEW</text>
+    ${arms}
+    <rect x="132" y="244" width="36" height="48" rx="12" fill="#EFC3A2"/>
+    <circle cx="60" cy="170" r="18" fill="${SKIN}"/><circle cx="240" cy="170" r="18" fill="${SKIN}"/>
+    <circle cx="150" cy="160" r="92" fill="${SKIN}"/>
+    <path d="M54 170 C46 92 96 50 150 50 C206 50 256 92 246 170 L236 150 L226 126 L210 142 L198 116 L180 136 L166 108 L150 134 L134 108 L120 136 L102 116 L90 142 L74 126 L64 150 Z" fill="${HAIR}"/>
+    <path d="M118 58 L104 24 L140 50 Z M146 52 L152 16 L168 52 Z M178 56 L206 30 L198 70 Z" fill="${HAIR}"/>
+    <ellipse cx="94" cy="204" rx="16" ry="10" fill="#FF9F8A" opacity=".55"/><ellipse cx="206" cy="204" rx="16" ry="10" fill="#FF9F8A" opacity=".55"/>
+    <circle cx="114" cy="170" r="30" fill="#fff" fill-opacity=".35" stroke="${HAIR}" stroke-width="7"/>
+    <circle cx="186" cy="170" r="30" fill="#fff" fill-opacity=".35" stroke="${HAIR}" stroke-width="7"/>
+    <path d="M144 168 Q150 162 156 168" stroke="${HAIR}" stroke-width="6" fill="none"/>
+    <circle cx="116" cy="172" r="9" fill="${HAIR}"/><circle cx="188" cy="172" r="9" fill="${HAIR}"/>
+    <circle cx="119" cy="168" r="3" fill="#fff"/><circle cx="191" cy="168" r="3" fill="#fff"/>
+    <path d="M124 214 Q150 248 176 214 Z" fill="#B23A3A"/>
+    <path d="M136 230 Q150 240 164 230 Q150 225 136 230 Z" fill="#FF8C8C"/>
+    ${laptop}
+  </svg>`;
+}
+
+function bossSVG() {  // 김기획: 15년차 대표, 반신반의하는 표정
+  const skin = '#F1C7A6', hair = '#3E3A38';
+  return `<svg viewBox="0 0 300 420" width="100%" height="100%">
+    <path d="M50 420 C50 332 90 288 150 288 C210 288 250 332 250 420 Z" fill="#34425E"/>
+    <path d="M116 290 L150 344 L184 290 Z" fill="#fff"/>
+    <path d="M150 304 L141 344 L150 400 L159 344 Z" fill="#E0663A"/>
+    <rect x="132" y="246" width="36" height="48" rx="12" fill="#E9B997"/>
+    <circle cx="60" cy="172" r="18" fill="${skin}"/><circle cx="240" cy="172" r="18" fill="${skin}"/>
+    <circle cx="150" cy="162" r="92" fill="${skin}"/>
+    <path d="M56 160 C50 90 96 54 152 54 C210 54 252 92 244 160 C238 128 226 110 206 102 C176 94 126 96 100 108 C82 118 66 134 56 160 Z" fill="${hair}"/>
+    <path d="M56 160 C56 142 60 130 66 122 L70 160 Z" fill="#A39D97"/><path d="M244 160 C244 142 240 130 234 122 L230 160 Z" fill="#A39D97"/>
+    <path d="M90 134 L132 124" stroke="${hair}" stroke-width="9" stroke-linecap="round"/>
+    <path d="M168 118 L210 130" stroke="${hair}" stroke-width="9" stroke-linecap="round"/>
+    <rect x="84" y="146" width="58" height="42" rx="10" fill="#fff" fill-opacity=".3" stroke="${hair}" stroke-width="6"/>
+    <rect x="158" y="146" width="58" height="42" rx="10" fill="#fff" fill-opacity=".3" stroke="${hair}" stroke-width="6"/>
+    <path d="M142 162 L158 162" stroke="${hair}" stroke-width="6"/>
+    <circle cx="114" cy="168" r="7" fill="${hair}"/><circle cx="186" cy="166" r="7" fill="${hair}"/>
+    <path d="M126 226 Q152 216 178 230" stroke="#8A3A2E" stroke-width="7" stroke-linecap="round" fill="none"/>
+  </svg>`;
+}
+
+const MAG = c => `<svg width="46" height="46" viewBox="0 0 46 46"><circle cx="19" cy="19" r="13" fill="none" stroke="${c}" stroke-width="6"/><path d="M29 29 L41 41" stroke="${c}" stroke-width="7" stroke-linecap="round"/></svg>`;
+
+$('s1-boss').innerHTML = bossSVG();
+$('s4-yj').innerHTML = yjSVG('laptop');
+$('s5-yj').innerHTML = yjSVG('cheer');
+document.querySelectorAll('.mag').forEach(el => el.innerHTML = MAG(el.classList.contains('blue') ? '#3D6EF0' : '#211C17'));
+const fileChips = [...document.querySelectorAll('#s4-grid .fc')];
+const taps = $('s4-yj').querySelector('.tap');
+
+// ---------- 애니메이션 도우미 (모든 값은 시간 t로만 정해진다) ----------
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const prog = (t, at, dur) => clamp((t - at) / dur);
+const eo = x => 1 - Math.pow(1 - x, 3);
+const eb = x => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
+function put(el, o, y = 0, s = 1, r = 0) { el.style.opacity = o; el.style.transform = `translateY(${y}px) scale(${s}) rotate(${r}deg)`; }
+function rise(el, t, at, dur = 0.35, dist = 40) { const k = eo(prog(t, at, dur)); put(el, k, (1 - k) * dist); }
+function pop(el, t, at, dur = 0.4, r = 0) { const k = prog(t, at, dur); put(el, clamp(k * 1.6), 0, k ? 0.6 + 0.4 * eb(k) : 0.6, r); }
+function typeText(el, text, t, at, cps) { const n = Math.floor(clamp((t - at) * cps, 0, text.length)); el.textContent = text.slice(0, n); return n >= text.length; }
+const blink = t => Math.floor(t * 2.5) % 2 ? 0 : 1;
+
+// ---------- 장면 ----------
+const SCENE = {
+  s1(t, d, m) {
+    const out = 1 - eo(prog(t, m[1] - 0.1, 0.35));
+    const kb = prog(t, 0.05, 0.45);
+    put($('s1-boss'), clamp(kb * 1.5) * out, (1 - eo(kb)) * 80 + (1 - out) * 60);
+    const kq = prog(t, 0.3, 0.4);
+    put($('s1-bubble'), clamp(kq * 1.6) * out, (1 - out) * 60, kq ? 0.6 + 0.4 * eb(kq) : 0.6);
+    const ks = prog(t, 0.8, 0.35);
+    put($('s1-search'), ks * out, (1 - eo(ks)) * 40 + (1 - out) * 60);
+    $('s1-caret').style.opacity = blink(t);
+    const k3 = prog(t, m[1] + 0.1, 0.45);
+    put($('s1-three'), clamp(k3 * 1.6), 0, k3 ? 0.5 + 0.5 * eb(k3) : 0.5);
+  },
+
+  s2(t, d, m) {
+    rise($('s2-label'), t, 0);
+    rise($('s2-card'), t, 0.25, 0.4, 60);
+    const q = '빵집 홈페이지 메뉴 추가하는 법';
+    const typed = typeText($('s2-q'), q, t, 0.55, 18);
+    $('s2-caret').style.opacity = typed ? 0 : blink(t);
+    const r0 = Math.max(m[1] + 0.2, 0.75 + q.length / 18);
+    for (let i = 0; i < 5; i++) rise($('s2-r' + i), t, r0 + i * 0.13, 0.3, 24);
+    pop($('s2-st'), t, m[3] + 0.1, 0.4, -3);
+  },
+
+  s3(t, d, m) {
+    rise($('s3-label'), t, 0);
+    rise($('s3-card'), t, 0.25, 0.4, 60);
+    pop($('s3-u'), t, 0.5, 0.35);
+    const ta = m[1] + 0.05, txt = 'header 메뉴 부분에 아래 코드를 넣으세요.';
+    rise($('s3-a'), t, ta, 0.3, 20);
+    typeText($('s3-at'), txt, t, ta + 0.1, 28);
+    rise($('s3-code'), t, Math.max(m[2], ta + 0.2 + txt.length / 28), 0.3, 16);
+    const c0 = m[3];  // "복사하고 붙여넣는 건…"
+    $('s3-sel').style.width = eo(prog(t, c0, 0.45)) * 100 + '%';
+    const kc = prog(t, c0 + 0.2, 0.3), kcOut = prog(t, c0 + 1.0, 0.2);
+    put($('s3-kc'), clamp(kc * 1.6) * (1 - kcOut), 0, kc ? 0.6 + 0.4 * eb(kc) : 0.6, -4);
+    rise($('s3-file'), t, c0 + 0.7, 0.4, 80);
+    pop($('s3-kv'), t, c0 + 1.05, 0.3, 4);
+    $('s3-paste').style.opacity = prog(t, c0 + 1.2, 0.25);
+    $('s3-count').textContent = `${1 + Math.floor(clamp((t - c0 - 1.6) / 0.6, 0, 9))} / 12 파일`;
+    pop($('s3-st'), t, Math.min(c0 + 2.0, d - 0.9), 0.4, -3);
+  },
+
+  s4(t, d, m) {
+    rise($('s4-label'), t, 0);
+    rise($('s4-term'), t, 0.25, 0.4, 60);
+    typeText($('s4-p'), " 메뉴에 '오시는 길' 추가해줘", t, 0.5, 20);
+    const ky = prog(t, m[1] - 0.05, 0.45);
+    put($('s4-yj'), clamp(ky * 1.5), (1 - eb(ky)) * 120 + Math.sin(t * 14) * 3 * ky);
+    pop($('s4-tag'), t, m[1] + 0.25, 0.35);
+    taps.style.opacity = ky >= 1 && Math.floor(t * 8) % 2 ? 1 : 0;
+
+    const w0 = Math.max(m[1] + 0.5, 1.4), w1 = d - 1.3;
+    const g0 = w0 + 0.8, g1 = g0 + (w1 - w0) * 0.45;
+    rise($('s4-a'), t, w0, 0.2, 10);
+    const aDone = t >= w0 + 0.45;
+    $('s4-a-ic').textContent = aDone ? '✓' : '◐◓◑◒'[Math.floor(t * 10) % 4];
+    $('s4-a-t').textContent = aDone ? '사이트 폴더 확인' : '사이트 폴더 살펴보는 중…';
+    rise($('s4-b'), t, w0 + 0.5, 0.2, 10);
+    rise($('s4-grid'), t, w0 + 0.7, 0.2, 10);
+    fileChips.forEach((el, i) => el.classList.toggle('ok', t >= g0 + (g1 - g0) * i / 11));
+    rise($('s4-loc'), t, g1 + 0.15, 0.2, 10);
+    rise($('s4-chk'), t, g1 + 0.45, 0.2, 10);
+    rise($('s4-done'), t, w1, 0.25, 10);
+    pop($('s4-st'), t, w1 + 0.35, 0.4, -3);
+  },
+
+  s5(t, d, m) {
+    rise($('s5-label'), t, 0);
+    [['s5-b1', m[0]], ['s5-b2', m[1]], ['s5-b3', m[2]]].forEach(([id, at]) => {
+      const k = eo(prog(t, at - 0.1, 0.4));
+      put($(id), k, (1 - k) * 200);
+    });
+    const kj = prog(t, m[2] + 0.1, 0.5), ke = prog(t, m[3] - 0.05, 0.45);
+    const hop = kj >= 1 ? -Math.abs(Math.sin((t - m[2] - 0.6) * 5)) * 14 : 0;
+    put($('s5-yj'), clamp(kj * 3) * (1 - clamp(ke * 3)), (1 - eb(kj)) * -220 + hop);
+    put($('s5-end'), clamp(ke * 1.6), (1 - eo(ke)) * 60, ke ? 0.85 + 0.15 * eb(ke) : 0.85);
+  },
+};
+
+// ---------- 공통: 3단계 표시, 자막 ----------
+function ladder(t) {
+  const s1 = TL.scenes[0], base = s1.start + s1.marks[1];
+  [['c1', 0], ['a1', 0.2], ['c2', 0.35], ['a2', 0.55], ['c3', 0.7]].forEach(([id, dt]) => {
+    const k = prog(t, base + 0.15 + dt, 0.3);
+    $(id).style.opacity = clamp(k * 1.4);
+    $(id).style.transform = `scale(${k ? 0.6 + 0.4 * eb(k) : 0.6})`;
+  });
+  const cur = (TL.scenes.find(s => t >= s.start && t < s.end) || TL.scenes.at(-1)).id;
+  $('c1').className = 'chip' + (cur === 's2' || cur === 's5' ? ' on1' : '');
+  $('c2').className = 'chip' + (cur === 's3' || cur === 's5' ? ' on2' : '');
+  $('c3').className = 'chip' + (cur === 's4' || cur === 's5' ? ' on3' : '');
+}
+
+let capShown = null;
+function caption(t) {
+  const c = TL.captions.find(c => t >= c.start && t < c.end), el = $('cap');
+  if (!c) { el.style.opacity = 0; return; }
+  if (capShown !== c) { el.innerHTML = c.html; capShown = c; }
+  el.style.opacity = 1;
+  el.style.transform = `scale(${0.9 + 0.1 * eo(prog(t, c.start, 0.16))})`;
+}
+
+function seek(t) {
+  TL.scenes.forEach((sc, i) => {
+    const el = $(sc.id), lt = t - sc.start, d = sc.end - sc.start;
+    if (lt < 0 || lt > d) { el.style.visibility = 'hidden'; return; }
+    const fin = eo(prog(lt, 0, 0.3)), fout = i === TL.scenes.length - 1 ? 1 : 1 - prog(lt, d - 0.25, 0.25);
+    el.style.visibility = 'visible';
+    el.style.opacity = Math.min(fin, fout);
+    el.style.transform = `translateY(${(1 - fin) * 30}px)`;
+    SCENE[sc.id](lt, d, sc.marks);
+  });
+  ladder(t);
+  caption(t);
+}
+window.seek = seek;
+
+// ---------- 렌더링 모드 / 미리보기 모드 ----------
+const params = new URLSearchParams(location.search);
+if (params.has('render')) {
+  document.body.classList.add('render');
+} else {
+  const fit = () => { const s = Math.min(innerWidth / 1080, innerHeight / 1920); $('viewport').style.transform = `translate(-50%, -50%) scale(${s})`; };
+  fit();
+  addEventListener('resize', fit);
+  let playing = false, t0 = 0;
+  const loop = now => {
+    if (!playing) return;
+    const a = $('audio');
+    const t = !a.paused && a.readyState >= 2 ? a.currentTime : (now - t0) / 1000;
+    if (t >= TL.total) { seek(TL.total - 0.001); playing = false; $('play').textContent = '↻ 다시 재생'; $('play').style.display = ''; return; }
+    seek(t);
+    requestAnimationFrame(loop);
+  };
+  $('play').onclick = () => {
+    const a = $('audio');
+    a.currentTime = 0;
+    a.play().catch(() => {});
+    t0 = performance.now();
+    playing = true;
+    $('play').style.display = 'none';
+    requestAnimationFrame(loop);
+  };
+}
+document.fonts.ready.then(() => { seek(Number(params.get('t') || 0)); window.READY = true; });
+</script>
+</body>
+</html>
