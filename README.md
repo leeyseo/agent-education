@@ -13,7 +13,7 @@
 | [03-제작-가이드](docs/03-제작-가이드.md) | 새 편을 만들고, 확인하고, 렌더링하는 방법 |
 | [04-작업-기록](docs/04-작업-기록.md) | 이 작업을 하며 정한 것과 그 이유, 남은 일 |
 | [05-디자이너편-기획](docs/05-디자이너편-기획.md) | 후속 시리즈 '디자이너 편' 18편 구성, 실제 결과물 원칙, 로고 시안 작업 기록 |
-| [06-디자이너편-대본](docs/06-디자이너편-대본.md) | 디자이너 편 내레이션 (지금까지 만든 EP0~EP8) |
+| [06-디자이너편-대본](docs/06-디자이너편-대본.md) | 디자이너 편 내레이션 (EP0~EP17 전체) |
 | [07-2부-촬영-가이드](docs/07-2부-촬영-가이드.md) | 2부를 실제 claude.ai 화면 녹화로 바꿀 때의 순서와 지시문 (지금은 모형 화면) |
 
 ## 폴더 구조
@@ -26,7 +26,7 @@ shorts/
     build.py        script.json → ElevenLabs 내레이션 + timeline.js
     render.py       index.html → 1080x1920 30fps mp4
     sheet.py        확인용 정지 화면 모음 (stills/sheet.png)
-    snap.py         Design 캔버스 아트보드(.dc.html) → PNG (실제 시안을 영상에 넣을 때)
+    snap.py         Design 캔버스 아트보드(.dc.html) → PNG·PDF (실제 시안을 영상에 넣을 때)
     clip.py         화면 녹화본 → 장면에 넣을 클립 (구간 자르기, 영역 잘라내기)
   ep00 ~ ep18/    편마다 script.json(대사) + index.html(장면)
   ep01/           첫 편. 공통 엔진 이전에 따로 만든 버전 (자체 build.py·render.py)
@@ -34,8 +34,10 @@ shorts/
   s2/             디자이너 편
     s2.css, s2.js   이 시리즈 공통 부품 (실제 시안 카드, 판정 표시, 회의 테이블, CDO 의자)
     design/logo/    Claude Design 캔버스로 만든 실제 로고 시안 (project/ 원본, png/ 영상용)
+    design/brochure/  실제 오픈 브로셔 시안 (project/ 원본, png/ 영상용, pdf/ 내보낸 PDF)
+    design/homepage/  실제 홈페이지 시안 (project/ 원본, png/ 영상용. 폰 폭은 <이름>@390.png)
     rec/            2부 녹화: 자료/(claude.ai에 올릴 가상 자료), raw/(녹화 원본), clips/(잘라낸 클립)
-    ep00 ~ ep08/    편마다 script.json + index.html (EP6~EP8은 claude.ai 모형 화면)
+    ep00 ~ ep17/    편마다 script.json + index.html (EP6~EP8은 claude.ai 모형 화면)
 docs/             기획·대본·제작 가이드·작업 기록
 ```
 

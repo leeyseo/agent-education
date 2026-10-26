@@ -1,0 +1,42 @@
+{
+  "v": 3,
+  "createdOnFiles": {"v": 1, "at": "2026-10-27T01:20:00Z"},
+  "title": "모닝빵 2호점 오픈 브로셔",
+  "launch": {"view": "canvas", "page": "plan"},
+  "pages": [
+    {"id": "plan", "name": "1 접지·구성"},
+    {"id": "copy", "name": "2 카피"},
+    {"id": "layout", "name": "3 레이아웃 두 방향"},
+    {"id": "lux", "name": "4 '고급스럽게'"},
+    {"id": "mix", "name": "5 섞고 비틀기"}
+  ],
+  "boards": {
+    "Main.dc.html": {"x": 0, "y": 0, "w": 1123, "h": 794, "title": "A4 3단 접지 · 여섯 면 구성", "page": "plan"},
+    "Copy.dc.html": {"x": 0, "y": 0, "w": 1123, "h": 794, "title": "표지 카피 후보 셋", "page": "copy"},
+    "LA-out.dc.html": {"x": 0, "y": 0, "w": 1123, "h": 794, "title": "A 새벽 남색 · 바깥면", "page": "layout", "guides": [{"kind": "columns", "count": 3, "gutter": 0, "margin": 0}]},
+    "LA-in.dc.html": {"x": 1203, "y": 0, "w": 1123, "h": 794, "title": "A 새벽 남색 · 안쪽면", "page": "layout", "guides": [{"kind": "columns", "count": 3, "gutter": 0, "margin": 0}]},
+    "LB-out.dc.html": {"x": 0, "y": 1200, "w": 1123, "h": 794, "title": "B 크라프트 종이 · 바깥면", "page": "layout", "guides": [{"kind": "columns", "count": 3, "gutter": 0, "margin": 0}]},
+    "LB-in.dc.html": {"x": 1203, "y": 1200, "w": 1123, "h": 794, "title": "B 크라프트 종이 · 안쪽면", "page": "layout", "guides": [{"kind": "columns", "count": 3, "gutter": 0, "margin": 0}]},
+    "Cover-V1.dc.html": {"x": 0, "y": 0, "w": 374, "h": 794, "title": "표지 · '고급스럽게'를 그대로 넘김", "page": "lux"},
+    "Cover-V2.dc.html": {"x": 454, "y": 0, "w": 374, "h": 794, "title": "표지 · 말로 바꿔 넘김", "page": "lux"},
+    "Mix-1.dc.html": {"x": 0, "y": 0, "w": 1123, "h": 794, "title": "1 A 안쪽면 + B 칠판", "page": "mix", "guides": [{"kind": "columns", "count": 3, "gutter": 0, "margin": 0}]},
+    "Mix-2.dc.html": {"x": 1203, "y": 0, "w": 1123, "h": 794, "title": "2 1호점 메뉴판 참고", "page": "mix", "guides": [{"kind": "columns", "count": 3, "gutter": 0, "margin": 0}]},
+    "Mix-3.dc.html": {"x": 2406, "y": 0, "w": 1123, "h": 794, "title": "3 비평 반영", "page": "mix", "guides": [{"kind": "columns", "count": 3, "gutter": 0, "margin": 0}]}
+  },
+  "order": ["Main.dc.html", "Copy.dc.html", "LA-out.dc.html", "LA-in.dc.html", "LB-out.dc.html", "LB-in.dc.html", "Cover-V1.dc.html", "Cover-V2.dc.html", "Mix-1.dc.html", "Mix-2.dc.html", "Mix-3.dc.html"],
+  "notes": {
+    "brief_plan": {"x": -600, "y": 0, "w": 480, "text": "최시안: 기획서 보고 오픈 브로셔 구성부터 잡아 줘. A4 3단 접지야. 여섯 면에 뭘 넣을지만.", "fill": "orange", "size": "l", "page": "plan"},
+    "brief_copy": {"x": -600, "y": 0, "w": 480, "text": "최시안: 카피라이터, 표지 문구 세 개 뽑아 줘. 짧게. 왜 그렇게 썼는지 한 줄씩.", "fill": "orange", "size": "l", "page": "copy"},
+    "t_la": {"x": 0, "y": -300, "text": "A 새벽 남색", "kind": "title1", "maxW": 2326, "page": "layout"},
+    "t_lb": {"x": 0, "y": 900, "text": "B 크라프트 종이", "kind": "title1", "maxW": 2326, "page": "layout"},
+    "brief_layout": {"x": -600, "y": 0, "w": 480, "text": "최시안: 구성이랑 카피는 그대로 두고, 레이아웃만 두 방향으로. 로고는 B1, 색은 새벽 남색이랑 크러스트 갈색. 자료에 없는 건 '확인 필요'로 비워 둬.", "fill": "orange", "size": "l", "page": "layout"},
+    "owner_lux": {"x": -600, "y": 0, "w": 480, "text": "사장님: 음… 좀 더 고급스럽게? 근데 너무 비싸 보이면 안 돼요.", "fill": "gray", "size": "l", "page": "lux"},
+    "brief_v1": {"x": 0, "y": 900, "w": 374, "text": "최시안 (그대로 넘김): 좀 더 고급스럽게 해 줘.", "fill": "orange", "size": "m", "page": "lux"},
+    "brief_v2": {"x": 454, "y": 900, "w": 480, "text": "최시안 (말로 바꿔 넘김): 색은 남색이랑 갈색 두 개만. 제목 자간은 넓히고 글자는 한 단계 작게. 여백은 지금의 두 배. 장식은 빼. 대신 '12월 첫 주 오픈'은 지금처럼 크게.", "fill": "orange", "size": "m", "page": "lux"},
+    "brief_mix1": {"x": 0, "y": 900, "w": 480, "text": "최시안: 브로셔는 A로 가. 안쪽 가운데 면만 B의 칠판 메뉴로 바꿔.", "fill": "orange", "size": "m", "page": "mix"},
+    "brief_mix2": {"x": 1203, "y": 900, "w": 480, "text": "최시안: 칠판은 1호점 진짜 메뉴판처럼. 이 사진 참고해. (1호점_메뉴판.png)", "fill": "orange", "size": "m", "page": "mix"},
+    "critic": {"x": 1723, "y": 900, "w": 560, "text": "최시안: 비평가, 사장님 보기 전에 이거 깎아내려 봐. 세 개만.\n\n비평가:\n1. 칠판 면만 손글씨에 초록·나무색이라, 펼치면 다른 집 전단을 붙여 놓은 것 같아요.\n2. 로고는 남색·갈색 두 색인데, 칠판 초록과 나무색이 새로 들어왔어요.\n3. 칠판 아래가 텅 비어서 이 면만 덜 끝난 것 같아요.", "fill": "red", "size": "m", "page": "mix"},
+    "brief_mix3": {"x": 2406, "y": 900, "w": 480, "text": "최시안: 지적한 세 개만 고쳐. 칠판 느낌은 남기고.", "fill": "orange", "size": "m", "page": "mix"}
+  },
+  "designSystems": []
+}

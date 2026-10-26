@@ -6,7 +6,10 @@
   "pages": [
     {"id": "r1", "name": "1차 시안 12개"},
     {"id": "a", "name": "사수 A: 좀 더 예쁘게"},
-    {"id": "b", "name": "사수 B: 버려·살려·보강"}
+    {"id": "b", "name": "사수 B: 버려·살려·보강"},
+    {"id": "c", "name": "쓰일 자리에 놓고 보기"},
+    {"id": "d", "name": "5 뻔한 것 빼기"},
+    {"id": "chk", "name": "6 넘기기 전 확인표"}
   ],
   "boards": {
     "Main.dc.html": {"x": 0, "y": 0, "w": 640, "h": 640, "title": "01 새벽 다섯 시", "page": "r1"},
@@ -26,14 +29,25 @@
     "A08.dc.html": {"x": 1440, "y": 0, "w": 640, "h": 640, "title": "08 오븐 아치 · 다듬음", "page": "a"},
     "B1.dc.html": {"x": 0, "y": 0, "w": 640, "h": 640, "title": "B1 해 뜨는 빵 v2", "page": "b"},
     "B3.dc.html": {"x": 720, "y": 0, "w": 640, "h": 640, "title": "B3 2호점 오픈 스탬프", "page": "b"},
-    "B2.dc.html": {"x": 0, "y": 760, "w": 1040, "h": 400, "title": "B2 가로형 (간판·웹 헤더)", "page": "b"}
+    "B2.dc.html": {"x": 0, "y": 760, "w": 1040, "h": 400, "title": "B2 가로형 (간판·웹 헤더)", "page": "b"},
+    "C1.dc.html": {"x": 0, "y": 0, "w": 1040, "h": 640, "title": "C1 2호점 간판", "page": "c"},
+    "C2.dc.html": {"x": 1120, "y": 0, "w": 640, "h": 640, "title": "C2 빵 봉투 (남색 한 도)", "page": "c"},
+    "C3.dc.html": {"x": 0, "y": 760, "w": 1040, "h": 720, "title": "C3 크기 시험", "page": "c"},
+    "Cliche.dc.html": {"x": 0, "y": 0, "w": 1040, "h": 720, "title": "빵집 로고의 뻔한 것 열 개", "page": "d"},
+    "D1.dc.html": {"x": 0, "y": 1140, "w": 640, "h": 640, "title": "D1 역 앞 표지판", "page": "d"},
+    "D2.dc.html": {"x": 720, "y": 1140, "w": 640, "h": 640, "title": "D2 새벽 띠", "page": "d"},
+    "D3.dc.html": {"x": 1440, "y": 1140, "w": 640, "h": 640, "title": "D3 불 켜진 창", "page": "d"},
+    "D2b.dc.html": {"x": 0, "y": 2020, "w": 640, "h": 640, "title": "D2 보강 · 빵 색은 띠 하나만", "page": "d"},
+    "Check.dc.html": {"x": 0, "y": 0, "w": 1040, "h": 720, "title": "넘기기 전 확인표", "page": "chk"}
   },
   "order": [
     "Main.dc.html", "L02.dc.html", "L03.dc.html", "L04.dc.html",
     "L05.dc.html", "L06.dc.html", "L07.dc.html", "L08.dc.html",
     "L09.dc.html", "L10.dc.html", "L11.dc.html", "L12.dc.html",
-    "A02.dc.html", "A04.dc.html", "A08.dc.html",
-    "B1.dc.html", "B3.dc.html", "B2.dc.html"
+    "A02.dc.html", "A04.dc.html", "A08.dc.html", "B1.dc.html",
+    "B3.dc.html", "B2.dc.html", "C1.dc.html", "C2.dc.html",
+    "C3.dc.html", "Cliche.dc.html", "D1.dc.html", "D2.dc.html",
+    "D3.dc.html", "D2b.dc.html", "Check.dc.html"
   ],
   "notes": {
     "t_r1": {"x": 0, "y": -300, "text": "1차 시안 · 방향이 다른 12개", "kind": "title1", "maxW": 2800, "page": "r1"},
@@ -41,7 +55,14 @@
     "t_a": {"x": 0, "y": -300, "text": "사수 A의 피드백을 받고", "kind": "title1", "maxW": 2080, "page": "a"},
     "fb_a": {"x": -600, "y": 0, "w": 480, "text": "사수 A: 음, 괜찮네. 좀 더 예쁘게 해 봐.", "fill": "gray", "size": "l", "page": "a"},
     "t_b": {"x": 0, "y": -300, "text": "사수 B의 피드백을 받고", "kind": "title1", "maxW": 1360, "page": "b"},
-    "fb_b": {"x": -680, "y": 0, "w": 560, "text": "사수 B:\n6, 11, 12번 버려. 카페 로고랑 구분이 안 돼.\n1번은 '새벽 다섯 시' 이야기만 살려. 시계 숫자는 편의점 같아.\n2번 살려. 근데 해가 컴퍼스로 그린 것 같아. 반죽처럼 살짝 찌그러지게.\n색은 두 개만. 크러스트 갈색이랑 새벽 남색.\n4번 스탬프는 2호점 오픈 굿즈용으로 따로 다듬어.", "fill": "red", "size": "m", "page": "b"}
+    "fb_b": {"x": -680, "y": 0, "w": 560, "text": "사수 B:\n6, 11, 12번 버려. 카페 로고랑 구분이 안 돼.\n1번은 '새벽 다섯 시' 이야기만 살려. 시계 숫자는 편의점 같아.\n2번 살려. 근데 해가 컴퍼스로 그린 것 같아. 반죽처럼 살짝 찌그러지게.\n색은 두 개만. 크러스트 갈색이랑 새벽 남색.\n4번 스탬프는 2호점 오픈 굿즈용으로 따로 다듬어.", "fill": "red", "size": "m", "page": "b"},
+    "t_c": {"x": 0, "y": -300, "text": "쓰일 자리에 놓고 보기", "kind": "title1", "maxW": 1760, "page": "c"},
+    "brief_c": {"x": -600, "y": 0, "w": 480, "text": "최시안: B1으로 가자. 2호점 간판이랑 빵 봉투에 올려 봐. 명함만 하게 줄였을 때도 보여 주고.", "fill": "orange", "size": "l", "page": "c"},
+    "brief_cliche": {"x": -600, "y": 0, "w": 480, "text": "최시안: 빵집 로고에서 뻔한 거 열 개만 꼽아 줘. 우리 1차 시안 열두 개에서 몇 개가 썼는지도 세어 보고.", "fill": "orange", "size": "l", "page": "d"},
+    "t_d": {"x": 0, "y": 900, "text": "뻔한 것 열 개를 다 빼고", "kind": "title1", "maxW": 2080, "page": "d"},
+    "brief_d": {"x": -600, "y": 1140, "w": 480, "text": "최시안: 그 열 개 다 빼고 세 개만 다시. 대신 빵집인 건 알아보게.", "fill": "orange", "size": "l", "page": "d"},
+    "verdict_d": {"x": 720, "y": 2020, "w": 560, "text": "최시안:\n1번 버려. 지하철 안내판 같아.\n3번 버려. 빵집인지 모르겠어.\n2번 살려. 근데 맨 아래 띠 하나만 크러스트 갈색으로. 빵 색은 그거 하나만.", "fill": "red", "size": "m", "page": "d"},
+    "brief_chk": {"x": -600, "y": 0, "w": 480, "text": "최시안: 사장님께 넘기기 전에 확인표 한 장. 확인한 것과 못 한 것 나눠서.", "fill": "orange", "size": "l", "page": "chk"}
   },
   "designSystems": []
 }

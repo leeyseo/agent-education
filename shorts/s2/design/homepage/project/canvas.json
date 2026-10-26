@@ -1,0 +1,45 @@
+{
+  "v": 3,
+  "createdOnFiles": {"v": 1, "at": "2026-10-27T01:50:00Z"},
+  "title": "모닝빵 홈페이지 리뉴얼",
+  "launch": {"view": "canvas", "page": "mood"},
+  "pages": [
+    {"id": "mood", "name": "1 무드"},
+    {"id": "wire", "name": "2 섹션 구성"},
+    {"id": "proto", "name": "3 눌러 보는 시안"},
+    {"id": "handoff", "name": "4 퍼블리셔에게"},
+    {"id": "hero", "name": "5 첫 화면 여섯 개"},
+    {"id": "hero2", "name": "6 판정 뒤"}
+  ],
+  "boards": {
+    "Mood-A.dc.html": {"x": 0, "y": 0, "w": 520, "h": 640, "title": "무드 A 새벽 남색", "page": "mood"},
+    "Mood-B.dc.html": {"x": 600, "y": 0, "w": 520, "h": 640, "title": "무드 B 갓 구운 크러스트", "page": "mood"},
+    "Mood-C.dc.html": {"x": 1200, "y": 0, "w": 520, "h": 640, "title": "무드 C 동네 칠판", "page": "mood"},
+    "Wire.dc.html": {"x": 0, "y": 0, "w": 1040, "h": 844, "title": "섹션 순서 (폰 기준)", "page": "wire"},
+    "Main.dc.html": {"x": 0, "y": 0, "w": 1280, "h": 850, "title": "홈", "page": "proto", "expand": "fill", "is_interactive": true},
+    "Menu.dc.html": {"x": 1360, "y": 0, "w": 1280, "h": 878, "title": "메뉴", "page": "proto", "expand": "fill", "is_interactive": true},
+    "Stores.dc.html": {"x": 2720, "y": 0, "w": 1280, "h": 737, "title": "매장", "page": "proto", "expand": "fill", "is_interactive": true},
+    "Handoff.dc.html": {"x": 0, "y": 0, "w": 1040, "h": 844, "title": "퍼블리셔에게 넘기는 것", "page": "handoff"},
+    "H1.dc.html": {"x": 0, "y": 0, "w": 390, "h": 700, "title": "1 큰 글씨", "page": "hero"},
+    "H2.dc.html": {"x": 470, "y": 0, "w": 390, "h": 700, "title": "2 빵 사진", "page": "hero"},
+    "H3.dc.html": {"x": 940, "y": 0, "w": 390, "h": 700, "title": "3 오픈 공지", "page": "hero"},
+    "H4.dc.html": {"x": 1410, "y": 0, "w": 390, "h": 700, "title": "4 메뉴 먼저", "page": "hero"},
+    "H5.dc.html": {"x": 1880, "y": 0, "w": 390, "h": 700, "title": "5 다섯 시 시계", "page": "hero"},
+    "H6.dc.html": {"x": 2350, "y": 0, "w": 390, "h": 700, "title": "6 칠판 인사", "page": "hero"},
+    "H2b.dc.html": {"x": 0, "y": 0, "w": 390, "h": 700, "title": "2 보강 · 사진 대신 빵 그림", "page": "hero2"}
+  },
+  "order": ["Mood-A.dc.html", "Mood-B.dc.html", "Mood-C.dc.html", "Wire.dc.html", "Main.dc.html", "Menu.dc.html", "Stores.dc.html", "Handoff.dc.html", "H1.dc.html", "H2.dc.html", "H3.dc.html", "H4.dc.html", "H5.dc.html", "H6.dc.html", "H2b.dc.html"],
+  "notes": {
+    "t_mood": {"x": 0, "y": -300, "text": "무드 세 갈래", "kind": "title1", "maxW": 1720, "page": "mood"},
+    "brief_mood": {"x": -600, "y": 0, "w": 480, "text": "최시안: 홈페이지 무드부터 세 갈래로. 색, 글꼴, 버튼 느낌만. 로고는 B1.", "fill": "orange", "size": "l", "page": "mood"},
+    "brief_wire": {"x": -600, "y": 0, "w": 480, "text": "최시안: 폰 화면 기준으로 섹션 순서 잡아 줘. 사장님 요청은 둘. 폰에서 안 깨지게, 메뉴와 가격은 직접 고치게.", "fill": "orange", "size": "l", "page": "wire"},
+    "t_proto": {"x": 0, "y": -300, "text": "홈 · 메뉴 · 매장 (눌러서 넘어감)", "kind": "title1", "maxW": 4000, "page": "proto"},
+    "brief_proto": {"x": -600, "y": 0, "w": 480, "text": "최시안: 무드 A로 홈, 메뉴, 매장 세 화면. 눌러서 넘어가게. 폰이랑 PC 둘 다 되게.", "fill": "orange", "size": "l", "page": "proto"},
+    "brief_handoff": {"x": -600, "y": 0, "w": 480, "text": "최시안: 퍼블리셔 박태그한테 넘길 거 한 장으로 정리해 줘.", "fill": "orange", "size": "l", "page": "handoff"},
+    "t_hero": {"x": 0, "y": -300, "text": "첫 화면 여섯 개 (폰 기준)", "kind": "title1", "maxW": 2740, "page": "hero"},
+    "brief_hero": {"x": -600, "y": 0, "w": 480, "text": "최시안: 홈페이지 첫 화면만 여섯 개 뽑아 줘. 폰 기준. 무드 A 색 안에서 방향은 다 다르게.", "fill": "orange", "size": "l", "page": "hero"},
+    "verdict": {"x": -680, "y": 0, "w": 560, "text": "최시안:\n1번 살려. 첫 화면은 이걸로 가.\n2번 보강. 사진 생길 때까진 빵 그림으로.\n3번 버려. 오픈 지나면 바로 낡아.\n4번 살려. 메뉴 화면 위쪽에 써.\n5번 버려. 시계는 편의점 같아.\n6번 버려. 칠판은 1호점 메뉴판으로 충분해.", "fill": "red", "size": "m", "page": "hero2"},
+    "reply": {"x": 480, "y": 0, "w": 480, "text": "Claude: 1번과 4번은 손대지 않고 그대로 두었어요. 2번만 사진 자리를 빵 그림(우유식빵, 모닝빵, 소금빵)으로 바꿨어요. 3·5·6번은 뺐어요.", "fill": "gray", "size": "m", "page": "hero2"}
+  },
+  "designSystems": []
+}

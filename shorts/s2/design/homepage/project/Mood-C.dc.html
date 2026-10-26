@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>무드 C 동네 칠판</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@500;700;900&display=block">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 520px; height: 640px; box-sizing: border-box; padding: 36px; background: #2F3A33; color: #F4F1E8; font-family: 'Noto Sans KR', sans-serif; display: flex; flex-direction: column; gap: 20px">
+<span style="font-size: 14px; font-weight: 900; letter-spacing: 2px; color: #E8C27A">무드 C</span>
+<h1 style="margin: 0; font-family: 'Nanum Pen Script', cursive; font-weight: 400; font-size: 64px; line-height: 1">동네 칠판</h1>
+<p style="margin: 0; font-size: 16px; line-height: 1.6">1호점 칠판 메뉴판 느낌이에요. 단골에겐 익숙하지만, 글씨가 작아지면 잘 안 읽혀요.</p>
+<div style="display: flex; gap: 16px">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 6px"><span style="width: 76px; height: 76px; border-radius: 50%; background: #2F3A33; box-shadow: inset 0 0 0 2px #5C6B60"></span><span style="font-size: 13px; font-weight: 700">#2F3A33</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 6px"><span style="width: 76px; height: 76px; border-radius: 50%; background: #F4F1E8"></span><span style="font-size: 13px; font-weight: 700">#F4F1E8</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 6px"><span style="width: 76px; height: 76px; border-radius: 50%; background: #8B5A3C"></span><span style="font-size: 13px; font-weight: 700">#8B5A3C</span></div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 6px"><span style="width: 76px; height: 76px; border-radius: 50%; background: #E8C27A"></span><span style="font-size: 13px; font-weight: 700">#E8C27A</span></div>
+</div>
+<div style="border-top: 2px solid #5C6B60; padding-top: 16px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-family: 'Nanum Pen Script', cursive; font-size: 40px; line-height: 1.1">새벽 다섯 시에 굽습니다</span>
+<span style="font-size: 15px; color: #D9D4C6">제목 나눔펜 · 본문 Noto Sans KR</span>
+</div>
+<div style="margin-top: auto; display: flex; align-items: center; gap: 14px">
+<button type="button" style="min-height: 48px; padding: 0 22px; border: 0; border-radius: 6px; background: #8B5A3C; color: #FFFFFF; font-family: 'Noto Sans KR', sans-serif; font-size: 16px; font-weight: 900">대표 메뉴 보기</button>
+<button type="button" style="min-height: 48px; padding: 0 22px; border: 0; border-radius: 6px; background: #E8C27A; color: #2F3A33; font-family: 'Noto Sans KR', sans-serif; font-size: 16px; font-weight: 900">2호점 오픈</button>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":520,"height":640}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

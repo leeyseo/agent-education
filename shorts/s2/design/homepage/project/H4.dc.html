@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>첫 화면 4 메뉴 먼저</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&family=Noto+Sans+KR:wght@500;700;900&display=block">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 390px; height: 700px; background: #FBF5EC; color: #1E2A4A; font-family: 'Noto Sans KR', sans-serif; display: flex; flex-direction: column; overflow: hidden">
+<div style="height: 56px; flex: none; padding: 0 20px; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid #E6DCCD">
+<svg width="48" height="28" viewBox="64 94 392 210" aria-hidden="true"><g stroke="#C7772E" stroke-width="12" stroke-linecap="round"><line x1="128" y1="214" x2="104" y2="200"></line><line x1="184" y1="158" x2="170" y2="134"></line><line x1="262" y1="140" x2="263" y2="104"></line><line x1="338" y1="160" x2="354" y2="134"></line><line x1="392" y1="216" x2="414" y2="203"></line></g><path d="M134 292 C128 236 170 178 250 172 C298 168 336 178 360 204 C380 226 390 258 386 292 Z" fill="#C7772E"></path><path d="M74 294 C150 290 220 297 300 292 C360 289 410 296 446 292" fill="none" stroke="#1E2A4A" stroke-width="12" stroke-linecap="round"></path></svg>
+<span style="font-family: 'Gowun Batang', serif; font-weight: 700; font-size: 20px">모닝빵 베이커리</span>
+</div>
+<section style="flex: 1; padding: 28px 20px 28px; display: flex; flex-direction: column; gap: 12px">
+<h1 style="margin: 0; font-family: 'Gowun Batang', serif; font-size: 30px; line-height: 1.35">오늘도 새벽 다섯 시에<br>구웠어요</h1>
+<div style="margin-top: 6px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; align-items: center; gap: 14px; background: #FFFFFF; border: 2px solid #EADFD1; border-radius: 16px; padding: 14px 16px"><svg width="64" height="45" viewBox="0 0 80 56" aria-hidden="true"><ellipse cx="22" cy="36" rx="18" ry="14" fill="#C7772E"></ellipse><ellipse cx="58" cy="36" rx="18" ry="14" fill="#C7772E"></ellipse><ellipse cx="40" cy="26" rx="19" ry="15" fill="#D98A3D"></ellipse></svg><b style="font-family: 'Gowun Batang', serif; font-size: 21px">모닝빵</b><span style="margin-left: auto; font-size: 18px; font-weight: 900">3,000원</span></div>
+<div style="display: flex; align-items: center; gap: 14px; background: #FFFFFF; border: 2px solid #EADFD1; border-radius: 16px; padding: 14px 16px"><svg width="64" height="45" viewBox="0 0 80 56" aria-hidden="true"><path d="M8 54 L8 30 C8 14 24 10 30 22 C34 8 50 8 52 22 C58 10 74 14 72 30 L72 54 Z" fill="#E3B074"></path><path d="M8 30 C8 14 24 10 30 22 C34 8 50 8 52 22 C58 10 74 14 72 30" fill="none" stroke="#C7772E" stroke-width="6"></path></svg><b style="font-family: 'Gowun Batang', serif; font-size: 21px">우유식빵</b><span style="margin-left: auto; font-size: 18px; font-weight: 900">4,500원</span></div>
+<div style="display: flex; align-items: center; gap: 14px; background: #FFFFFF; border: 2px solid #EADFD1; border-radius: 16px; padding: 14px 16px"><svg width="64" height="45" viewBox="0 0 80 56" aria-hidden="true"><path d="M6 40 C10 18 34 10 52 14 C66 17 76 26 74 38 C72 48 56 50 40 48 C24 46 6 50 6 40 Z" fill="#C7772E"></path><g stroke="#E8B27A" stroke-width="4" stroke-linecap="round"><path d="M24 22 L32 44"></path><path d="M38 16 L46 44"></path><path d="M52 18 L58 42"></path></g></svg><b style="font-family: 'Gowun Batang', serif; font-size: 21px">소금빵</b><span style="margin-left: auto; font-size: 18px; font-weight: 900">2,800원</span></div>
+</div>
+<span style="font-size: 14px; color: #4A433D">가격은 1호점 기준이에요.</span>
+<a href="Menu.dc.html" style="margin-top: auto; min-height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 999px; background: #1E2A4A; color: #FFFFFF; font-size: 17px; font-weight: 900; text-decoration: none">전체 메뉴</a>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":700}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

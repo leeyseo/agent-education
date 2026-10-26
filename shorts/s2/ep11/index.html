@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>디자이너 편 EP11 홈페이지, 눌러 보는 시안</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700;900&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../../lib/base.css">
+<link rel="stylesheet" href="../s2.css">
+<style>
+  /* 홈페이지 캔버스에서 lib/snap.py로 찍은 실제 결과물 (PC 폭 1280, 폰 폭 390) */
+  .shot { position: absolute; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 14px 30px rgba(60, 40, 20, .18); }
+  .shot img { display: block; width: 100%; height: 100%; }
+  .ph { position: absolute; border: 14px solid var(--ink); border-radius: 48px; overflow: hidden; background: #FBF5EC;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, .2); }
+  .ph img { position: absolute; left: 0; top: 0; width: 100%; }
+  .browser .bbody { position: absolute; left: 0; right: 0; top: 56px; bottom: 0; overflow: hidden; }
+  .browser .bbody img { display: block; width: 100%; }
+  .ring { position: absolute; border: 7px solid var(--mint); border-radius: 18px; opacity: 0; }
+  .pill { position: absolute; color: #fff; font-size: 28px; font-weight: 900; padding: 6px 20px; border-radius: 999px; white-space: nowrap; }
+  .crop { position: absolute; overflow: hidden; border-radius: 18px; background: #fff; box-shadow: 0 14px 30px rgba(60, 40, 20, .18); }
+  .crop img { position: absolute; }
+  .mark { position: absolute; background: rgba(255, 216, 77, .45); border-radius: 10px; opacity: 0; }
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage"><div class="abs" id="area">
+
+  <!-- s1: 폰에서도 PC에서도 -->
+  <div class="scene" id="s1">
+    <div class="browser" id="s1-pc" style="left:0;top:60px;width:760px;height:561px">
+      <div class="bbar"><i></i><i></i><i></i><div class="url">모닝빵 · 홈</div></div>
+      <div class="bbody"><img src="../design/homepage/png/Main.png" alt=""></div>
+    </div>
+    <div class="ph" id="s1-ph" style="left:600px;top:200px;width:330px;height:714px"><img src="../design/homepage/png/Main@390.png" alt=""></div>
+    <div class="real" id="s1-real" style="left:0;top:0">실제 Claude 결과물</div>
+    <div class="sticker mint" id="s1-st" style="left:60px;top:700px">안 깨짐</div>
+  </div>
+
+  <!-- s2: 무드 세 갈래 -->
+  <div class="scene" id="s2">
+    <div class="real" id="s2-real" style="left:0;top:0">실제 Claude 결과물 · 무드</div>
+    <div class="shot" id="s2-a" style="left:0;top:64px;width:300px;height:369px"><img src="../design/homepage/png/Mood-A.png" alt=""></div>
+    <div class="shot" id="s2-b" style="left:330px;top:64px;width:300px;height:369px"><img src="../design/homepage/png/Mood-B.png" alt=""></div>
+    <div class="shot" id="s2-c" style="left:660px;top:64px;width:300px;height:369px"><img src="../design/homepage/png/Mood-C.png" alt=""></div>
+    <div class="ring" id="s2-ring" style="left:-12px;top:52px;width:324px;height:393px"></div>
+    <div class="pill" id="s2-pk" style="left:60px;top:460px;background:var(--mint)">로고와 같은 색</div>
+    <div class="abs" id="s2-sian" data-char="person:sian:grin" style="left:60px;top:560px;width:240px;height:336px"></div>
+    <div class="ub" id="s2-ub" style="left:340px;right:auto;top:680px;font-size:38px">A로 가자</div>
+  </div>
+
+  <!-- s3: 섹션 순서 -->
+  <div class="scene" id="s3">
+    <div class="shot" id="s3-wire" style="left:0;top:0;width:960px;height:779px"><img src="../design/homepage/png/Wire.png" alt=""></div>
+    <div class="sticker orange" id="s3-st" style="left:420px;top:800px">폰 기준, 위에서부터</div>
+  </div>
+
+  <!-- s4: 눌러지는 시안 -->
+  <div class="scene" id="s4">
+    <div class="real" id="s4-real" style="left:0;top:0">실제 결과 · 눌러 보는 시안</div>
+    <div class="ph" id="s4-ph" style="left:286px;top:60px;width:360px;height:779px">
+      <img id="s4-home" src="../design/homepage/png/Main@390.png" alt="">
+      <img id="s4-menu" src="../design/homepage/png/Menu@390.png" alt="" style="opacity:0">
+    </div>
+    <div class="cursor" id="s4-cur" data-cursor></div>
+    <div class="pill" id="s4-l1" style="left:40px;top:300px;background:var(--ink)">홈</div>
+    <div class="pill" id="s4-l2" style="left:700px;top:300px;background:var(--orange)">→ 메뉴 화면</div>
+  </div>
+
+  <!-- s5: 같은 페이지, 폰과 PC -->
+  <div class="scene" id="s5">
+    <div class="browser" id="s5-pc" style="left:0;top:60px;width:600px;height:455px">
+      <div class="bbar"><i></i><i></i><i></i><div class="url">PC · 폭 1280</div></div>
+      <div class="bbody"><img src="../design/homepage/png/Main.png" alt=""></div>
+    </div>
+    <div class="ph" id="s5-ph" style="left:632px;top:0;width:290px;height:628px"><img id="s5-img" src="../design/homepage/png/Main@390.png" alt=""></div>
+    <div class="pill" id="s5-l" style="left:660px;top:670px;background:var(--ink)">폰 · 폭 390</div>
+    <div class="abs" id="s5-owner" data-char="person:owner:smile" style="left:40px;top:560px;width:240px;height:336px"></div>
+    <div class="sticker mint" id="s5-st" style="left:300px;top:780px">같은 페이지, 폭만 달라요</div>
+  </div>
+
+  <!-- s6: 퍼블리셔에게 넘기기 -->
+  <div class="scene" id="s6">
+    <div class="real" id="s6-real" style="left:0;top:0">실제 Claude 결과물 · 넘기는 한 장</div>
+    <div class="shot" id="s6-ho" style="left:0;top:60px;width:860px;height:698px"><img src="../design/homepage/png/Handoff.png" alt=""></div>
+    <div class="abs" id="s6-tag" data-char="person:tag:smile" style="left:740px;top:580px;width:220px;height:308px"></div>
+    <div class="pill" id="s6-pl" style="left:560px;top:800px;background:var(--ink)">퍼블리셔 박태그</div>
+  </div>
+
+  <!-- s7: 꼭 붙일 조건 -->
+  <div class="scene" id="s7">
+    <div class="crop" id="s7-crop" style="left:19px;top:0;width:922px;height:571px">
+      <img src="../design/homepage/png/Handoff.png" alt="" style="left:-864px;top:-203px;width:1872px;height:1519px">
+      <div class="mark" id="s7-mk" style="left:36px;top:135px;width:864px;height:126px"></div>
+    </div>
+    <div class="abs" id="s7-owner" data-char="person:owner:grin" style="left:40px;top:600px;width:220px;height:308px"></div>
+    <div class="ub" id="s7-ub" style="left:300px;right:auto;top:690px;font-size:38px">가격은 제가 직접 고칠게요</div>
+  </div>
+
+  <!-- s8: 결론 -->
+  <div class="scene" id="s8">
+    <div class="abs" data-chair style="left:350px;top:0;width:260px;height:364px"></div>
+    <div class="abs" id="s8-sian" data-char="person:sian:proud" style="left:370px;top:10px;width:220px;height:308px"></div>
+    <div class="abs conclude" id="s8-c" style="top:400px"><div class="k">오늘의 결론</div><div class="t">눌러 보고 고르고<br><span>조건까지 넘긴다</span></div></div>
+  </div>
+
+</div></div></div>
+<script src="timeline.js"></script>
+<script src="../../lib/engine.js"></script>
+<script src="../s2.js"></script>
+<script>
+start({
+  s1(t, d, m, W) {
+    rise($('s1-pc'), t, 0.15, 0.4, 40);
+    rise($('s1-ph'), t, 0.45, 0.4, 60);
+    pop($('s1-real'), t, when(W, '실제로') - 0.1, 0.35);
+    pop($('s1-st'), t, when(W, '안') - 0.1, 0.4, -4);
+  },
+
+  s2(t, d, m, W) {
+    fade($('s2-real'), t, 0.2, 0.3);
+    ['a', 'b', 'c'].forEach((k, i) => pop($(`s2-${k}`), t, 0.15 + i * 0.15, 0.35));
+    const pk = d - 1.3;   // 말이 끝난 뒤 A를 고른다
+    pop($('s2-ring'), t, pk, 0.35);
+    pop($('s2-pk'), t, pk + 0.1, 0.35, -3);
+    rise($('s2-sian'), t, 0.4, 0.4, 60);
+    pop($('s2-ub'), t, pk + 0.2, 0.35);
+  },
+
+  s3(t, d, m, W) {
+    rise($('s3-wire'), t, 0.1, 0.4, 40);
+    pop($('s3-st'), t, when(W, '기준으로') - 0.1, 0.4, -3);
+  },
+
+  s4(t, d, m, W) {
+    fade($('s4-real'), t, 0.2, 0.3);
+    rise($('s4-ph'), t, 0.1, 0.4, 50);
+    // 커서가 '메뉴' 탭을 누르면 메뉴 화면으로 바뀐다 (탭 위치는 폭 390 화면에서 잰 값 × 360/390)
+    const tap = when(W, '메뉴를') + 0.2;
+    cursorAt($('s4-cur'), t, [[tap - 1.0, 640, 560], [tap - 0.1, 393, 149]], [tap]);
+    $('s4-menu').style.opacity = clamp((t - tap - 0.1) / 0.25);
+    pop($('s4-l1'), t, 0.5, 0.3);
+    pop($('s4-l2'), t, tap + 0.3, 0.35);
+  },
+
+  s5(t, d, m, W) {
+    rise($('s5-pc'), t, 0.1, 0.4, 40);
+    rise($('s5-ph'), t, 0.3, 0.4, 60);
+    pop($('s5-l'), t, 0.6, 0.3);
+    // 폰 화면을 끝까지 내려 본다
+    $('s5-img').style.transform = `translateY(${-eo(prog(t, 1.4, 2.4)) * (1142 * 290 / 390 - 628)}px)`;
+    rise($('s5-owner'), t, when(W, '사장님') - 0.4, 0.4, 60);
+    pop($('s5-st'), t, when(W, '둘') - 0.1, 0.4, -3);
+  },
+
+  s6(t, d, m, W) {
+    fade($('s6-real'), t, 0.2, 0.3);
+    rise($('s6-ho'), t, 0.1, 0.4, 40);
+    rise($('s6-tag'), t, when(W, '퍼블리셔') - 0.1, 0.4, 60);
+    pop($('s6-pl'), t, when(W, '퍼블리셔') + 0.2, 0.35);
+  },
+
+  s7(t, d, m, W) {
+    rise($('s7-crop'), t, 0.1, 0.4, 40);
+    fade($('s7-mk'), t, when(W, '메뉴와') - 0.1, 0.3);
+    rise($('s7-owner'), t, 0.4, 0.4, 60);
+    pop($('s7-ub'), t, when(W, '직접') + 0.2, 0.35);
+  },
+
+  s8(t, d, m, W) {
+    rise($('s8-sian'), t, 0.1, 0.4, 60);
+    pop($('s8-c'), t, Math.max(when(W, '조건까지') - 0.4, 0.6), 0.45);
+  },
+});
+</script>
+</body>
+</html>

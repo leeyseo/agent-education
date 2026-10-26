@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>디자이너 편 EP16 그럴듯한 거짓말과 남의 것</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Batang:wght@700&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700;900&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../../lib/base.css">
+<link rel="stylesheet" href="../s2.css">
+<style>
+  .q4 { position: absolute; width: 460px; height: 380px; background: #fff; border: 3px solid var(--line); border-radius: 26px;
+    box-shadow: 0 12px 26px rgba(60, 40, 20, .12); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; }
+  .q4 b { font-size: 40px; font-weight: 900; }
+  .q4 .qi { height: 210px; display: flex; align-items: center; justify-content: center; }
+  .num { position: absolute; left: 18px; top: 14px; width: 52px; height: 52px; border-radius: 50%; background: #7C5CD6; color: #fff;
+    font-size: 30px; font-weight: 900; display: flex; align-items: center; justify-content: center; }
+  .card { position: absolute; background: #fff; border: 3px solid var(--line); border-radius: 22px; padding: 22px 26px;
+    box-shadow: 0 12px 26px rgba(60, 40, 20, .12); }
+  .card h4 { font-size: 24px; font-weight: 900; color: var(--sub); margin-bottom: 10px; }
+  .ok { display: inline-block; background: var(--mint-soft); color: #0F5E4C; font-weight: 900; border-radius: 8px; padding: 2px 12px; }
+  .no { display: inline-block; background: var(--red-soft); color: #B4232A; font-weight: 900; border-radius: 8px; padding: 2px 12px; }
+  .stampx { position: absolute; font-family: 'Black Han Sans', sans-serif; font-size: 52px; color: var(--red); border: 7px solid var(--red);
+    border-radius: 16px; padding: 4px 20px; transform: rotate(-8deg); background: rgba(255, 255, 255, .85); white-space: nowrap; opacity: 0; }
+  .lg2 { position: absolute; background: #fff; border-radius: 18px; overflow: hidden; border: 3px solid var(--line); box-shadow: 0 10px 22px rgba(60, 40, 20, .12); }
+  .lg2 img { display: block; width: 100%; height: 100%; }
+  .tog { display: flex; align-items: center; gap: 16px; font-size: 30px; font-weight: 800; }
+  .tog i { width: 90px; height: 50px; border-radius: 999px; background: #CFC6BA; position: relative; flex: none; }
+  .tog i::after { content: ''; position: absolute; left: 6px; top: 6px; width: 38px; height: 38px; border-radius: 50%; background: #fff; transition: none; }
+  .tog.on i { background: var(--mint); } .tog.on i::after { left: 46px; }
+  .redact { background: var(--ink); color: var(--ink); border-radius: 4px; }
+  .ring { position: absolute; border: 6px solid #7C5CD6; border-radius: 10px; opacity: 0; }
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage"><div class="abs" id="area">
+
+  <!-- s1: 네 가지 -->
+  <div class="scene" id="s1">
+    <div class="q4" id="s1-a" style="left:0;top:40px"><div class="num">1</div><div class="qi" style="font-family:'Black Han Sans';font-size:140px;color:#7C5CD6">70%?</div><b>출처 없는 숫자</b></div>
+    <div class="q4" id="s1-b" style="left:500px;top:40px"><div class="num">2</div><div class="qi"><img src="../design/logo/png/B1.png" alt="" style="width:210px;height:210px"></div><b>어디서 본 로고</b></div>
+    <div class="q4" id="s1-c" style="left:0;top:460px"><div class="num">3</div><div class="qi" style="font-family:'Gowun Batang';font-size:150px;font-weight:700">가</div><b>폰트와 사진</b></div>
+    <div class="q4" id="s1-d" style="left:500px;top:460px"><div class="num">4</div><div class="qi"><span data-icon="lock:#7C5CD6" style="width:150px;height:170px;display:block"></span></div><b>고객 자료</b></div>
+  </div>
+
+  <!-- s2: 출처 없는 숫자 -->
+  <div class="scene" id="s2">
+    <div class="demo" style="right:0;top:0">예시 화면 · 숫자는 지어낸 예</div>
+    <div class="ab" id="s2-ab" style="left:0;top:70px;width:820px;font-size:36px">빵집 손님의 <b>70%</b>는 인스타그램을 보고 찾아와요.</div>
+    <div class="ub" id="s2-ub" style="right:0;top:260px;font-size:38px">그 숫자, 어디서 나왔어?</div>
+    <div class="ab" id="s2-ab2" style="left:0;top:400px;width:820px;font-size:34px">출처를 찾지 못했어요. '확인 필요'로 둘게요.</div>
+    <div class="stampx" id="s2-st" style="left:500px;top:110px">링크 없음</div>
+    <div class="sticker" id="s2-st2" style="left:140px;top:620px">링크 없으면 안 쓴다</div>
+    <div class="abs" id="s2-sian" data-char="person:sian:skeptic" style="left:700px;top:560px;width:240px;height:336px"></div>
+  </div>
+
+  <!-- s3: 닮은꼴 로고 → 상표 검색 -->
+  <div class="scene" id="s3">
+    <div class="lg2" id="s3-lg" style="left:0;top:40px;width:420px;height:420px"><img src="../design/logo/png/B1.png" alt=""></div>
+    <div class="card" id="s3-k" style="left:470px;top:60px;width:490px">
+      <h4>kipris.or.kr · 상표 검색</h4>
+      <div style="font-size:32px;font-weight:800;line-height:1.5">이름(모닝빵)으로 한 번,<br>비슷한 그림으로 한 번</div>
+      <div style="font-size:24px;font-weight:700;color:var(--sub);margin-top:10px">그림은 도형 분류 코드로 찾을 수 있어요</div>
+    </div>
+    <span class="abs" id="s3-mag" data-icon="mag:#7C5CD6" style="left:330px;top:360px;width:120px;height:120px"></span>
+    <div class="sticker" id="s3-st" style="left:470px;top:400px">쓰기 전에 검색</div>
+    <div class="abs" id="s3-sian" data-char="person:sian:skeptic" style="left:120px;top:520px;width:260px;height:364px"></div>
+  </div>
+
+  <!-- s4: 폰트와 사진 -->
+  <div class="scene" id="s4">
+    <div class="card" id="s4-f" style="left:0;top:20px;width:960px">
+      <h4>이번 로고 글꼴</h4>
+      <div style="display:flex;align-items:center;gap:30px">
+        <span style="font-family:'Gowun Batang';font-weight:700;font-size:76px;line-height:1;white-space:nowrap;flex:none">고운바탕</span>
+        <span style="font-size:30px;font-weight:900;line-height:1.5">SIL 오픈 폰트 라이선스(OFL) 1.1<br><span class="ok">로고·인쇄에 써도 됨</span> <span class="no">폰트 파일만 따로 팔기</span></span>
+      </div>
+      <div style="font-size:22px;font-weight:700;color:var(--sub);margin-top:12px">출처: 폰트의 OFL 원문, OFL FAQ 1.1 · Noto Sans KR · 나눔펜도 OFL</div>
+    </div>
+    <div class="card" id="s4-p" style="left:0;top:330px;width:960px">
+      <h4>이번 시안의 사진</h4>
+      <div style="font-size:36px;font-weight:900">사진 0장 · 빵 그림은 모두 코드(SVG)로 그림</div>
+      <div style="font-size:26px;font-weight:700;color:var(--sub);margin-top:8px">사진을 쓸 땐: 누가 찍었는지, 어디까지 써도 되는지</div>
+    </div>
+    <div class="abs" id="s4-sian" data-char="person:sian:proud" style="left:360px;top:600px;width:220px;height:308px"></div>
+  </div>
+
+  <!-- s5: 고객 자료 -->
+  <div class="scene" id="s5">
+    <div class="demo" style="right:0;top:0">예시 화면 · 메뉴 이름은 실제와 다를 수 있음</div>
+    <div class="card" id="s5-set" style="left:0;top:60px;width:960px">
+      <h4>개인정보 설정</h4>
+      <div class="tog" id="s5-tog"><i></i>내 대화를 모델 학습에 쓰도록 허용</div>
+      <div style="font-size:24px;font-weight:700;color:var(--sub);margin-top:14px;line-height:1.5">개인 요금제(Free·Pro·Max)는 직접 고름 · 팀·기업 요금제와 API는 별도 약관<br>출처: Anthropic, 소비자 약관 업데이트 (2025.8.28)</div>
+    </div>
+    <div class="card" id="s5-doc" style="left:0;top:400px;width:600px">
+      <h4>예: 단체 주문 문의.txt</h4>
+      <div style="font-size:32px;font-weight:800;line-height:1.6">주문하신 분 연락처:<br><span id="s5-ph">010-1234-5678</span></div>
+    </div>
+    <div class="sticker red" id="s5-st" style="left:250px;top:700px">개인정보는 지우고</div>
+    <div class="abs" id="s5-sian" data-char="person:sian:skeptic" style="left:680px;top:430px;width:240px;height:336px"></div>
+  </div>
+
+  <!-- s6: 확인표 -->
+  <div class="scene" id="s6">
+    <div class="lg2" id="s6-ck" style="left:0;top:40px;width:960px;height:665px"><img src="../design/logo/png/Check.png" alt=""></div>
+    <div class="real" id="s6-real" style="left:0;top:0">실제 Claude 결과물 · 넘기기 전 확인표</div>
+    <div class="ring" id="s6-r1" style="left:646px;top:264px;width:300px;height:46px"></div>
+    <div class="ring" id="s6-r2" style="left:646px;top:444px;width:300px;height:46px"></div>
+    <div class="ring" id="s6-r3" style="left:646px;top:519px;width:300px;height:46px"></div>
+    <div class="sticker yellow" id="s6-st" style="left:280px;top:740px">못 한 건 '확인 필요'</div>
+  </div>
+
+  <!-- s7: 결론 -->
+  <div class="scene" id="s7">
+    <div class="abs" data-chair style="left:350px;top:0;width:260px;height:364px"></div>
+    <div class="abs" id="s7-sian" data-char="person:sian:skeptic" style="left:370px;top:10px;width:220px;height:308px"></div>
+    <div class="abs conclude" id="s7-c" style="top:400px"><div class="k">오늘의 결론</div><div class="t">그럴듯한 건 의심하고<br><span>출처는 남긴다</span></div></div>
+  </div>
+
+</div></div></div>
+<script src="timeline.js"></script>
+<script src="../../lib/engine.js"></script>
+<script src="../s2.js"></script>
+<script>
+const PHONE = $('s5-ph').textContent;
+start({
+  s1(t, d, m, W) {
+    const at = when(W, '네') - 0.2;
+    ['a', 'b', 'c', 'd'].forEach((k, i) => pop($(`s1-${k}`), t, Math.min(0.15 + i * 0.15, at + i * 0.15), 0.35));
+  },
+
+  s2(t, d, m, W) {
+    pop($('s2-ab'), t, 0.2, 0.35);
+    pop($('s2-ub'), t, when(W, "'어디서") - 0.1, 0.35);
+    pop($('s2-ab2'), t, when(W, '링크가') - 0.3, 0.35);
+    pop($('s2-st'), t, when(W, '링크가'), 0.35, -8);
+    pop($('s2-st2'), t, when(W, '안') + 0.1, 0.4, -3);
+    rise($('s2-sian'), t, 0.3, 0.4, 60);
+  },
+
+  s3(t, d, m, W) {
+    pop($('s3-lg'), t, 0.15, 0.4);
+    rise($('s3-sian'), t, 0.3, 0.4, 60);
+    pop($('s3-mag'), t, when(W, '키프리스') - 0.3, 0.35, -10);
+    rise($('s3-k'), t, when(W, '키프리스') - 0.1, 0.35, 30);
+    pop($('s3-st'), t, when(W, '찾아봐요.') - 0.1, 0.4, -3);
+  },
+
+  s4(t, d, m, W) {
+    rise($('s4-f'), t, when(W, '이번') - 0.2, 0.35, 30);
+    rise($('s4-p'), t, when(W, '사진은') - 0.1, 0.35, 30);
+    rise($('s4-sian'), t, 0.3, 0.4, 60);
+  },
+
+  s5(t, d, m, W) {
+    rise($('s5-set'), t, 0.1, 0.35, 30);
+    $('s5-tog').classList.toggle('on', t < when(W, '학습') + 0.4);   // 켜져 있던 것을 확인하고 끈다
+    rise($('s5-doc'), t, when(W, '전화번호') - 0.4, 0.35, 30);
+    const r = when(W, '지워요.') - 0.2;
+    $('s5-ph').className = t >= r ? 'redact' : '';
+    pop($('s5-st'), t, r + 0.2, 0.4, -3);
+    rise($('s5-sian'), t, 0.3, 0.4, 60);
+  },
+
+  s6(t, d, m, W) {
+    rise($('s6-ck'), t, 0.1, 0.4, 40);
+    fade($('s6-real'), t, 0.3, 0.3);
+    const r = when(W, '못') - 0.1;
+    ['s6-r1', 's6-r2', 's6-r3'].forEach((id, i) => pop($(id), t, r + i * 0.2, 0.3));
+    pop($('s6-st'), t, r + 0.7, 0.4, -3);
+  },
+
+  s7(t, d, m, W) {
+    rise($('s7-sian'), t, 0.1, 0.4, 60);
+    pop($('s7-c'), t, Math.max(when(W, '출처는') - 0.4, 0.6), 0.45);
+  },
+});
+</script>
+</body>
+</html>

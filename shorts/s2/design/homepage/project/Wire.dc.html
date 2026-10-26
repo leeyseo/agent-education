@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>섹션 순서</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&family=Noto+Sans+KR:wght@500;700;900&display=block">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 1040px; height: 844px; box-sizing: border-box; padding: 40px 48px; background: #FFFFFF; color: #1E2A4A; font-family: 'Noto Sans KR', sans-serif; display: flex; gap: 48px">
+<div style="width: 300px; height: 764px; flex: none; box-sizing: border-box; border: 6px solid #1E2A4A; border-radius: 40px; padding: 26px 16px; display: flex; flex-direction: column; gap: 10px; background: #FBF5EC">
+<div style="height: 48px; border-radius: 10px; background: #E6DCCD; display: flex; align-items: center; gap: 10px; padding: 0 12px; font-size: 15px; font-weight: 900"><span style="width: 28px; height: 28px; border-radius: 50%; background: #1E2A4A; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 14px">1</span>머리말</div>
+<div style="height: 200px; border-radius: 10px; background: #1E2A4A; color: #FBF5EC; display: flex; align-items: flex-start; gap: 10px; padding: 12px; font-size: 15px; font-weight: 900"><span style="width: 28px; height: 28px; border-radius: 50%; background: #C7772E; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 14px">2</span>첫 화면</div>
+<div style="height: 56px; border-radius: 10px; background: #F3E6D3; display: flex; align-items: center; gap: 10px; padding: 0 12px; font-size: 15px; font-weight: 900"><span style="width: 28px; height: 28px; border-radius: 50%; background: #1E2A4A; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 14px">3</span>2호점 오픈 띠</div>
+<div style="height: 170px; border-radius: 10px; background: #E6DCCD; display: flex; align-items: flex-start; gap: 10px; padding: 12px; font-size: 15px; font-weight: 900"><span style="width: 28px; height: 28px; border-radius: 50%; background: #1E2A4A; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 14px">4</span>대표 메뉴 셋</div>
+<div style="height: 56px; border-radius: 10px; background: #E6DCCD; display: flex; align-items: center; gap: 10px; padding: 0 12px; font-size: 15px; font-weight: 900"><span style="width: 28px; height: 28px; border-radius: 50%; background: #1E2A4A; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 14px">5</span>바닥글</div>
+</div>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+<h1 style="margin: 0; font-family: 'Gowun Batang', serif; font-size: 34px">섹션 순서 · 폰 화면 기준</h1>
+<ol style="margin: 0; padding-left: 26px; display: flex; flex-direction: column; gap: 12px; font-size: 18px; line-height: 1.5">
+<li><b>머리말</b> 로고와 홈 · 메뉴 · 매장. 폰에서는 메뉴가 로고 아래 줄로 내려가요.</li>
+<li><b>첫 화면</b> '새벽 다섯 시에 굽습니다'와 버튼 둘(대표 메뉴, 매장 위치).</li>
+<li><b>2호점 오픈 띠</b> 12월 첫 주 · 지하철역 앞. 누르면 매장 화면으로.</li>
+<li><b>대표 메뉴 셋</b> 모닝빵 · 우유식빵 · 소금빵을 가격까지. 전체는 메뉴 화면에.</li>
+<li><b>바닥글</b> 인스타그램 계정 <span style="background: #FFE9A8; color: #5A4500; border-radius: 4px; padding: 1px 8px; font-size: 15px; font-weight: 700">확인 필요</span></li>
+</ol>
+<div style="margin-top: auto; background: #F3E6D3; border-radius: 16px; padding: 18px 22px; display: flex; flex-direction: column; gap: 10px; font-size: 17px; line-height: 1.5">
+<b style="font-size: 18px">사장님 요청 두 가지</b>
+<span>· 폰에서 안 깨지게 → 폰 화면(390px)부터 짜고 PC로 넓혀요.</span>
+<span>· 메뉴와 가격은 직접 고치게 → 메뉴를 한곳에 모아 두고, 고치는 방법은 퍼블리셔와 정해요.</span>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1040,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

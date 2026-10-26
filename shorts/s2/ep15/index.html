@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>디자이너 편 EP15 다 거기서 거기</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700;900&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../../lib/base.css">
+<link rel="stylesheet" href="../s2.css">
+<style>
+  .lgrid4 .lg .no { font-size: 20px; }
+  /* 칸 위에 붙이는 표시: 빵 색 점, 영문·빵 그림 꼬리표 */
+  .dot { position: absolute; right: 8px; top: 8px; width: 30px; height: 30px; border-radius: 50%; background: #C7772E;
+    border: 3px solid #fff; box-shadow: 0 2px 6px rgba(0, 0, 0, .2); opacity: 0; }
+  .tg { position: absolute; left: 6px; bottom: 6px; font-size: 18px; font-weight: 900; color: #fff; border-radius: 8px; padding: 1px 8px; opacity: 0; }
+  .tg.en { background: var(--blue); } .tg.br { background: var(--orange); left: auto; right: 6px; }
+  .cnt { position: absolute; font-family: 'Black Han Sans', sans-serif; font-size: 64px; color: #fff; border-radius: 26px; padding: 10px 30px;
+    box-shadow: 0 12px 26px rgba(0, 0, 0, .18); white-space: nowrap; }
+  .cnt small { font-family: 'Noto Sans KR', sans-serif; font-size: 28px; font-weight: 900; margin-right: 14px; vertical-align: 12px; }
+  .paper { position: absolute; background: #fff; border-radius: 22px; border: 3px solid var(--line); padding: 26px 30px;
+    box-shadow: 0 12px 26px rgba(60, 40, 20, .12); }
+  .paper .src { font-size: 22px; font-weight: 800; color: var(--sub); }
+  .paper .tt { font-size: 30px; font-weight: 900; margin: 8px 0 18px; line-height: 1.35; }
+  .paper .row { display: flex; gap: 16px; align-items: flex-start; font-size: 32px; font-weight: 800; line-height: 1.4; margin-top: 14px; }
+  .paper .row i { font-style: normal; flex: none; width: 46px; height: 46px; border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 26px; }
+  .img { position: absolute; background: #fff; border-radius: 14px; overflow: hidden; border: 3px solid var(--line); box-shadow: 0 10px 22px rgba(60, 40, 20, .12); }
+  .img img { display: block; width: 100%; height: 100%; }
+  .img .mk { top: 10px; right: 10px; }
+  .why { position: absolute; font-size: 26px; font-weight: 800; color: var(--ink); background: #fff; border: 3px solid var(--red); border-radius: 14px;
+    padding: 6px 14px; white-space: nowrap; opacity: 0; }
+  .pill { position: absolute; color: #fff; font-size: 28px; font-weight: 900; padding: 6px 20px; border-radius: 999px; white-space: nowrap; z-index: 3; }
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage"><div class="abs" id="area">
+
+  <!-- s1: 열두 개 중 열한 개가 빵 색 -->
+  <div class="scene" id="s1">
+    <div class="real" id="s1-real" style="left:0;top:0">실제 Claude 결과물 · 1차 로고 열두 개</div>
+    <div class="lgrid4" id="s1-grid" data-r1 style="left:100px;top:60px;width:760px;gap:12px"></div>
+    <div class="cnt" id="s1-c" style="left:250px;top:660px;background:#C7772E"><small>빵 색</small>11 / 12</div>
+  </div>
+
+  <!-- s2: 영어 한 줄, 빵·밀 그림 -->
+  <div class="scene" id="s2">
+    <div class="lgrid4" id="s2-grid" data-r1 style="left:100px;top:0;width:760px;gap:12px"></div>
+    <div class="cnt" id="s2-c1" style="left:60px;top:610px;background:var(--blue)"><small>영어 한 줄</small>10 / 12</div>
+    <div class="cnt" id="s2-c2" style="left:500px;top:610px;background:var(--orange)"><small>빵·밀 그림</small>6 / 12</div>
+  </div>
+
+  <!-- s3: 흔한 쪽으로 -->
+  <div class="scene" id="s3">
+    <div class="abs" id="s3-yj" data-char="yj:laptop:proud:designer" style="left:40px;top:300px;width:420px;height:588px"></div>
+    <div class="ab" id="s3-ab" style="left:440px;top:120px;width:500px;font-size:36px">빵집이면 빵 색이죠!<br>영어도 한 줄 넣고요!</div>
+    <div class="sticker" id="s3-st" style="left:500px;top:420px;font-size:46px">그럴듯한 = 흔한</div>
+    <div class="abs" id="s3-sian" data-char="person:sian:skeptic" style="left:640px;top:560px;width:240px;height:336px"></div>
+  </div>
+
+  <!-- s4: 연구 -->
+  <div class="scene" id="s4">
+    <div class="paper" id="s4-p" style="left:0;top:20px;width:960px">
+      <div class="src">Doshi &amp; Hauser · Science Advances (2024)</div>
+      <div class="tt">Generative AI enhances individual creativity but reduces the collective diversity of novel content</div>
+      <div class="row" id="s4-r1"><i style="background:var(--mint)">↑</i>AI 아이디어를 받아 쓴 이야기는 더 창의적이고 잘 쓴 글로 평가됐다</div>
+      <div class="row" id="s4-r2"><i style="background:var(--red)">↓</i><span>하지만 이야기들끼리는 <span class="hlt" id="s4-hl">서로 더 비슷해졌다</span></span></div>
+      <div style="font-size:22px;font-weight:700;color:var(--sub);margin-top:20px">온라인 실험 · 글쓴이 293명, 평가자 600명</div>
+    </div>
+    <div class="abs" id="s4-sian" data-char="person:sian:shock" style="left:360px;top:620px;width:220px;height:308px"></div>
+  </div>
+
+  <!-- s5: 뻔한 것부터 꼽기 -->
+  <div class="scene" id="s5">
+    <div class="demo" style="right:0;top:0">지시: "빵집 로고에서 뻔한 거 열 개, 우리 시안에서 몇 개가 썼는지도"</div>
+    <div class="img" id="s5-cl" style="left:0;top:60px;width:960px;height:665px"><img src="../design/logo/png/Cliche.png" alt=""></div>
+    <div class="real" id="s5-real" style="left:0;top:750px">실제 Claude 결과물</div>
+  </div>
+
+  <!-- s6: 다 빼고 다시 → 빵집인지 모르겠다 -->
+  <div class="scene" id="s6">
+    <div class="real" id="s6-real" style="left:0;top:0">실제 결과 · 뻔한 것 열 개를 다 빼고</div>
+    <div class="img" id="s6-d1" style="left:0;top:70px;width:300px;height:300px"><img src="../design/logo/png/D1.png" alt=""><div class="mk x" id="s6-m1">버려</div></div>
+    <div class="img" id="s6-d2" style="left:330px;top:70px;width:300px;height:300px"><img src="../design/logo/png/D2.png" alt=""><div class="mk t" id="s6-m2">보강</div></div>
+    <div class="img" id="s6-d3" style="left:660px;top:70px;width:300px;height:300px"><img src="../design/logo/png/D3.png" alt=""><div class="mk x" id="s6-m3">버려</div></div>
+    <div class="why" id="s6-w1" style="left:0;top:390px">지하철 안내판 같아</div>
+    <div class="why" id="s6-w3" style="left:640px;top:390px">빵집인지 모르겠어</div>
+    <div class="abs" id="s6-sian" data-char="person:sian:skeptic" style="left:360px;top:500px;width:260px;height:364px"></div>
+  </div>
+
+  <!-- s7: 빵 색은 하나만 -->
+  <div class="scene" id="s7">
+    <div class="pill" id="s7-l1" style="left:120px;top:0;background:#7A6E62">다 뺀 것</div>
+    <div class="pill" id="s7-l2" style="left:580px;top:0;background:var(--mint)">빵 색 하나 남김</div>
+    <div class="img" id="s7-a" style="left:40px;top:60px;width:400px;height:400px"><img src="../design/logo/png/D2.png" alt=""></div>
+    <div class="img" id="s7-b" style="left:520px;top:60px;width:400px;height:400px"><img src="../design/logo/png/D2b.png" alt=""></div>
+    <div class="ub" id="s7-ub" style="left:120px;right:auto;top:520px;font-size:36px;line-height:1.45">맨 아래 띠 하나만 크러스트 갈색으로.<br>빵 색은 그거 하나만.</div>
+    <div class="real" id="s7-real" style="left:520px;top:480px">실제 결과 · 보강</div>
+    <div class="abs" id="s7-sian" data-char="person:sian:proud" style="left:680px;top:660px;width:190px;height:266px"></div>
+  </div>
+
+  <!-- s8: 결론 -->
+  <div class="scene" id="s8">
+    <div class="abs" data-chair style="left:350px;top:0;width:260px;height:364px"></div>
+    <div class="abs" id="s8-sian" data-char="person:sian:proud" style="left:370px;top:10px;width:220px;height:308px"></div>
+    <div class="abs conclude" id="s8-c" style="top:400px"><div class="k">오늘의 결론</div><div class="t">뻔한 걸 알고<br><span>골라서 남긴다</span></div></div>
+  </div>
+
+</div></div></div>
+<script src="timeline.js"></script>
+<script src="../../lib/engine.js"></script>
+<script src="../s2.js"></script>
+<script>
+// 시안 코드와 그림에서 실제로 센 것 (design/logo/png/Cliche.png와 같은 기준)
+const WARM = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12];          // 빵 색(갈색·주황·노랑) 11개, 11번만 없음
+const ENG = [1, 2, 3, 4, 5, 6, 7, 9, 11, 12];              // 영문 한 줄 10개
+const BREAD = [2, 6, 7, 8, 10, 11];                        // 빵·밀 그림 6개
+WARM.forEach(n => cell('s1-grid', n).insertAdjacentHTML('beforeend', '<div class="dot"></div>'));
+ENG.forEach(n => cell('s2-grid', n).insertAdjacentHTML('beforeend', '<div class="tg en">영문</div>'));
+BREAD.forEach(n => cell('s2-grid', n).insertAdjacentHTML('beforeend', '<div class="tg br">빵·밀</div>'));
+
+start({
+  s1(t, d, m, W) {
+    fade($('s1-real'), t, 0.2, 0.3);
+    for (let i = 1; i <= 12; i++) pop(cell('s1-grid', i), t, 0.1 + (i - 1) * 0.04, 0.25);
+    const at = when(W, '열두') - 0.2;
+    $$('#s1-grid .dot').forEach((el, i) => pop(el, t, at + i * 0.08, 0.25));
+    cell('s1-grid', 11).classList.toggle('dim', t >= when(W, '열한') + 0.4);
+    pop($('s1-c'), t, when(W, '열한') - 0.1, 0.4, -3);
+  },
+
+  s2(t, d, m, W) {
+    for (let i = 1; i <= 12; i++) pop(cell('s2-grid', i), t, 0.05 + (i - 1) * 0.03, 0.2);
+    const a = when(W, '열') - 0.1, b = when(W, '절반은') - 0.1;
+    $$('#s2-grid .tg.en').forEach((el, i) => pop(el, t, a + i * 0.06, 0.25));
+    pop($('s2-c1'), t, a + 0.5, 0.35, -3);
+    $$('#s2-grid .tg.br').forEach((el, i) => pop(el, t, b + i * 0.08, 0.25));
+    pop($('s2-c2'), t, b + 0.5, 0.35, 3);
+  },
+
+  s3(t, d, m, W) {
+    rise($('s3-yj'), t, 0.1, 0.4, 60);
+    pop($('s3-ab'), t, 0.3, 0.35);
+    pop($('s3-st'), t, when(W, '흔한') - 0.1, 0.4, -3);
+    rise($('s3-sian'), t, when(W, '몰리기') - 0.2, 0.4, 60);
+  },
+
+  s4(t, d, m, W) {
+    rise($('s4-p'), t, 0.1, 0.4, 40);
+    fade($('s4-r1'), t, when(W, '하나하나') - 0.2, 0.3);
+    fade($('s4-r2'), t, when(W, '서로') - 0.2, 0.3);
+    $('s4-hl').classList.toggle('hlt', t >= when(W, '비슷해졌어요.') - 0.1);
+    rise($('s4-sian'), t, when(W, '서로') - 0.1, 0.4, 60);
+  },
+
+  s5(t, d, m, W) {
+    rise($('s5-cl'), t, 0.1, 0.4, 40);
+    fade($('s5-real'), t, 0.4, 0.3);
+  },
+
+  s6(t, d, m, W) {
+    fade($('s6-real'), t, 0.2, 0.3);
+    ['d1', 'd2', 'd3'].forEach((k, i) => pop($(`s6-${k}`), t, 0.15 + i * 0.15, 0.35));
+    rise($('s6-sian'), t, 0.4, 0.4, 60);
+    const v = when(W, '빵집인지') - 0.3;
+    pop($('s6-m1'), t, v, 0.3, -6);
+    pop($('s6-w1'), t, v + 0.1, 0.3);
+    pop($('s6-m3'), t, v + 0.4, 0.3, -6);
+    pop($('s6-w3'), t, v + 0.5, 0.3);
+    pop($('s6-m2'), t, v + 0.9, 0.3, -6);
+  },
+
+  s7(t, d, m, W) {
+    pop($('s7-l1'), t, 0.1, 0.3);
+    pop($('s7-a'), t, 0.1, 0.35);
+    const k = when(W, '하나만') - 0.3;
+    pop($('s7-b'), t, k, 0.4);
+    pop($('s7-l2'), t, k + 0.1, 0.3);
+    fade($('s7-real'), t, k + 0.3, 0.3);
+    pop($('s7-ub'), t, 0.3, 0.35);
+    rise($('s7-sian'), t, k, 0.4, 60);
+  },
+
+  s8(t, d, m, W) {
+    rise($('s8-sian'), t, 0.1, 0.4, 60);
+    pop($('s8-c'), t, Math.max(when(W, '골라서') - 0.4, 0.6), 0.45);
+  },
+});
+</script>
+</body>
+</html>

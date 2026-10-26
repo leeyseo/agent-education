@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>디자이너 편 EP13 '느낌'을 말로 바꾸기</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700;900&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../../lib/base.css">
+<link rel="stylesheet" href="../s2.css">
+<style>
+  /* 브로셔 캔버스의 표지 두 벌 (Cover-V1: 그대로 넘김, Cover-V2: 말로 바꿔 넘김) */
+  .cv { position: absolute; border-radius: 10px; overflow: hidden; box-shadow: 0 14px 30px rgba(60, 40, 20, .2); }
+  .cv img { display: block; width: 100%; height: 100%; }
+  .pill { position: absolute; color: #fff; font-size: 28px; font-weight: 900; padding: 6px 20px; border-radius: 999px; white-space: nowrap; z-index: 3; }
+  .q { position: absolute; background: #fff; border: 3px solid var(--line); border-radius: 22px; padding: 18px 24px; font-size: 34px;
+    font-weight: 800; line-height: 1.4; box-shadow: 0 10px 22px rgba(60, 40, 20, .1); white-space: nowrap; }
+  .arr { position: absolute; font-size: 64px; font-weight: 900; color: #C2B39F; }
+  .rule { position: absolute; left: 0; width: 960px; display: flex; align-items: center; gap: 20px; background: #fff; border: 3px solid var(--line);
+    border-radius: 20px; padding: 16px 24px; font-size: 36px; font-weight: 800; }
+  .rule i { font-style: normal; width: 52px; height: 52px; flex: none; border-radius: 50%; background: #E3DAD0; color: #fff; font-size: 28px;
+    display: flex; align-items: center; justify-content: center; }
+  .rule.on { border-color: var(--mint); }
+  .rule.on i { background: var(--mint); }
+  .rule small { margin-left: auto; font-size: 24px; color: var(--sub); font-weight: 700; }
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage"><div class="abs" id="area">
+
+  <!-- s1: 넘기는 말만 바꿨더니 -->
+  <div class="scene" id="s1">
+    <div class="real" id="s1-real" style="left:0;top:0">실제 Claude 결과물 · 브로셔 표지</div>
+    <div class="pill" id="s1-l1" style="left:160px;top:70px;background:#7A6E62">그대로 넘김</div>
+    <div class="pill" id="s1-l2" style="left:520px;top:70px;background:var(--mint)">말로 바꿔 넘김</div>
+    <div class="cv" id="s1-v1" style="left:130px;top:130px;width:330px;height:701px"><img src="../design/brochure/png/Cover-V1.png" alt=""></div>
+    <div class="cv" id="s1-v2" style="left:500px;top:130px;width:330px;height:701px"><img src="../design/brochure/png/Cover-V2.png" alt=""></div>
+  </div>
+
+  <!-- s2: 사장님 말 -->
+  <div class="scene" id="s2">
+    <div class="abs" id="s2-owner" data-char="person:owner:grin" style="left:20px;top:260px;width:320px;height:448px"></div>
+    <div class="ub" id="s2-ub" style="left:330px;right:auto;top:120px;font-size:40px;line-height:1.45;border-radius:30px 30px 30px 8px;background:#7A6E62">좀 더 고급스럽게?<br>근데 <span style="color:var(--yellow)">비싸 보이면</span> 안 돼요.</div>
+    <div class="abs" id="s2-sian" data-char="person:sian:oops" style="left:640px;top:480px;width:260px;height:364px"></div>
+    <div class="sticker yellow" id="s2-st" style="left:360px;top:420px">이걸 어떻게 넘기지?</div>
+  </div>
+
+  <!-- s3: 그대로 넘겼더니 -->
+  <div class="scene" id="s3">
+    <div class="ub" id="s3-ub" style="left:0;right:auto;top:0;font-size:32px">좀 더 고급스럽게 해 줘.</div>
+    <div class="cv" id="s3-v1" style="left:0;top:100px;width:380px;height:807px"><img src="../design/brochure/png/Cover-V1.png" alt=""></div>
+    <div class="real" id="s3-real" style="left:420px;top:110px">실제 결과 · 그대로 넘김</div>
+    <div class="sticker" id="s3-s1" style="left:430px;top:220px">검정 + 금색</div>
+    <div class="sticker orange" id="s3-s2" style="left:430px;top:360px;font-size:38px">오픈 날짜는 작은 영어로</div>
+    <div class="sticker red" id="s3-s3" style="left:470px;top:520px">비싸 보여요</div>
+    <div class="abs" id="s3-owner" data-char="person:owner:shock" style="left:640px;top:620px;width:220px;height:308px"></div>
+  </div>
+
+  <!-- s4: 고칠 수 있는 말로 -->
+  <div class="scene" id="s4">
+    <div class="q" id="s4-q1" style="left:0;top:40px">"좀 더 고급스럽게"</div>
+    <div class="q" id="s4-q2" style="left:0;top:180px">"비싸 보이면 안 돼요"</div>
+    <div class="arr" id="s4-ar" style="left:440px;top:330px">↓</div>
+    <div class="doc" id="s4-doc" style="left:0;top:440px;width:960px;text-align:center">
+      <div class="dh" style="font-size:56px;margin:0">고칠 수 있는 말</div>
+      <div style="font-size:30px;font-weight:700;color:var(--sub);margin-top:8px">색 · 크기 · 간격 · 무엇을 빼고 남길지</div>
+    </div>
+    <div class="abs" id="s4-sian" data-char="person:sian:proud" style="left:700px;top:20px;width:240px;height:336px"></div>
+  </div>
+
+  <!-- s5: 규칙 다섯 -->
+  <div class="scene" id="s5">
+    <div class="rule" id="s5-r1" style="top:0"><i>1</i>색은 남색·갈색 두 개만<small>고급스럽게</small></div>
+    <div class="rule" id="s5-r2" style="top:110px"><i>2</i>제목 자간 넓게, 한 단계 작게<small>고급스럽게</small></div>
+    <div class="rule" id="s5-r3" style="top:220px"><i>3</i>여백은 지금의 두 배<small>고급스럽게</small></div>
+    <div class="rule" id="s5-r4" style="top:330px"><i>4</i>장식은 빼기<small>고급스럽게</small></div>
+    <div class="rule" id="s5-r5" style="top:460px;border-width:4px"><i>5</i>'12월 첫 주 오픈'은 크게 그대로<small>비싸 보이면 안 돼요</small></div>
+    <div class="demo" style="left:0;top:600px">실제로 보낸 지시를 다섯 줄로 나눈 것</div>
+    <div class="abs" id="s5-sian" data-char="person:sian:skeptic" style="left:380px;top:660px;width:200px;height:280px"></div>
+  </div>
+
+  <!-- s6: 고급스러운데 동네 빵집 -->
+  <div class="scene" id="s6">
+    <div class="cv" id="s6-v2" style="left:0;top:40px;width:380px;height:807px"><img src="../design/brochure/png/Cover-V2.png" alt=""></div>
+    <div class="real" id="s6-real" style="left:420px;top:50px">실제 결과 · 말로 바꿔 넘김</div>
+    <div class="sticker mint" id="s6-st" style="left:440px;top:170px;font-size:40px">여백 두 배 · 장식 뺌</div>
+    <div class="sticker orange" id="s6-st2" style="left:440px;top:300px;font-size:40px">오픈 날짜는 크게</div>
+    <div class="abs" id="s6-owner" data-char="person:owner:smile" style="left:560px;top:460px;width:300px;height:420px"></div>
+  </div>
+
+  <!-- s7: 결론 -->
+  <div class="scene" id="s7">
+    <div class="abs" data-chair style="left:350px;top:0;width:260px;height:364px"></div>
+    <div class="abs" id="s7-sian" data-char="person:sian:proud" style="left:370px;top:10px;width:220px;height:308px"></div>
+    <div class="abs conclude" id="s7-c" style="top:400px"><div class="k">오늘의 결론</div><div class="t">느낌은<br><span>숫자와 규칙으로</span></div></div>
+  </div>
+
+</div></div></div>
+<script src="timeline.js"></script>
+<script src="../../lib/engine.js"></script>
+<script src="../s2.js"></script>
+<script>
+start({
+  s1(t, d, m, W) {
+    fade($('s1-real'), t, 0.2, 0.3);
+    pop($('s1-v1'), t, 0.15, 0.4, -2);
+    pop($('s1-v2'), t, when(W, '바꿨더니') - 0.1, 0.4, 2);
+    pop($('s1-l1'), t, 0.3, 0.3);
+    pop($('s1-l2'), t, when(W, '바꿨더니'), 0.3);
+  },
+
+  s2(t, d, m, W) {
+    rise($('s2-owner'), t, 0.1, 0.4, 60);
+    pop($('s2-ub'), t, when(W, "'좀") - 0.1, 0.35);
+    rise($('s2-sian'), t, when(W, '비싸') - 0.2, 0.4, 60);
+    pop($('s2-st'), t, when(W, '비싸') + 0.5, 0.4, -3);
+  },
+
+  s3(t, d, m, W) {
+    pop($('s3-ub'), t, 0.1, 0.35);
+    rise($('s3-v1'), t, 0.3, 0.4, 40);
+    fade($('s3-real'), t, 0.5, 0.3);
+    pop($('s3-s1'), t, when(W, '검정에') - 0.1, 0.35, -3);
+    pop($('s3-s2'), t, when(W, '오픈') - 0.1, 0.35, 2);
+    rise($('s3-owner'), t, when(W, '자기') - 0.2, 0.4, 60);
+    pop($('s3-s3'), t, when(W, '고급스러워졌어요.') + 0.3, 0.35, -4);
+  },
+
+  s4(t, d, m, W) {
+    rise($('s4-q1'), t, 0.1, 0.3, 30);
+    rise($('s4-q2'), t, 0.3, 0.3, 30);
+    fade($('s4-ar'), t, 0.6, 0.3);
+    pop($('s4-doc'), t, when(W, '고칠') - 0.1, 0.4);
+    rise($('s4-sian'), t, 0.2, 0.4, 60);
+  },
+
+  s5(t, d, m, W) {
+    const keys = ['색은', '자간은', '여백은', '장식은', '오픈'];
+    keys.forEach((k, i) => {
+      const el = $(`s5-r${i + 1}`), at = when(W, k) - 0.1;
+      rise(el, t, Math.min(0.1 + i * 0.12, at), 0.3, 20);
+      el.classList.toggle('on', t >= at);
+    });
+    rise($('s5-sian'), t, 0.4, 0.4, 60);
+  },
+
+  s6(t, d, m, W) {
+    rise($('s6-v2'), t, 0.1, 0.4, 40);
+    fade($('s6-real'), t, 0.3, 0.3);
+    pop($('s6-st'), t, 0.5, 0.35, -3);
+    pop($('s6-st2'), t, 0.8, 0.35, 2);
+    rise($('s6-owner'), t, when(W, '동네') - 0.3, 0.4, 60);
+  },
+
+  s7(t, d, m, W) {
+    rise($('s7-sian'), t, 0.1, 0.4, 60);
+    pop($('s7-c'), t, Math.max(when(W, '숫자와') - 0.4, 0.6), 0.45);
+  },
+});
+</script>
+</body>
+</html>

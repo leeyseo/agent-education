@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>디자이너 편 EP17 결정은 사람이 한다</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700;900&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../../lib/base.css">
+<link rel="stylesheet" href="../s2.css">
+<style>
+  .fname { position: absolute; font: 24px var(--mono); color: var(--sub); white-space: nowrap; }
+  /* 지금까지 만든 실제 시안 마흔여섯 개 */
+  .wall { position: absolute; display: grid; grid-template-columns: repeat(8, 100px); gap: 8px; }
+  .wall div { width: 100px; height: 100px; border-radius: 10px; overflow: hidden; background: #fff; border: 2px solid var(--line); opacity: 0; }
+  .wall img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .count { position: absolute; font-family: 'Black Han Sans', sans-serif; font-size: 120px; color: #fff; background: var(--ink); border-radius: 30px;
+    padding: 6px 40px; box-shadow: 0 16px 34px rgba(0, 0, 0, .25); white-space: nowrap; }
+  .count small { font-family: 'Noto Sans KR', sans-serif; font-size: 34px; font-weight: 900; margin-left: 10px; }
+  .pick { position: absolute; background: #fff; border-radius: 14px; overflow: hidden; border: 4px solid var(--mint); box-shadow: 0 12px 26px rgba(60, 40, 20, .14); }
+  .pick img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .pick.crop img { position: absolute; width: auto; height: 100%; object-fit: initial; }
+  .pill { position: absolute; color: #fff; font-size: 28px; font-weight: 900; padding: 6px 20px; border-radius: 999px; white-space: nowrap; background: var(--ink); }
+  .qt { position: absolute; background: #fff; border: 3px solid var(--line); border-radius: 22px; padding: 14px 20px; font-size: 30px; font-weight: 800;
+    line-height: 1.4; box-shadow: 0 10px 22px rgba(60, 40, 20, .12); max-width: 560px; }
+  .qt i { display: block; font-style: normal; font-size: 20px; font-weight: 900; color: var(--sub); margin-bottom: 2px; }
+  .duo { position: absolute; top: 40px; width: 420px; text-align: center; }
+  .duo .lab { font-family: 'Black Han Sans', sans-serif; font-size: 56px; margin-top: 14px; line-height: 1.2; }
+  .plus { position: absolute; left: 432px; top: 250px; font-family: 'Black Han Sans', sans-serif; font-size: 110px; color: #C2B39F; }
+  .clone { position: absolute; width: 170px; height: 272px; }
+  .end { position: absolute; left: 0; top: 0; width: 960px; height: 900px; background: var(--ink); border-radius: 40px; color: #fff; text-align: center;
+    padding-top: 56px; overflow: hidden; }
+  .end .s { font-size: 34px; font-weight: 900; color: var(--yellow); }
+  .end .t { font-family: 'Black Han Sans', sans-serif; font-size: 96px; margin-top: 10px; letter-spacing: -2px; line-height: 1.1; }
+  .end .u { font-family: 'Black Han Sans', sans-serif; font-size: 64px; margin-top: 22px; }
+  .end .u span { color: var(--yellow); }
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage"><div class="abs" id="area">
+
+  <!-- s1: 사흘에 시안 하나 -->
+  <div class="scene" id="s1">
+    <div class="tag-old" style="left:0;top:0;position:absolute">처음</div>
+    <div class="lg" data-logo="L03" id="s1-one" style="left:290px;top:90px;width:380px;height:380px"></div>
+    <div class="fname" id="s1-fn" style="left:250px;top:490px">로고_최종_진짜최종_v17.psd</div>
+    <div class="abs" id="s1-sian" data-char="person:sian:oops" style="left:360px;top:560px;width:240px;height:336px"></div>
+    <div class="sticker red" id="s1-st" style="left:640px;top:600px">사흘</div>
+  </div>
+
+  <!-- s2: 마흔여섯 개 -->
+  <div class="scene" id="s2">
+    <div class="real" id="s2-real" style="left:0;top:0">지금까지 만든 실제 Claude 결과물</div>
+    <div class="wall" id="s2-wall" style="left:52px;top:60px"></div>
+    <div class="count" id="s2-c" style="left:300px;top:735px"><span id="s2-n">0</span><small>개</small></div>
+  </div>
+
+  <!-- s3: 끝까지 남은 것 -->
+  <div class="scene" id="s3">
+    <div class="pill" id="s3-l1" style="left:90px;top:0">로고</div>
+    <div class="pill" id="s3-l2" style="left:400px;top:0">브로셔</div>
+    <div class="pill" id="s3-l3" style="left:730px;top:0">홈페이지</div>
+    <div class="pick" id="s3-a" style="left:0;top:60px;width:300px;height:300px"><img src="../design/logo/png/B1.png" alt=""></div>
+    <div class="pick" id="s3-a2" style="left:0;top:380px;width:300px;height:115px"><img src="../design/logo/png/B2.png" alt=""></div>
+    <div class="pick" id="s3-b" style="left:330px;top:60px;width:142px;height:300px"><img src="../design/brochure/png/Cover-V2.png" alt=""></div>
+    <div class="pick crop" id="s3-b2" style="left:484px;top:60px;width:142px;height:300px"><img src="../design/brochure/png/Mix-3.png" alt="" style="left:-142px"></div>
+    <div class="pick" id="s3-c" style="left:656px;top:60px;width:300px;height:620px"><img src="../design/homepage/png/Main@390.png" alt=""></div>
+    <div class="abs" id="s3-sian" data-char="person:sian:proud" style="left:150px;top:540px;width:240px;height:336px"></div>
+  </div>
+
+  <!-- s4: 전부 사람이 말했다 -->
+  <div class="scene" id="s4">
+    <div class="qt" id="s4-q1" style="left:0;top:0"><i>EP4 · 로고</i>6, 11, 12번 버려. 카페 로고랑 구분이 안 돼.</div>
+    <div class="qt" id="s4-q2" style="left:430px;top:130px"><i>EP4 · 로고</i>색은 두 개만.</div>
+    <div class="qt" id="s4-q3" style="left:0;top:240px"><i>EP6 · 회의실 규칙</i>자료에 없는 건 지어내지 말고 '확인 필요'라고 표시해.</div>
+    <div class="qt" id="s4-q4" style="left:440px;top:420px"><i>EP11 · 홈페이지</i>메뉴와 가격은 사장님이 직접 고칠 수 있게.</div>
+    <div class="qt" id="s4-q5" style="left:0;top:560px"><i>EP12 · 첫 화면</i>5번 버려. 시계는 편의점 같아.</div>
+    <div class="qt" id="s4-q6" style="left:430px;top:640px"><i>EP15 · 로고</i>빵 색은 그거 하나만.</div>
+    <div class="abs" id="s4-sian" data-char="person:sian:skeptic" style="left:40px;top:690px;width:160px;height:224px"></div>
+  </div>
+
+  <!-- s5: AI는 많이, 사람은 고르고 책임 -->
+  <div class="scene" id="s5">
+    <div class="duo" id="s5-l" style="left:0"><div data-char="yj:laptop:smile:designer" style="width:340px;height:476px;margin:0 auto"></div><div class="lab cm">많이 만든다</div></div>
+    <div class="plus" id="s5-plus">+</div>
+    <div class="duo" id="s5-r" style="left:540px"><div data-char="person:sian:skeptic" style="width:340px;height:476px;margin:0 auto"></div><div class="lab">고르고<br>책임진다</div></div>
+  </div>
+
+  <!-- s6: 결정은 빌려줄 수 없다 -->
+  <div class="scene" id="s6">
+    <div class="clone" id="s6-c1" data-char="yj:stand:smile:analyst" style="left:0;top:40px"></div>
+    <div class="clone" id="s6-c2" data-char="yj:stand:smile:planner" style="left:790px;top:40px"></div>
+    <div class="clone" id="s6-c3" data-char="yj:stand:proud:designer" style="left:20px;top:420px"></div>
+    <div class="clone" id="s6-c4" data-char="yj:stand:smile:copy" style="left:770px;top:420px"></div>
+    <div class="clone" id="s6-c5" data-char="yj:stand:skeptic:critic" style="left:395px;top:600px"></div>
+    <div class="abs" data-chair style="left:300px;top:60px;width:360px;height:504px"></div>
+    <div class="abs" id="s6-sian" data-char="person:sian:proud" style="left:330px;top:70px;width:300px;height:420px"></div>
+    <div class="sticker" id="s6-st" style="left:360px;top:500px;font-size:52px">결정</div>
+  </div>
+
+  <!-- s7: 엔딩 -->
+  <div class="scene" id="s7">
+    <div class="end" id="s7-end">
+      <div class="s">디자이너 편 끝</div>
+      <div class="t">AI 신입 길들이기</div>
+      <div class="u">이제 <span>당신이 CDO</span>입니다</div>
+      <div class="abs" data-chair style="left:320px;top:400px;width:320px;height:448px"></div>
+      <div class="abs" id="s7-sian" data-char="person:sian:proud" style="left:345px;top:410px;width:270px;height:378px"></div>
+      <div class="abs" id="s7-yj" data-char="yj:cheer:proud:designer" style="left:40px;top:470px;width:230px;height:368px"></div>
+      <div class="abs" id="s7-cr" data-char="yj:stand:smile:critic" style="left:700px;top:490px;width:220px;height:352px"></div>
+    </div>
+  </div>
+
+</div></div></div>
+<script src="timeline.js"></script>
+<script src="../../lib/engine.js"></script>
+<script>
+// s2: 세 캔버스의 시안 마흔여섯 개 (정리용 시트는 뺌)
+const WALL = [
+  ...['Main', 'L02', 'L03', 'L04', 'L05', 'L06', 'L07', 'L08', 'L09', 'L10', 'L11', 'L12', 'A02', 'A04', 'A08', 'B1', 'B3', 'B2', 'C1', 'C2', 'D1', 'D2', 'D3', 'D2b'].map(n => `logo/png/${n}`),
+  ...['LA-out', 'LA-in', 'LB-out', 'LB-in', 'Cover-V1', 'Cover-V2', 'Mix-1', 'Mix-2', 'Mix-3'].map(n => `brochure/png/${n}`),
+  ...['Mood-A', 'Mood-B', 'Mood-C', 'Main', 'Menu', 'Stores', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H2b'].map(n => `homepage/png/${n}`),
+];
+$('s2-wall').innerHTML = WALL.map(p => `<div><img src="../design/${p}.png" alt=""></div>`).join('');
+</script>
+<script src="../s2.js"></script>
+<script>
+start({
+  s1(t, d, m, W) {
+    pop($('s1-one'), t, 0.15, 0.4, -2);
+    fade($('s1-fn'), t, 0.4, 0.3);
+    rise($('s1-sian'), t, 0.3, 0.4, 60);
+    pop($('s1-st'), t, when(W, '사흘.') - 0.1, 0.4, -4);
+  },
+
+  s2(t, d, m, W) {
+    fade($('s2-real'), t, 0.2, 0.3);
+    const tiles = $$('#s2-wall div'), at = 0.2, span = Math.max(when(W, '마흔여섯') - 0.4, 1.2);
+    tiles.forEach((el, i) => pop(el, t, at + (span - at) * i / tiles.length, 0.25));
+    pop($('s2-c'), t, when(W, '마흔여섯') - 0.4, 0.35);
+    countTo($('s2-n'), t, when(W, '마흔여섯') - 0.4, 0.6, WALL.length);
+  },
+
+  s3(t, d, m, W) {
+    ['l1', 'l2', 'l3'].forEach((k, i) => pop($(`s3-${k}`), t, 0.1 + i * 0.12, 0.3));
+    ['a', 'a2', 'b', 'b2', 'c'].forEach((k, i) => pop($(`s3-${k}`), t, 0.2 + i * 0.12, 0.35));
+    rise($('s3-sian'), t, when(W, '손에') - 0.2, 0.4, 60);
+  },
+
+  s4(t, d, m, W) {
+    const at = 0.15, gap = Math.max((when(W, '전부') - 0.3 - at) / 6, 0.15);
+    for (let i = 1; i <= 6; i++) pop($(`s4-q${i}`), t, at + (i - 1) * gap, 0.3, i % 2 ? -1.5 : 1.5);
+    rise($('s4-sian'), t, when(W, '전부') - 0.1, 0.4, 60);
+  },
+
+  s5(t, d, m, W) {
+    rise($('s5-l'), t, 0.1, 0.4, 50);
+    fade($('s5-plus'), t, when(W, '사람은') - 0.3, 0.3);
+    rise($('s5-r'), t, when(W, '사람은') - 0.2, 0.4, 50);
+  },
+
+  s6(t, d, m, W) {
+    for (let i = 1; i <= 5; i++) rise($(`s6-c${i}`), t, 0.1 + i * 0.1, 0.35, 40);
+    rise($('s6-sian'), t, 0.2, 0.4, 50);
+    pop($('s6-st'), t, when(W, '결정은') - 0.1, 0.4, -3);
+  },
+
+  s7(t, d, m, W) {
+    pop($('s7-end'), t, 0.1, 0.45);
+    rise($('s7-yj'), t, 0.6, 0.4, 60);
+    rise($('s7-sian'), t, 0.8, 0.4, 60);
+    rise($('s7-cr'), t, 1.0, 0.4, 60);
+  },
+});
+</script>
+</body>
+</html>

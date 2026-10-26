@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>디자이너 편 EP9 로고, 열둘에서 하나로</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700;900&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../../lib/base.css">
+<link rel="stylesheet" href="../s2.css">
+<style>
+  #s1-grid .no { display: none; }
+  #s1-grid .lg { border-radius: 12px; border-width: 2px; }
+  .down { position: absolute; font-size: 56px; font-weight: 900; color: #C2B39F; }
+  .kwc { position: absolute; font-family: 'Black Han Sans', sans-serif; font-size: 72px; color: #fff; background: var(--orange);
+    padding: 14px 40px; border-radius: 28px; box-shadow: 0 12px 26px rgba(0, 0, 0, .16); white-space: nowrap; }
+  .kw { border-radius: 8px; padding: 0 4px; }
+  .kw.on { background: var(--yellow); color: var(--ink); }
+  .lbl { position: absolute; background: var(--ink); color: #fff; font-size: 28px; font-weight: 900; padding: 6px 18px;
+    border-radius: 999px; white-space: nowrap; z-index: 3; }
+  /* 크기 시험(C3.png)의 명함 크기 로고를 4배로 보는 확대경 */
+  .lens { position: absolute; width: 460px; height: 280px; border-radius: 22px; overflow: hidden; background: #fff;
+    border: 4px solid var(--ink); box-shadow: 0 14px 30px rgba(0, 0, 0, .18); }
+  .lens img { position: absolute; width: 4160px; height: 2880px; image-rendering: pixelated; }
+  .lens .lbl { left: 12px; top: 10px; font-size: 22px; padding: 4px 14px; }
+  .codep { position: absolute; background: #27231F; color: #F7E3C0; border-radius: 22px; padding: 22px 24px; font: 22px/1.55 var(--mono);
+    white-space: pre; overflow: hidden; box-shadow: 0 14px 30px rgba(0, 0, 0, .2); }
+  .codep .c { color: #9A8F82; }
+  .codep .t { color: #FFB27A; }
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage"><div class="abs" id="area">
+
+  <!-- s1: 열두 개에서 간판까지 -->
+  <div class="scene" id="s1">
+    <div class="lgrid4" id="s1-grid" data-r1 style="left:280px;top:30px;width:400px;gap:8px"></div>
+    <div class="down" id="s1-dn" style="left:452px;top:318px">↓</div>
+    <div class="lg" data-logo="C1" id="s1-sign" style="left:60px;top:400px;width:840px;height:517px"></div>
+    <div class="real" id="s1-real" style="left:60px;top:376px;z-index:3">실제 Claude 결과물</div>
+  </div>
+
+  <!-- s2: 가게를 단어 세 개로 -->
+  <div class="scene" id="s2">
+    <div class="doc" id="s2-doc" style="left:0;top:0;width:960px">
+      <div class="dh">기획서 · 가게 소개</div>
+      <div class="dl"><span class="kw" id="s2-k3">2012년</span>에 문을 연 <span class="kw" id="s2-k2">동네</span> 빵집</div>
+      <div class="dl">사장님이 매일 <span class="kw" id="s2-k1">새벽</span> 5시에 오븐을 켠다</div>
+      <div class="dl">대표 메뉴: 모닝빵, 우유식빵, 소금빵</div>
+    </div>
+    <div class="kwc" id="s2-c1" style="left:40px;top:420px">새벽</div>
+    <div class="kwc" id="s2-c2" style="left:340px;top:420px;background:var(--mint)">동네</div>
+    <div class="kwc" id="s2-c3" style="left:640px;top:420px;background:var(--blue)">2012년</div>
+    <div class="abs" id="s2-sian" data-char="person:sian:smile" style="left:360px;top:600px;width:220px;height:308px"></div>
+  </div>
+
+  <!-- s3: 단어를 넣어 던지기 -->
+  <div class="scene" id="s3">
+    <div class="demo" style="right:0;top:0">예시 화면 · 지시문은 실제로 쓴 것</div>
+    <div class="chat" id="s3-chat" style="left:0;top:60px;width:960px;height:420px">
+      <div class="chd"><i></i>Claude</div>
+      <div class="ub" id="s3-ub" style="top:100px;max-width:840px;font-size:36px;line-height:1.5">모닝빵 베이커리 2호점 오픈해. <span class="kw" id="s3-k1">2012년</span>부터 <span class="kw" id="s3-k2">동네</span>에서 <span class="kw" id="s3-k3">새벽</span>마다 빵 굽는 집이야. 로고 리뉴얼 시안 <span class="kw" id="s3-k4">열두 개</span> 뽑아 줘. <span class="kw" id="s3-k5">방향은 다 다르게.</span></div>
+    </div>
+    <div class="abs" id="s3-sian" data-char="person:sian:grin" style="left:40px;top:540px;width:250px;height:350px"></div>
+    <div class="sticker orange" id="s3-st" style="left:340px;top:660px">개수 + 방향은 다르게</div>
+  </div>
+
+  <!-- s4: 세 개만 남기고 다시 다듬게 -->
+  <div class="scene" id="s4">
+    <div class="lgrid4" id="s4-grid" data-r1 style="left:180px;top:0;width:600px;gap:12px"></div>
+    <div class="down" id="s4-dn" style="left:452px;top:440px">↓</div>
+    <div class="real" id="s4-real" style="left:0;top:520px">실제 결과 · 셋만 다시 다듬은 것</div>
+    <div class="lg" data-logo="B1" id="s4-b1" style="left:0;top:590px;width:300px;height:300px"></div>
+    <div class="lg" data-logo="B3" id="s4-b3" style="left:320px;top:590px;width:300px;height:300px"></div>
+    <div class="lg" data-logo="B2" id="s4-b2" style="left:640px;top:678px;width:320px;height:123px"></div>
+  </div>
+
+  <!-- s5: 쓰일 자리에 놓고 보기 -->
+  <div class="scene" id="s5">
+    <div class="lg" data-logo="C1" id="s5-c1" style="left:100px;top:0;width:760px;height:468px"></div>
+    <div class="lg" data-logo="C2" id="s5-c2" style="left:0;top:488px;width:420px;height:420px"></div>
+    <div class="lg" data-logo="C3" id="s5-c3" style="left:440px;top:518px;width:520px;height:360px"></div>
+    <div class="real" id="s5-real" style="left:80px;top:-20px;z-index:3">실제 Claude 결과물</div>
+    <div class="lbl" id="s5-l1" style="left:700px;top:20px">간판</div>
+    <div class="lbl" id="s5-l2" style="left:20px;top:508px">빵 봉투</div>
+    <div class="lbl" id="s5-l3" style="left:780px;top:534px">명함 크기</div>
+  </div>
+
+  <!-- s6: 작은 글씨부터 뭉개진다 -->
+  <div class="scene" id="s6">
+    <div class="lg" data-logo="C3" id="s6-c3" style="left:70px;top:0;width:820px;height:568px"></div>
+    <div class="lens" id="s6-l1" style="left:0;top:596px"><img src="../design/logo/png/C3.png" alt="" style="left:-2816px;top:-1064px"><div class="lbl">원래 로고 · 명함 크기 4배</div></div>
+    <div class="lens" id="s6-l2" style="left:500px;top:596px"><img src="../design/logo/png/C3.png" alt="" style="left:-2816px;top:-2154px"><div class="lbl">작은 크기용 · 명함 크기 4배</div></div>
+    <div class="sticker red" id="s6-s1" style="left:330px;top:810px;font-size:34px;padding:10px 20px">뭉개짐</div>
+    <div class="sticker mint" id="s6-s2" style="left:850px;top:810px;font-size:34px;padding:10px 20px">읽힘</div>
+  </div>
+
+  <!-- s7: AI 로고는 러프까지 -->
+  <div class="scene" id="s7">
+    <div class="lg" data-logo="B1" id="s7-b1" style="left:0;top:40px;width:400px;height:400px"></div>
+    <div class="codep" id="s7-code" style="left:420px;top:40px;width:540px;height:400px"><span class="c">&lt;!-- B1 로고의 실제 코드 일부 --&gt;</span>
+&lt;svg viewBox="0 0 520 520"&gt;
+ &lt;path d="M134 292
+   C128 236 170 178 250 172
+   C298 168 336 178 360 204
+   …" fill="#C7772E"/&gt;
+ &lt;text …&gt;<span class="t">모닝빵</span>&lt;/text&gt;
+&lt;/svg&gt;</div>
+    <div class="sticker yellow" id="s7-st1" style="left:40px;top:6px">러프</div>
+    <div class="sticker orange" id="s7-st2" style="left:560px;top:400px;font-size:36px;padding:12px 24px">그림이 아니라 코드</div>
+    <div class="abs" id="s7-sian" data-char="person:sian:proud" style="left:40px;top:540px;width:250px;height:350px"></div>
+    <div class="ub" id="s7-ub" style="left:330px;right:auto;top:640px;font-size:38px">선 굵기랑 곡선은<br>내 손으로 마무리</div>
+  </div>
+
+  <!-- s8: 결론 -->
+  <div class="scene" id="s8">
+    <div class="abs" data-chair style="left:350px;top:0;width:260px;height:364px"></div>
+    <div class="abs" id="s8-sian" data-char="person:sian:proud" style="left:370px;top:10px;width:220px;height:308px"></div>
+    <div class="abs conclude" id="s8-c" style="top:400px"><div class="k">오늘의 결론</div><div class="t">넓게 뽑고, 좁게 고르고<br><span>쓰일 자리에서 확인</span></div></div>
+  </div>
+
+</div></div></div>
+<script src="timeline.js"></script>
+<script src="../../lib/engine.js"></script>
+<script src="../s2.js"></script>
+<script>
+start({
+  s1(t, d, m, W) {
+    for (let i = 1; i <= 12; i++) pop(cell('s1-grid', i), t, 0.1 + (i - 1) * 0.05, 0.25);
+    const at = when(W, '간판까지') - 0.2;
+    fade($('s1-dn'), t, at - 0.1, 0.3);
+    rise($('s1-sign'), t, at, 0.45, 60);
+    pop($('s1-real'), t, when(W, '실제로') - 0.1, 0.35);
+  },
+
+  s2(t, d, m, W) {
+    rise($('s2-doc'), t, 0.1, 0.35, 40);
+    rise($('s2-sian'), t, 0.3, 0.4, 60);
+    [['새벽', 1], ['동네', 2], ['2012년', 3]].forEach(([w, k]) => {
+      const at = when(W, w) - 0.1;
+      $(`s2-k${k}`).classList.toggle('on', t >= at);
+      pop($(`s2-c${k}`), t, at, 0.4, k === 2 ? 3 : -3);
+    });
+  },
+
+  s3(t, d, m, W) {
+    rise($('s3-chat'), t, 0.1, 0.35, 40);
+    pop($('s3-ub'), t, 0.35, 0.35);
+    rise($('s3-sian'), t, 0.3, 0.4, 60);
+    const k = when(W, '단어를') - 0.1;
+    [1, 2, 3].forEach(i => $(`s3-k${i}`).classList.toggle('on', t >= k + (i - 1) * 0.15));
+    $('s3-k4').classList.toggle('on', t >= when(W, '열두') - 0.1);
+    $('s3-k5').classList.toggle('on', t >= when(W, '방향은') - 0.1);
+    pop($('s3-st'), t, when(W, '방향은') + 0.3, 0.4, -3);
+  },
+
+  s4(t, d, m, W) {
+    // 실제로 남긴 셋: 1번(새벽 다섯 시 이야기만), 2번(살림), 4번(오픈 굿즈용으로 따로)
+    const keep = { 1: ['t', '이야기만'], 2: ['o', '살려'], 4: ['t', '굿즈용'] };
+    const at = when(W, '세') - 0.1;
+    for (let i = 1; i <= 12; i++) {
+      pop(cell('s4-grid', i), t, 0.1 + (i - 1) * 0.04, 0.25);
+      cell('s4-grid', i).classList.toggle('dim', t >= at && !keep[i]);
+      cell('s4-grid', i).classList.toggle('pick', t >= at && !!keep[i]);
+    }
+    Object.entries(keep).forEach(([n, [k, txt]], j) => mark('s4-grid', +n, k, txt, t, at + 0.15 + j * 0.15));
+    const re = when(W, '다듬게') - 0.3;
+    fade($('s4-dn'), t, re - 0.2, 0.3);
+    fade($('s4-real'), t, re, 0.3);
+    pop($('s4-b1'), t, re + 0.1, 0.4);
+    pop($('s4-b3'), t, re + 0.25, 0.4);
+    pop($('s4-b2'), t, re + 0.4, 0.4);
+  },
+
+  s5(t, d, m, W) {
+    const a = when(W, '간판,') - 0.1, b = when(W, '봉투,') - 0.3, c = when(W, '명함') - 0.1;
+    rise($('s5-c1'), t, 0.15, 0.4, 50);
+    fade($('s5-real'), t, 0.3, 0.3);
+    pop($('s5-l1'), t, a, 0.35);
+    rise($('s5-c2'), t, Math.min(b, 0.6), 0.4, 50);
+    pop($('s5-l2'), t, b, 0.35);
+    rise($('s5-c3'), t, Math.min(c, 0.8), 0.4, 50);
+    pop($('s5-l3'), t, c, 0.35);
+  },
+
+  s6(t, d, m, W) {
+    rise($('s6-c3'), t, 0.1, 0.35, 40);
+    const a = when(W, '뭉개져요') - 0.6, b = when(W, '크기용은') - 0.4;
+    rise($('s6-l1'), t, a, 0.35, 30);
+    pop($('s6-s1'), t, a + 0.5, 0.35, -5);
+    rise($('s6-l2'), t, b, 0.35, 30);
+    pop($('s6-s2'), t, b + 0.5, 0.35, 4);
+  },
+
+  s7(t, d, m, W) {
+    pop($('s7-b1'), t, 0.15, 0.4);
+    rise($('s7-code'), t, when(W, '그린') - 0.2, 0.35, 30);
+    pop($('s7-st2'), t, when(W, '그린') + 0.3, 0.35, -3);
+    pop($('s7-st1'), t, when(W, '러프') - 0.1, 0.4, -6);
+    const fin = when(W, '마지막') - 0.1;
+    rise($('s7-sian'), t, fin, 0.4, 60);
+    pop($('s7-ub'), t, fin + 0.3, 0.35);
+  },
+
+  s8(t, d, m, W) {
+    rise($('s8-sian'), t, 0.1, 0.4, 60);
+    pop($('s8-c'), t, Math.max(when(W, '쓰일') - 0.4, 0.6), 0.45);
+  },
+});
+</script>
+</body>
+</html>

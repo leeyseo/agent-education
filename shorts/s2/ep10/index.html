@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>디자이너 편 EP10 브로셔, 구성부터 PDF까지</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700;900&display=block" rel="stylesheet">
+<link rel="stylesheet" href="../../lib/base.css">
+<link rel="stylesheet" href="../s2.css">
+<style>
+  /* 브로셔 캔버스에서 lib/snap.py로 찍은 실제 결과물 */
+  .bro { position: absolute; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 14px 30px rgba(60, 40, 20, .18); }
+  .bro img { display: block; width: 100%; height: 100%; }
+  .crop { position: absolute; overflow: hidden; border-radius: 16px; box-shadow: 0 14px 30px rgba(60, 40, 20, .18); }
+  .crop img { position: absolute; }
+  .ring { position: absolute; border: 7px solid var(--mint); border-radius: 18px; opacity: 0; }
+  .pill { position: absolute; color: #fff; font-size: 30px; font-weight: 900; padding: 6px 22px; border-radius: 999px; white-space: nowrap; }
+  .rule { position: absolute; background: #fff; border: 3px solid var(--line); border-radius: 22px; padding: 22px 26px;
+    box-shadow: 0 12px 26px rgba(60, 40, 20, .12); }
+  .rule h4 { font-size: 24px; font-weight: 900; color: var(--sub); margin-bottom: 10px; }
+  .rule div { font-size: 34px; font-weight: 800; line-height: 1.45; }
+  .pdfbody { position: absolute; left: 0; right: 0; top: 56px; bottom: 0; background: #525659; }
+  .pg { position: absolute; font-size: 22px; font-weight: 800; color: #fff; background: rgba(0, 0, 0, .55); border-radius: 999px; padding: 2px 14px; }
+  .chk { display: flex; align-items: flex-start; gap: 18px; padding: 18px 0; border-top: 2px solid var(--line); }
+  .chk .bx { width: 54px; height: 54px; flex: none; border: 4px solid #C9BBA9; border-radius: 12px; position: relative; }
+  .chk .bx span { position: absolute; inset: -6px; opacity: 0; }
+  .chk b { display: block; font-size: 36px; font-weight: 900; }
+  .chk small { display: block; font-size: 26px; font-weight: 600; color: var(--sub); margin-top: 4px; line-height: 1.4; }
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage"><div class="abs" id="area">
+
+  <!-- s1: 기획서에서 PDF까지 -->
+  <div class="scene" id="s1">
+    <div class="bro" id="s1-in" style="left:60px;top:270px;width:900px;height:636px"><img src="../design/brochure/png/LA-in.png" alt=""></div>
+    <div class="bro" id="s1-out" style="left:0;top:20px;width:900px;height:636px"><img src="../design/brochure/png/LA-out.png" alt=""></div>
+    <div class="real" id="s1-real" style="left:600px;top:-10px;z-index:3">실제 Claude 결과물</div>
+    <div class="sticker orange" id="s1-st" style="left:700px;top:800px;z-index:3">PDF까지</div>
+  </div>
+
+  <!-- s2: 구성부터 -->
+  <div class="scene" id="s2">
+    <div class="bro" id="s2-plan" style="left:0;top:0;width:960px;height:679px"><img src="../design/brochure/png/Main.png" alt=""></div>
+    <div class="sticker orange" id="s2-st" style="left:40px;top:730px">디자인 전에 구성부터</div>
+    <div class="abs" id="s2-sian" data-char="person:sian:skeptic" style="left:730px;top:620px;width:210px;height:294px"></div>
+  </div>
+
+  <!-- s3: 카피 세 개 중 하나 -->
+  <div class="scene" id="s3">
+    <div class="real" id="s3-real" style="left:0;top:0">실제 Claude 결과물 · 카피 후보</div>
+    <div class="bro" id="s3-copy" style="left:0;top:60px;width:960px;height:679px"><img src="../design/brochure/png/Copy.png" alt=""></div>
+    <div class="ring" id="s3-ring" style="left:38px;top:155px;width:296px;height:302px"></div>
+    <div class="pill" id="s3-pk" style="left:226px;top:136px;background:var(--mint)">이걸로</div>
+    <div class="abs" id="s3-sian" data-char="person:sian:grin" style="left:40px;top:640px;width:200px;height:280px"></div>
+    <div class="ub" id="s3-ub" style="left:270px;right:auto;top:780px;font-size:36px">01번, 새벽 다섯 시로 가자</div>
+  </div>
+
+  <!-- s4: 확인 필요로 비워 왔다 -->
+  <div class="scene" id="s4">
+    <div class="crop" id="s4-crop" style="left:0;top:0;width:450px;height:790px"><img src="../design/brochure/png/LA-out.png" alt="" style="left:-449px;top:0;width:1348px;height:953px"></div>
+    <div class="real" id="s4-real" style="left:0;top:812px">실제 결과 · 뒷면</div>
+    <div class="sticker yellow" id="s4-st" style="left:500px;top:40px;font-size:40px">지어내지 않고 비워 둠</div>
+    <div class="rule" id="s4-rule" style="left:490px;top:200px;width:470px">
+      <h4>회의실 규칙 · 프로젝트 지침</h4>
+      <div>자료에 없는 건 지어내지 말고 <span id="s4-hl">'확인 필요'라고 표시해.</span></div>
+    </div>
+    <div class="abs" id="s4-sian" data-char="person:sian:proud" style="left:580px;top:540px;width:260px;height:364px"></div>
+  </div>
+
+  <!-- s5: 두 방향을 나란히 -->
+  <div class="scene" id="s5">
+    <div class="pill" id="s5-la" style="left:0;top:0;background:var(--ink)">A 새벽 남색</div>
+    <div class="pill" id="s5-lb" style="left:490px;top:0;background:#9C8869">B 크라프트 종이</div>
+    <div class="bro" id="s5-ao" style="left:0;top:66px;width:470px;height:332px"><img src="../design/brochure/png/LA-out.png" alt=""></div>
+    <div class="bro" id="s5-ai" style="left:0;top:414px;width:470px;height:332px"><img src="../design/brochure/png/LA-in.png" alt=""></div>
+    <div class="bro" id="s5-bo" style="left:490px;top:66px;width:470px;height:332px"><img src="../design/brochure/png/LB-out.png" alt=""></div>
+    <div class="bro" id="s5-bi" style="left:490px;top:414px;width:470px;height:332px"><img src="../design/brochure/png/LB-in.png" alt=""></div>
+    <div class="ring" id="s5-ring" style="left:-12px;top:54px;width:494px;height:704px"></div>
+    <div class="ub" id="s5-ub" style="left:120px;right:auto;top:790px;font-size:38px">A로 가자. 남색이 멀리서도 보여</div>
+  </div>
+
+  <!-- s6: PDF로 뽑아 보내기 -->
+  <div class="scene" id="s6">
+    <div class="real" id="s6-real" style="left:0;top:0">실제 PDF · 2쪽</div>
+    <div class="browser" id="s6-win" style="left:0;top:56px;width:960px;height:860px">
+      <div class="bbar"><i></i><i></i><i></i><div class="url">모닝빵_2호점_브로셔_A.pdf</div></div>
+      <div class="pdfbody">
+        <div class="bro" id="s6-p1" style="left:210px;top:20px;width:540px;height:382px;border-radius:2px"><img src="../design/brochure/png/LA-out.png" alt=""></div>
+        <div class="bro" id="s6-p2" style="left:210px;top:418px;width:540px;height:382px;border-radius:2px"><img src="../design/brochure/png/LA-in.png" alt=""></div>
+        <div class="pg" style="left:770px;top:30px">1 / 2</div>
+        <div class="pg" style="left:770px;top:428px">2 / 2</div>
+      </div>
+    </div>
+    <div class="sticker mint" id="s6-st" style="left:20px;top:760px">사장님께 보내기</div>
+  </div>
+
+  <!-- s7: 인쇄소 넘기기 전 -->
+  <div class="scene" id="s7">
+    <div class="doc" id="s7-doc" style="left:0;top:0;width:960px;padding-bottom:16px">
+      <div class="dh">인쇄소 넘기기 전에</div>
+      <div class="chk"><div class="bx"><span id="s7-c1" data-icon="check:#1FB394"></span></div><div><b>색 모드</b><small>지금 PDF는 화면용(RGB). 인쇄용으로 맞출지 인쇄소에 확인</small></div></div>
+      <div class="chk"><div class="bx"><span id="s7-c2" data-icon="check:#1FB394"></span></div><div><b>재단 여백</b><small>지금 PDF엔 없음. 인쇄소가 정한 만큼 바탕을 늘리기</small></div></div>
+      <div class="chk"><div class="bx"><span id="s7-c3" data-icon="check:#1FB394"></span></div><div><b>'확인 필요' 칸</b><small>주소 · 여는 시간 · 전화 · 2호점 가격, 다 채웠나</small></div></div>
+    </div>
+    <div class="sticker red" id="s7-st" style="left:40px;top:700px">지금 이 PDF는 화면용</div>
+    <div class="abs" id="s7-sian" data-char="person:sian:skeptic" style="left:700px;top:600px;width:220px;height:308px"></div>
+  </div>
+
+  <!-- s8: 결론 -->
+  <div class="scene" id="s8">
+    <div class="abs" data-chair style="left:350px;top:0;width:260px;height:364px"></div>
+    <div class="abs" id="s8-sian" data-char="person:sian:proud" style="left:370px;top:10px;width:220px;height:308px"></div>
+    <div class="abs conclude" id="s8-c" style="top:400px"><div class="k">오늘의 결론</div><div class="t">한 번에 다 말고<br><span>단계마다 고른다</span></div></div>
+  </div>
+
+</div></div></div>
+<script src="timeline.js"></script>
+<script src="../../lib/engine.js"></script>
+<script src="../s2.js"></script>
+<script>
+start({
+  s1(t, d, m, W) {
+    pop($('s1-out'), t, 0.15, 0.45, -2);
+    pop($('s1-in'), t, 0.45, 0.45, 2);
+    pop($('s1-real'), t, when(W, '실제로') - 0.1, 0.35);
+    pop($('s1-st'), t, when(W, 'PDF까지') - 0.1, 0.4, -4);
+  },
+
+  s2(t, d, m, W) {
+    rise($('s2-plan'), t, 0.1, 0.4, 40);
+    pop($('s2-st'), t, when(W, '구성') - 0.1, 0.4, -3);
+    rise($('s2-sian'), t, 0.4, 0.4, 60);
+  },
+
+  s3(t, d, m, W) {
+    rise($('s3-copy'), t, 0.1, 0.4, 40);
+    fade($('s3-real'), t, 0.2, 0.3);
+    const pk = when(W, '골라요') - 0.3;
+    pop($('s3-ring'), t, pk, 0.35);
+    pop($('s3-pk'), t, pk + 0.15, 0.35, -5);
+    rise($('s3-sian'), t, 0.4, 0.4, 60);
+    pop($('s3-ub'), t, pk + 0.3, 0.35);
+  },
+
+  s4(t, d, m, W) {
+    rise($('s4-crop'), t, 0.1, 0.4, 40);
+    fade($('s4-real'), t, 0.3, 0.3);
+    pop($('s4-st'), t, when(W, '확인') - 0.1, 0.4, -3);
+    const r = when(W, '지어내지') - 0.2;
+    rise($('s4-rule'), t, r, 0.35, 30);
+    $('s4-hl').classList.toggle('hlt', t >= when(W, '규칙에') - 0.1);
+    rise($('s4-sian'), t, r + 0.2, 0.4, 60);
+  },
+
+  s5(t, d, m, W) {
+    ['ao', 'ai', 'bo', 'bi'].forEach((k, i) => pop($(`s5-${k}`), t, 0.15 + i * 0.12, 0.35));
+    pop($('s5-la'), t, 0.2, 0.3);
+    pop($('s5-lb'), t, 0.35, 0.3);
+    const pk = when(W, '골라요') - 0.2;
+    pop($('s5-ring'), t, pk, 0.35);
+    pop($('s5-ub'), t, pk + 0.2, 0.35);
+  },
+
+  s6(t, d, m, W) {
+    rise($('s6-win'), t, 0.1, 0.4, 40);
+    fade($('s6-real'), t, 0.3, 0.3);
+    rise($('s6-p1'), t, 0.35, 0.35, 30);
+    rise($('s6-p2'), t, 0.6, 0.35, 30);
+    pop($('s6-st'), t, when(W, '보내요') - 0.2, 0.4, -3);
+  },
+
+  s7(t, d, m, W) {
+    rise($('s7-doc'), t, 0.1, 0.35, 40);
+    pop($('s7-c1'), t, when(W, '색') + 0.1, 0.35);
+    pop($('s7-c2'), t, when(W, '재단') + 0.1, 0.35);
+    pop($('s7-c3'), t, when(W, '비워') + 0.1, 0.35);
+    pop($('s7-st'), t, when(W, '재단') + 0.6, 0.4, -3);
+    rise($('s7-sian'), t, 0.4, 0.4, 60);
+  },
+
+  s8(t, d, m, W) {
+    rise($('s8-sian'), t, 0.1, 0.4, 60);
+    pop($('s8-c'), t, Math.max(when(W, '단계마다') - 0.4, 0.6), 0.45);
+  },
+});
+</script>
+</body>
+</html>

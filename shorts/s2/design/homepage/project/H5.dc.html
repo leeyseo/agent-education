@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>첫 화면 5 다섯 시 시계</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&family=Orbitron:wght@700&family=Noto+Sans+KR:wght@500;700;900&display=block">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 390px; height: 700px; background: #FBF5EC; color: #1E2A4A; font-family: 'Noto Sans KR', sans-serif; display: flex; flex-direction: column; overflow: hidden">
+<div style="height: 56px; flex: none; padding: 0 20px; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid #E6DCCD">
+<svg width="48" height="28" viewBox="64 94 392 210" aria-hidden="true"><g stroke="#C7772E" stroke-width="12" stroke-linecap="round"><line x1="128" y1="214" x2="104" y2="200"></line><line x1="184" y1="158" x2="170" y2="134"></line><line x1="262" y1="140" x2="263" y2="104"></line><line x1="338" y1="160" x2="354" y2="134"></line><line x1="392" y1="216" x2="414" y2="203"></line></g><path d="M134 292 C128 236 170 178 250 172 C298 168 336 178 360 204 C380 226 390 258 386 292 Z" fill="#C7772E"></path><path d="M74 294 C150 290 220 297 300 292 C360 289 410 296 446 292" fill="none" stroke="#1E2A4A" stroke-width="12" stroke-linecap="round"></path></svg>
+<span style="font-family: 'Gowun Batang', serif; font-weight: 700; font-size: 20px">모닝빵 베이커리</span>
+</div>
+<section style="flex: 1; background: #1E2A4A; color: #FBF5EC; padding: 48px 24px 32px; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center">
+<span style="font-size: 15px; font-weight: 700; color: #E2A86E">매일 오븐을 켜는 시간</span>
+<div style="font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 92px; letter-spacing: 4px; color: #E2A86E; line-height: 1.1">05:00</div>
+<h1 style="margin: 8px 0 0; font-family: 'Gowun Batang', serif; font-size: 32px; line-height: 1.35">새벽 다섯 시에<br>굽습니다</h1>
+<p style="margin: 0; font-size: 16px; line-height: 1.7; color: #E9DFCF">2012년부터 동네에서 굽는 빵집이에요.</p>
+<a href="Menu.dc.html" style="margin-top: auto; align-self: stretch; min-height: 52px; display: flex; align-items: center; justify-content: center; border-radius: 999px; background: #C7772E; color: #FFFFFF; font-size: 17px; font-weight: 900; text-decoration: none">대표 메뉴 보기</a>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":700}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>
